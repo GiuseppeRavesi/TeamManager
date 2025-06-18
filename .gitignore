@@ -1,0 +1,23 @@
+
+*.class
+
+build/
+dist/
+nbproject/private/
+nbbuild/
+nbdist/
+.nb-gradle/
+
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+
+*~
+*.bak
+*.swp
+*.swo
+
+# Output compilati
+*.jar
+
