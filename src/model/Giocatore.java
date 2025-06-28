@@ -11,6 +11,8 @@ public class Giocatore {
     private LocalDate dataNascita;
     private String nazionalita;
     private String email;
+    private static int contatore = 0;
+    private int id;
 
     public Giocatore(String nome, String cognome, LocalDate dataNascita, String nazionalita, String email) {
         this.nome = nome;
@@ -18,6 +20,11 @@ public class Giocatore {
         this.dataNascita = dataNascita;
         this.nazionalita = nazionalita;
         this.email = email;
+        this.id = ++contatore;
+    }
+
+    public int getId() {
+        return id;
     }
 
     // Getters e Setters

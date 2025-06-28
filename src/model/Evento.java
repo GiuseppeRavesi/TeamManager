@@ -1,24 +1,28 @@
-
 package model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Evento {
+
     private static int contatore = 0;
-    
-    protected int id; 
-    protected LocalDate data;
-    protected LocalTime orario;
-    protected LocalTime durata;
-    protected String luogo;
-    
+
+    private int id;
+    private LocalDate data;
+    private LocalTime orario;
+    private LocalTime durata;
+    private String luogo;
+    private List<Disponibilità> disponibilità;
+
     public Evento(LocalDate data, LocalTime orario, LocalTime durata, String luogo) {
         this.id = ++contatore;
         this.data = data;
         this.orario = orario;
         this.durata = durata;
         this.luogo = luogo;
+        this.disponibilità = new ArrayList<>();
     }
 
     public Evento(int id, LocalDate data, LocalTime orario, LocalTime durata, String luogo) {
@@ -27,12 +31,21 @@ public abstract class Evento {
         this.orario = orario;
         this.durata = durata;
         this.luogo = luogo;
+        this.disponibilità = new ArrayList<>();
+    }
+
+    public void aggiungiDisponibilità(Disponibilità d) {
+        disponibilità.add(d);
+    }
+
+    public List<Disponibilità> getDisponibilità() {
+        return disponibilità;
     }
 
     public static void setContatore(int valore) {
         contatore = valore;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -78,8 +91,12 @@ public abstract class Evento {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Evento)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Evento)) {
+            return false;
+        }
         Evento other = (Evento) o;
         return id == other.id;
     }
@@ -89,4 +106,3 @@ public abstract class Evento {
         return Integer.hashCode(id);
     }
 }
-
