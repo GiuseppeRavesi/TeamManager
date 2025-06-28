@@ -22,12 +22,23 @@ public class Giocatore {
         this.email = email;
         this.id = ++contatore;
     }
-
+    
+    public Giocatore(int id, String nome, String cognome, LocalDate dataNascita, String nazionalita, String email) {
+        this.nome = nome;
+        this.cognome = cognome;
+        this.dataNascita = dataNascita;
+        this.nazionalita = nazionalita;
+        this.email = email;
+        this.id = id;
+        
+        if(id > contatore)
+            contatore = id;
+    }
+    
     public int getId() {
         return id;
     }
 
-    // Getters e Setters
     public String getNome() {
         return nome;
     }

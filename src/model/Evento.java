@@ -32,6 +32,9 @@ public abstract class Evento {
         this.durata = durata;
         this.luogo = luogo;
         this.disponibilità = new ArrayList<>();
+        
+        if(id>contatore)
+            contatore = id;
     }
 
     public void aggiungiDisponibilità(Disponibilità d) {
@@ -40,10 +43,6 @@ public abstract class Evento {
 
     public List<Disponibilità> getDisponibilità() {
         return disponibilità;
-    }
-
-    public static void setContatore(int valore) {
-        contatore = valore;
     }
 
     public int getId() {
