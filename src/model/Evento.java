@@ -12,11 +12,11 @@ public abstract class Evento {
     private int id;
     private LocalDate data;
     private LocalTime orario;
-    private LocalTime durata;
+    private int durata;
     private String luogo;
     private List<Disponibilità> disponibilità;
 
-    public Evento(LocalDate data, LocalTime orario, LocalTime durata, String luogo) {
+    public Evento(LocalDate data, LocalTime orario, int durata, String luogo) {
         this.id = ++contatore;
         this.data = data;
         this.orario = orario;
@@ -25,7 +25,7 @@ public abstract class Evento {
         this.disponibilità = new ArrayList<>();
     }
 
-    public Evento(int id, LocalDate data, LocalTime orario, LocalTime durata, String luogo) {
+    public Evento(int id, LocalDate data, LocalTime orario, int durata, String luogo) {
         this.id = id;
         this.data = data;
         this.orario = orario;
@@ -65,11 +65,11 @@ public abstract class Evento {
         this.orario = orario;
     }
 
-    public LocalTime getDurata() {
+    public int getDurata() {
         return durata;
     }
 
-    public void setDurata(LocalTime durata) {
+    public void setDurata(int durata) {
         this.durata = durata;
     }
 
@@ -80,8 +80,6 @@ public abstract class Evento {
     public void setLuogo(String luogo) {
         this.luogo = luogo;
     }
-
-    public abstract String getTipoEvento();
 
     @Override
     public String toString() {

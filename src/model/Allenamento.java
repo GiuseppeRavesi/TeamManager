@@ -8,14 +8,14 @@ public class Allenamento extends Evento {
     private String tipologia; 
     private String note;      
 
-    public Allenamento(LocalDate data, LocalTime orario, LocalTime durata, String luogo, String tipologia, String note) {
+    public Allenamento(LocalDate data, LocalTime orario, int durata, String luogo, String tipologia, String note) {
         super(data, orario, durata, luogo);
         this.tipologia = tipologia;
         this.note = note;
     }
 
     //per caricamento da file
-    public Allenamento(int id, LocalDate data, LocalTime orario, LocalTime durata, String luogo, String tipologia, String note) {
+    public Allenamento(int id, LocalDate data, LocalTime orario, int durata, String luogo, String tipologia, String note) {
         super(id, data, orario, durata, luogo);
         this.tipologia = tipologia;
         this.note = note;
@@ -35,11 +35,6 @@ public class Allenamento extends Evento {
 
     public void setNote(String note) {
         this.note = note;
-    }
-
-    @Override
-    public String getTipoEvento() {
-        return "Allenamento";
     }
 
     @Override
