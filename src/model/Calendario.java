@@ -1,6 +1,7 @@
 
 package model;
 
+import controller.Session;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class Calendario {
     
     public void aggiornaEvento(Evento eventoSelezionato, LocalDate nuovaData, LocalTime nuovoOrario,
             int nuovaDurata, String nuovoLuogo, Map<String, String> campiSpecifici) {
+        
         eventoSelezionato.setData(nuovaData);
         eventoSelezionato.setOrario(nuovoOrario);
         eventoSelezionato.setDurata(nuovaDurata);
@@ -52,12 +54,12 @@ public class Calendario {
     }
     
     public void aggiungiDisponibilità(Evento eventoSelezionato, boolean presenza, String motivazione) {
-    //int idGiocatore = Session.getInstance().getUtenteLoggato().getId();
+    int idGiocatore = Session.getInstance().getUtenteLoggato().getId();
 
     String motivazioneFinale = presenza ? null : motivazione;
 
-    //Disponibilità nuovaDisponibilità = new Disponibilità(idGiocatore, eventoSelezionato.getId(), presenza, motivazioneFinale);
+    Disponibilità nuovaDisponibilità = new Disponibilità(idGiocatore, eventoSelezionato.getId(), presenza, motivazioneFinale);
 
-    //eventoSelezionato.aggiungiDisponibilità(nuovaDisponibilità);
+    eventoSelezionato.aggiungiDisponibilità(nuovaDisponibilità);
     }
 }
