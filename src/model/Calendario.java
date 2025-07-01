@@ -28,6 +28,7 @@ public class Calendario {
     
     public void aggiornaEvento(Evento eventoSelezionato, LocalDate nuovaData, LocalTime nuovoOrario,
             int nuovaDurata, String nuovoLuogo, Map<String, String> campiSpecifici) {
+        
         eventoSelezionato.setData(nuovaData);
         eventoSelezionato.setOrario(nuovoOrario);
         eventoSelezionato.setDurata(nuovaDurata);
