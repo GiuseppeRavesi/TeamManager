@@ -1,0 +1,3 @@
+*.java text eol=crlf
+*.form text eol=crlf
+*.properties text eol=crlf
