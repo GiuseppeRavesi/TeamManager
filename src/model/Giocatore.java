@@ -79,15 +79,14 @@ public class Giocatore {
         this.email = email;
     }
 
+    
+    //rimossi parametri di confronto equals(), lasciando solo email come parametro di paragone
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Giocatore)) return false;
         Giocatore g = (Giocatore) o;
-        return nome.equalsIgnoreCase(g.nome) &&
-           cognome.equalsIgnoreCase(g.cognome) &&
-           dataNascita.equals(g.dataNascita) &&
-           email.equalsIgnoreCase(g.email);
+        return email.equalsIgnoreCase(g.email);
     }
 
     @Override
