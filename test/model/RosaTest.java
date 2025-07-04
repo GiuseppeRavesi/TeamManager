@@ -27,10 +27,6 @@ public class RosaTest {
 
     private Rosa r1;
 
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
     @Before
     public void setUp() {
 
