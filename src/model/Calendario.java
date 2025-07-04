@@ -1,4 +1,3 @@
-
 package model;
 
 import controller.Session;
@@ -9,27 +8,31 @@ import java.util.List;
 import java.util.Map;
 
 public class Calendario {
+
     private List<Evento> listaEventi;
-    
+
     public Calendario() {
         this.listaEventi = new ArrayList<>();
     }
-    
-    public void pianificaAllenamento(LocalDate data, LocalTime orario, 
+
+    //NOTA BENE:In iterazione 2, verificare la NON sovrapposizione allenamenti (luogo,data)
+    public void pianificaAllenamento(LocalDate data, LocalTime orario,
             int durata, String luogo, String tipologia, String note) {
         Allenamento allenamento = new Allenamento(data, orario, durata, luogo, tipologia, note);
         listaEventi.add(allenamento);
     }
-    
-    public void pianificaAmichevole(LocalDate data, LocalTime orario, 
+
+    //NOTA BENE:In iterazione 2, verificare la NON sovrapposizione amichevoli (luogo,data)
+    public void pianificaAmichevole(LocalDate data, LocalTime orario,
             int durata, String luogo, String squadraAvversaria) {
         Amichevole amichevole = new Amichevole(data, orario, durata, luogo, squadraAvversaria);
         listaEventi.add(amichevole);
     }
-    
+
+    //NOTA BENE:In iterazione 2, verificare la NON sovrapposizione eventi (luogo,data)
     public void aggiornaEvento(Evento eventoSelezionato, LocalDate nuovaData, LocalTime nuovoOrario,
             int nuovaDurata, String nuovoLuogo, Map<String, String> campiSpecifici) {
-        
+
         eventoSelezionato.setData(nuovaData);
         eventoSelezionato.setOrario(nuovoOrario);
         eventoSelezionato.setDurata(nuovaDurata);
@@ -44,22 +47,24 @@ public class Calendario {
             am.setSquadraAvversaria(campiSpecifici.getOrDefault("squadraAvversaria", am.getSquadraAvversaria()));
         }
     }
-    
+
     public void rimuoviEvento(Evento eventoSelezionato) {
-        listaEventi.remove(eventoSelezionato);
+        if (!listaEventi.isEmpty()) {
+            listaEventi.remove(eventoSelezionato);
+        }
     }
-    
+
     public List<Evento> getEventi() {
-        return new ArrayList<>(listaEventi); 
+        return new ArrayList<>(listaEventi);
     }
-    
+
     public void aggiungiDisponibilità(Evento eventoSelezionato, boolean presenza, String motivazione) {
-    int idGiocatore = Session.getInstance().getUtenteLoggato().getId();
+        int idGiocatore = Session.getInstance().getUtenteLoggato().getId();
 
-    String motivazioneFinale = presenza ? null : motivazione;
+        String motivazioneFinale = presenza ? null : motivazione;
 
-    Disponibilità nuovaDisponibilità = new Disponibilità(idGiocatore, eventoSelezionato.getId(), presenza, motivazioneFinale);
+        Disponibilità nuovaDisponibilità = new Disponibilità(idGiocatore, eventoSelezionato.getId(), presenza, motivazioneFinale);
 
-    eventoSelezionato.aggiungiDisponibilità(nuovaDisponibilità);
+        eventoSelezionato.aggiungiDisponibilità(nuovaDisponibilità);
     }
 }
