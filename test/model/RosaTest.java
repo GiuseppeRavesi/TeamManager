@@ -57,11 +57,11 @@ public class RosaTest {
         assertSame(0, r1.getGiocatori().size());
 
         //aggiungo un nuovo giocatore e verifico che sia stato aggiunto
-        r1.aggiungiGiocatore(gr1);
+        r1.aggiungiGiocatore(g1, "ATT", "Disponibile");
         assertSame(1, r1.getGiocatori().size());
 
         //provo ad aggiungere uno stesso giocatore -> deve restuire false
-        assertFalse(r1.aggiungiGiocatore(gr1));
+        assertFalse(r1.aggiungiGiocatore(g1, "DIF", "Disponibile"));
 
         //verifico che la lista giocatori non sia null
         assertNotNull(r1.getGiocatori());
@@ -78,7 +78,7 @@ public class RosaTest {
         assertSame(0, r1.getGiocatori().size());
 
         //aggiungo un nuovo giocatore e verifico che sia stato aggiunto
-        r1.aggiungiGiocatore(gr1);
+        r1.aggiungiGiocatore(g1, "ATT", "Disponibile");
         assertSame(1, r1.getGiocatori().size());
 
         //rimuovo e verifico che il giocatore viene rimosso correttamente
@@ -94,7 +94,7 @@ public class RosaTest {
     public void testModificaGiocatore() {
 
         //aggiungo un giocatore in rosa
-        r1.aggiungiGiocatore(gr1);
+        r1.aggiungiGiocatore(g1, "ATT", "Disponibile");
 
         //creo backup gr1
         GiocatoreInRosa gr1_Backup = new GiocatoreInRosa(new Giocatore("Ringhio", "Gattuso",

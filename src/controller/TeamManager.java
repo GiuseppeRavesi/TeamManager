@@ -1,8 +1,11 @@
 
 package controller;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import model.Calendario;
 import model.Evento;
 import model.Giocatore;
@@ -52,5 +55,30 @@ public class TeamManager {
     public List<Evento> visualizzaCalendario(){
         return c.getEventi();
     }
+    
+    public void pianificaAmichevole(LocalDate data, LocalTime orario, int durata,
+            String luogo, String squadraAvversaria) {
+        c.pianificaAmichevole(data, orario, durata, luogo, squadraAvversaria);
+    }
 
+    public void pianificaAllenamento(LocalDate data, LocalTime orario, int durata,
+            String luogo, String tipologia, String note) {
+        c.pianificaAllenamento(data, orario, durata, luogo, tipologia, note);
+    }
+
+    public void aggiornaEvento(Evento eventoSelezionato, LocalDate nuovaData,
+            LocalTime nuovoOrario, int nuovaDurata,
+            String nuovoLuogo, Map<String, String> campiSpecifici) {
+        c.aggiornaEvento(eventoSelezionato, nuovaData, nuovoOrario,
+                nuovaDurata, nuovoLuogo, campiSpecifici);
+    }
+
+    public void rimuoviEvento(Evento eventoSelezionato) {
+        c.rimuoviEvento(eventoSelezionato);
+    }
+
+    public void aggiungiDisponibilita(Evento eventoSelezionato, boolean presenza, String motivazione) {
+        c.aggiungiDisponibilità(eventoSelezionato, presenza, motivazione);
+    }
+    
 }

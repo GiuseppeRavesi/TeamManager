@@ -14,9 +14,19 @@ public class Rosa {
     }
 
     public boolean aggiungiGiocatore(Giocatore g, String ruolo, String status) {
-        if (!giocatoriRosa.contains(g) && giocatoriRosa.size() <= 22) {
+
+        if (giocatoriRosa.isEmpty()) {
             giocatoriRosa.add(new GiocatoreInRosa(g, ruolo, status, LocalDate.now()));
             return true;
+        }
+
+        if (giocatoriRosa.size() <= 22) {
+            for (GiocatoreInRosa gr : giocatoriRosa) {
+                if (!gr.getGiocatore().equals(g)) {
+                    giocatoriRosa.add(new GiocatoreInRosa(g, ruolo, status, LocalDate.now()));
+                    return true;
+                }
+            }
         }
         return false;
     }
