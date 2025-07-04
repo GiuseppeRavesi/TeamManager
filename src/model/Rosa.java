@@ -1,6 +1,7 @@
 
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,9 +14,9 @@ public class Rosa {
         this.giocatoriRosa = new ArrayList<>();
     }
 
-    public boolean aggiungiGiocatore(GiocatoreInRosa g) {
+    public boolean aggiungiGiocatore(Giocatore g, String ruolo, String status) {
         if (!giocatoriRosa.contains(g)) {
-            giocatoriRosa.add(g);
+            giocatoriRosa.add(new GiocatoreInRosa(g, ruolo, status, LocalDate.now()));
             return true;
         }
         return false;
