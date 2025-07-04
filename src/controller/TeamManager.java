@@ -76,9 +76,13 @@ public class TeamManager {
     public void rimuoviEvento(Evento eventoSelezionato) {
         c.rimuoviEvento(eventoSelezionato);
     }
-
+    
+    //UC3: Gestisci Disponibilità
+    
     public void aggiungiDisponibilita(Evento eventoSelezionato, boolean presenza, String motivazione) {
         c.aggiungiDisponibilità(eventoSelezionato, presenza, motivazione);
     }
+    
+    
     
 }
