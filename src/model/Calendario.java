@@ -15,18 +15,24 @@ public class Calendario {
         this.listaEventi = new ArrayList<>();
     }
 
-    //NOTA BENE:In iterazione 2, verificare la NON sovrapposizione allenamenti (luogo,data)
-    public void pianificaAllenamento(LocalDate data, LocalTime orario,
+    public boolean pianificaAllenamento(LocalDate data, LocalTime orario,
             int durata, String luogo, String tipologia, String note) {
+        if (verificaSovrapposizione(data, orario, durata, luogo)) {
+            return false;
+        }
         Allenamento allenamento = new Allenamento(data, orario, durata, luogo, tipologia, note);
         listaEventi.add(allenamento);
+        return true;
     }
 
-    //NOTA BENE:In iterazione 2, verificare la NON sovrapposizione amichevoli (luogo,data)
-    public void pianificaAmichevole(LocalDate data, LocalTime orario,
+    public boolean pianificaAmichevole(LocalDate data, LocalTime orario,
             int durata, String luogo, String squadraAvversaria) {
+        if (verificaSovrapposizione(data, orario, durata, luogo)) {
+            return false;
+        }
         Amichevole amichevole = new Amichevole(data, orario, durata, luogo, squadraAvversaria);
         listaEventi.add(amichevole);
+        return true;
     }
 
     //NOTA BENE:In iterazione 2, verificare la NON sovrapposizione eventi (luogo,data)
@@ -67,4 +73,28 @@ public class Calendario {
 
         eventoSelezionato.aggiungiDisponibilità(nuovaDisponibilità);
     }
+    
+    private boolean verificaSovrapposizione(LocalDate data, LocalTime orarioInizio, int durata, String luogo) {
+    if (listaEventi.isEmpty()) {
+        return false; 
+    }
+
+    LocalTime inizioNuovo = orarioInizio;
+    LocalTime fineNuovo = orarioInizio.plusMinutes(durata);
+
+    for (Evento evento : listaEventi) {
+        if (!evento.getData().equals(data)) continue; 
+        if (!evento.getLuogo().equalsIgnoreCase(luogo)) continue; 
+
+        LocalTime inizioEsistente = evento.getOrario();
+        LocalTime fineEsistente = inizioEsistente.plusMinutes(evento.getDurata());
+
+        boolean sovrapposto = inizioNuovo.isBefore(fineEsistente) && inizioEsistente.isBefore(fineNuovo);
+        if (sovrapposto) {
+            return true; 
+        }
+    }
+
+    return false; 
+}
 }

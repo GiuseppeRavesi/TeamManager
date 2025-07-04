@@ -56,14 +56,14 @@ public class TeamManager {
         return c.getEventi();
     }
     
-    public void pianificaAmichevole(LocalDate data, LocalTime orario, int durata,
+    public boolean pianificaAmichevole(LocalDate data, LocalTime orario, int durata,
             String luogo, String squadraAvversaria) {
-        c.pianificaAmichevole(data, orario, durata, luogo, squadraAvversaria);
+        return (c.pianificaAmichevole(data, orario, durata, luogo, squadraAvversaria));
     }
 
-    public void pianificaAllenamento(LocalDate data, LocalTime orario, int durata,
+    public boolean pianificaAllenamento(LocalDate data, LocalTime orario, int durata,
             String luogo, String tipologia, String note) {
-        c.pianificaAllenamento(data, orario, durata, luogo, tipologia, note);
+        return (c.pianificaAllenamento(data, orario, durata, luogo, tipologia, note));
     }
 
     public void aggiornaEvento(Evento eventoSelezionato, LocalDate nuovaData,
