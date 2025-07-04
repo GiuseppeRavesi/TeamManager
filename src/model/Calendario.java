@@ -35,10 +35,34 @@ public class Calendario {
         return true;
     }
 
-    //NOTA BENE:In iterazione 2, verificare la NON sovrapposizione eventi (luogo,data)
-    public void aggiornaEvento(Evento eventoSelezionato, LocalDate nuovaData, LocalTime nuovoOrario,
+    public boolean aggiornaEvento(Evento eventoSelezionato, LocalDate nuovaData, LocalTime nuovoOrario,
             int nuovaDurata, String nuovoLuogo, Map<String, String> campiSpecifici) {
 
+        // Controllo conflitti con altri eventi
+        for (Evento e : listaEventi) {
+            // Salta se sto controllando l'evento stesso
+            if (e.equals(eventoSelezionato)) {
+                continue;
+            }
+
+            if (e.getLuogo().equalsIgnoreCase(nuovoLuogo) && e.getData().equals(nuovaData)) {
+
+                LocalTime inizioEsistente = e.getOrario();
+                LocalTime fineEsistente = inizioEsistente.plusMinutes(e.getDurata());
+
+                LocalTime nuovoInizio = nuovoOrario;
+                LocalTime nuovoFine = nuovoOrario.plusMinutes(nuovaDurata);
+
+                boolean sovrapposto = !(nuovoFine.isBefore(inizioEsistente) || nuovoInizio.isAfter(fineEsistente));
+            
+                if (sovrapposto) {
+                    System.out.println("Conflitto di orario con un altro evento esistente!");
+                    return false; 
+                }
+            }
+        }
+
+        // Se non ci sono conflitti, aggiorno i dati
         eventoSelezionato.setData(nuovaData);
         eventoSelezionato.setOrario(nuovoOrario);
         eventoSelezionato.setDurata(nuovaDurata);
@@ -52,6 +76,8 @@ public class Calendario {
             Amichevole am = (Amichevole) eventoSelezionato;
             am.setSquadraAvversaria(campiSpecifici.getOrDefault("squadraAvversaria", am.getSquadraAvversaria()));
         }
+
+        return true; 
     }
 
     public void rimuoviEvento(Evento eventoSelezionato) {
