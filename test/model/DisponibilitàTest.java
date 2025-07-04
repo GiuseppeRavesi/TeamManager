@@ -33,7 +33,7 @@ public class DisponibilitàTest {
     @Test
     public void testMetodoCostruttore(){
         
-        //verifico le presenze su d1 e d2
+        //verifico le presenze su d1 e d2Costrutt
         assertNull(d1.getMotivazione());
         assertEquals(m1,d2.getMotivazione());
         

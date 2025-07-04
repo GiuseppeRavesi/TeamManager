@@ -101,12 +101,11 @@ public class RosaTest {
                 LocalDate.of(1978, 1, 9), "Italia", "ringhiog@mail.com"), "Centrocampista", "Disponibile", LocalDate.of(2025, 7, 4));
 
         //provo a modificare un giocatore presente in rosa -> esito TRUE
-        assertTrue(r1.modificaGiocatore(gr1.getGiocatore(), "Terzino", "Sospeso"));
+        assertTrue(r1.modificaGiocatore(r1.getGiocatori().get(0).getGiocatore(), "Terzino", "Sospeso"));
 
         //verifico se i campi effettivamente sono stati modificati
-        assertNotSame(gr1_Backup.getRuolo(),gr1.getRuolo());
-        assertNotSame(gr1_Backup.getStatus(),gr1.getStatus());
-        
+        assertNotSame(gr1_Backup.getRuolo(),r1.getGiocatori().get(0).getRuolo());
+        assertNotSame(gr1_Backup.getStatus(),r1.getGiocatori().get(0).getStatus());
         //provo a modificare giocatore NON presente in rosa -> false
         assertFalse(r1.modificaGiocatore(g2, "Ala destra", "Sospeso"));
     }
@@ -118,8 +117,8 @@ public class RosaTest {
     public void testCercaGiocatori() {
         
         //aggiungo in rosa
-        r1.aggiungiGiocatore(gr1);
-        r1.aggiungiGiocatore(gr2);
+        r1.aggiungiGiocatore(g1, "ATT", "Disponibile");
+        r1.aggiungiGiocatore(g2, "DIF", "Disponibile");
         
         //verifico se la ricerca mi restituisce una lista non vuota
         assertNotNull(r1.cercaGiocatori("R"));
@@ -134,7 +133,7 @@ public class RosaTest {
     @Test
     public void testGetGiocatori() {
         //aggiungo in rosa
-        r1.aggiungiGiocatore(gr1);
+        r1.aggiungiGiocatore(g1, "ATT", "Disponibile");
         
         //verifico che la get funzioni
         assertNotNull(r1.getGiocatori());

@@ -167,9 +167,16 @@ public class CalendarioTest {
     /**
      * Test of getEventi method, of class Calendario.
      */
+    
+    //non mi serve
     @Test
     public void testGetEventi() {
         //verifico se effettivamente gli eventi aggiunti non siano null
+         //pianificazione amichevoli
+        c.pianificaAmichevole(LocalDate.of(2025, 7, 4),LocalTime.of(15, 30, 45),90,"Manhattan","Inter");
+        c.pianificaAmichevole(LocalDate.of(2025, 8, 6),LocalTime.of(20, 10, 45),100,"Barcelona","Juventus");
+        
+        System.out.println("Lista eventi Aggiungi "+ c.getEventi());
         assertNotNull(c.getEventi());
     }
 
