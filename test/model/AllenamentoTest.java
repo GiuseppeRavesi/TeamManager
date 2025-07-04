@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,91 +19,45 @@ import static org.junit.Assert.*;
  */
 public class AllenamentoTest {
     
-    public AllenamentoTest() {
-    }
+    private Disponibilità d1;
+    private Disponibilità d2;
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
+    private String m1;
     
-    @AfterClass
-    public static void tearDownClass() {
-    }
+    private Allenamento tr1;
     
     @Before
     public void setUp() {
+        m1 = "Frattura al femore";
+        
+        d1 = new Disponibilità(1, 1, true, null);
+        d2 = new Disponibilità(1, 2, false, m1);
+        
+        tr1 = new Allenamento(LocalDate.of(2025, 7, 4), LocalTime.of(15, 30, 45), 45, "Catania", "Sessione Mirata", "Upper Body");
     }
     
     @After
     public void tearDown() {
+        tr1=null;
     }
 
     /**
      * Test of getTipologia method, of class Allenamento.
      */
     @Test
-    public void testGetTipologia() {
-        System.out.println("getTipologia");
-        Allenamento instance = null;
-        String expResult = "";
-        String result = instance.getTipologia();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setTipologia method, of class Allenamento.
-     */
-    @Test
-    public void testSetTipologia() {
-        System.out.println("setTipologia");
-        String tipologia = "";
-        Allenamento instance = null;
-        instance.setTipologia(tipologia);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getNote method, of class Allenamento.
-     */
-    @Test
-    public void testGetNote() {
-        System.out.println("getNote");
-        Allenamento instance = null;
-        String expResult = "";
-        String result = instance.getNote();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setNote method, of class Allenamento.
-     */
-    @Test
-    public void testSetNote() {
-        System.out.println("setNote");
-        String note = "";
-        Allenamento instance = null;
-        instance.setNote(note);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of toString method, of class Allenamento.
-     */
-    @Test
-    public void testToString() {
-        System.out.println("toString");
-        Allenamento instance = null;
-        String expResult = "";
-        String result = instance.toString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
+    public void testAggiungiDisponibilità() {
+        
+        //verifico che all'inizio non vi siano disponibilità
+        assertSame(0,tr1.getDisponibilità().size());
+        
+        //aggiungo 2 disponibilità
+        tr1.aggiungiDisponibilità(d1);
+        tr1.aggiungiDisponibilità(d2);
+        
+        //verifico che effettivamente siano state inserite
+        assertSame(2,tr1.getDisponibilità().size());
+        
+        //verifico che non siano null
+        assertNotNull(tr1.getDisponibilità());
+    }   
 }
