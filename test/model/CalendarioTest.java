@@ -104,6 +104,9 @@ public class CalendarioTest {
         //verifico se effettivamente è presente un allenamento
         assertSame(1,c.getEventi().size());
         
+        //verifico sovrapposizione, se due eventi stesso giorno e stesso orario -> false
+        assertFalse( c.pianificaAllenamento(LocalDate.of(2025, 7, 4), LocalTime.of(15, 30, 45), 45, "Catania", "Sessione Mirata", "Upper Body"));
+        
         //verifico se effettivamente gli eventi aggiunti non siano null
         assertNotNull(c.getEventi());
         
@@ -120,6 +123,9 @@ public class CalendarioTest {
         
         //verifico se sono stati aggiunti due amichevoli inizialmente
         assertSame(2,c.getEventi().size());
+        
+        //verifico sovrapposizione, se due eventi stesso giorno e stesso orario -> false
+        assertFalse(c.pianificaAmichevole(LocalDate.of(2025, 7, 4),LocalTime.of(15, 30, 45),90,"Manhattan","Inter"));
         
         //verifico se effettivamente gli eventi aggiunti non siano null
         assertNotNull(c.getEventi());
@@ -140,6 +146,13 @@ public class CalendarioTest {
         assertNotSame(a1_Old.getDurata(),a1.getDurata());
         assertNotSame(a1_Old.getLuogo(),a1.getLuogo());
         assertNotSame(a1_Old.getSquadraAvversaria(),a1.getSquadraAvversaria());
+        
+        //verifico che un altro evento, quando aggiornato, non si sovrapponga, se sovrapposto -> false
+        //DA RIVEDERE
+        assertTrue(c.aggiornaEvento(a2, LocalDate.of(2026,5,18), LocalTime.of(22,30,55), 95, "CaltaCity",campiSpecifici));
+        
+        System.out.println(a1);
+        System.out.println(a2);
     }
 
     /**
