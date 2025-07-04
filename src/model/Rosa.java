@@ -15,7 +15,7 @@ public class Rosa {
     }
 
     public boolean aggiungiGiocatore(Giocatore g, String ruolo, String status) {
-        if (!giocatoriRosa.contains(g)) {
+        if (!giocatoriRosa.contains(g) && giocatoriRosa.size() <= 22) {
             giocatoriRosa.add(new GiocatoreInRosa(g, ruolo, status, LocalDate.now()));
             return true;
         }
