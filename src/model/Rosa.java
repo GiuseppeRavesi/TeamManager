@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Rosa {
 
+    //NOTA BENE: Iterazione 2 verificare che giocatoriRosa.size() <= 22
     private List<GiocatoreInRosa> giocatoriRosa;
 
     public Rosa() {

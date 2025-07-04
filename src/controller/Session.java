@@ -7,7 +7,7 @@ import model.Utente;
  * @author Giuseppe Ravesi
  */
 public class Session {
-     private static Session instance;
+    private static Session instance;
     private Utente utenteLoggato;
 
     private Session() { }
