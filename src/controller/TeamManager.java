@@ -84,13 +84,15 @@ public class TeamManager {
     }
     
     //UC7: Gestisci Giocatore CRUD
-    public boolean creaGiocatore(String nome, String cognome, LocalDate dataNascita, String nazionalità, String email) {
+    public boolean creaGiocatore(String nome, String cognome, int numMaglia,LocalDate dataNascita, 
+            String nazionalità, String email, String ruoloPreferito) {
         for (Giocatore g : listaGiocatori) {
             if (g.getEmail().equalsIgnoreCase(email)) {
                 return false;
             }
         }
-        Giocatore nuovoGiocatore = new Giocatore(nome, cognome, dataNascita, nazionalità, email);
+        Giocatore nuovoGiocatore = new Giocatore(nome, cognome, numMaglia, ruoloPreferito,
+                dataNascita, nazionalità, email);
         listaGiocatori.add(nuovoGiocatore);
         return true;
     }
