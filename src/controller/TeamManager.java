@@ -115,5 +115,9 @@ public class TeamManager {
         }
         return risultati;
     }
+
+    public List<Giocatore> getListaGiocatori() {
+        return listaGiocatori;
+    }
     
 }

@@ -5,6 +5,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -31,8 +32,8 @@ public class RosaTest {
     public void setUp() {
 
         //giocatori di prova
-        g1 = new Giocatore("Ringhio", "Gattuso", LocalDate.of(1978, 1, 9), "Italia", "ringhiog@mail.com");
-        g2 = new Giocatore("Roberto", "Buffon", LocalDate.of(1978, 1, 28), "Italia", "gigibuff@mail.com");
+        g1 = new Giocatore("Ringhio", "Gattuso", 10, "Punta", LocalDate.of(1978, 1, 9), "Italia", "ringhiog@mail.com");
+        g2 = new Giocatore("Gigi", "Buffon", 1, "Portiere", LocalDate.of(1978, 1, 28), "Italia", "gigibuff@mail.com");
 
         //giocatori in rosa di prova
         gr1 = new GiocatoreInRosa(g1, "Centrocampista", "Disponibile", LocalDate.of(2025, 7, 4));
@@ -54,11 +55,11 @@ public class RosaTest {
     public void testAggiungiGiocatore() {
 
         //verifico che inizialmente non vi siano giocatori in rosa
-        assertSame(0, r1.getGiocatori().size());
+        assertEquals(0, r1.getGiocatori().size());
 
         //aggiungo un nuovo giocatore e verifico che sia stato aggiunto
         r1.aggiungiGiocatore(g1, "ATT", "Disponibile");
-        assertSame(1, r1.getGiocatori().size());
+        assertEquals(1, r1.getGiocatori().size());
 
         //provo ad aggiungere uno stesso giocatore -> deve restuire false
         assertFalse(r1.aggiungiGiocatore(g1, "DIF", "Disponibile"));
@@ -75,15 +76,15 @@ public class RosaTest {
     public void testRimuoviGiocatore() {
 
         //verifico che inizialmente non vi siano giocatori in rosa
-        assertSame(0, r1.getGiocatori().size());
+        assertEquals(0, r1.getGiocatori().size());
 
         //aggiungo un nuovo giocatore e verifico che sia stato aggiunto
         r1.aggiungiGiocatore(g1, "ATT", "Disponibile");
-        assertSame(1, r1.getGiocatori().size());
+        assertEquals(1, r1.getGiocatori().size());
 
         //rimuovo e verifico che il giocatore viene rimosso correttamente
         r1.rimuoviGiocatore(gr1);
-        assertSame(0, r1.getGiocatori().size());
+        assertEquals(0, r1.getGiocatori().size());
 
     }
 
@@ -97,15 +98,16 @@ public class RosaTest {
         r1.aggiungiGiocatore(g1, "ATT", "Disponibile");
 
         //creo backup gr1
-        GiocatoreInRosa gr1_Backup = new GiocatoreInRosa(new Giocatore("Ringhio", "Gattuso",
-                LocalDate.of(1978, 1, 9), "Italia", "ringhiog@mail.com"), "Centrocampista", "Disponibile", LocalDate.of(2025, 7, 4));
+        GiocatoreInRosa gr1_Backup = new GiocatoreInRosa(new Giocatore("Ringhio", "Gattuso", 10, "Punta",
+                LocalDate.of(1978, 1, 9), "Italia", "ringhiog@mail.com"),
+                "Centrocampista", "Disponibile", LocalDate.of(2025, 7, 4));
 
         //provo a modificare un giocatore presente in rosa -> esito TRUE
         assertTrue(r1.modificaGiocatore(r1.getGiocatori().get(0).getGiocatore(), "Terzino", "Sospeso"));
 
         //verifico se i campi effettivamente sono stati modificati
-        assertNotSame(gr1_Backup.getRuolo(),r1.getGiocatori().get(0).getRuolo());
-        assertNotSame(gr1_Backup.getStatus(),r1.getGiocatori().get(0).getStatus());
+        assertNotEquals(gr1_Backup.getRuolo(), r1.getGiocatori().get(0).getRuolo());
+        assertNotEquals(gr1_Backup.getStatus(), r1.getGiocatori().get(0).getStatus());
         //provo a modificare giocatore NON presente in rosa -> false
         assertFalse(r1.modificaGiocatore(g2, "Ala destra", "Sospeso"));
     }
@@ -115,16 +117,17 @@ public class RosaTest {
      */
     @Test
     public void testCercaGiocatori() {
-        
+
         //aggiungo in rosa
         r1.aggiungiGiocatore(g1, "ATT", "Disponibile");
         r1.aggiungiGiocatore(g2, "DIF", "Disponibile");
-        
+
         //verifico se la ricerca mi restituisce una lista non vuota
-        assertNotNull(r1.cercaGiocatori("R"));
+        assertNotEquals(0,r1.cercaGiocatori("R").size());
         
-        //verifico che la lista sia accurato
-        System.out.println("Giocatore filtrati: "+ "\n" +r1.cercaGiocatori("R"));
+        //verifico che la ricerca non restituisca nulla con parametri non corrispondenti
+        assertEquals(0,r1.cercaGiocatori("ahahbah").size());
+
     }
 
     /**
@@ -134,7 +137,7 @@ public class RosaTest {
     public void testGetGiocatori() {
         //aggiungo in rosa
         r1.aggiungiGiocatore(g1, "ATT", "Disponibile");
-        
+
         //verifico che la get funzioni
         assertNotNull(r1.getGiocatori());
 

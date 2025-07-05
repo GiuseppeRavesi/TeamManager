@@ -46,8 +46,8 @@ public class CalendarioTest {
     @Before
     public void setUpClass() {
         //giocatori di prova
-        g1 = new Giocatore("Ringhio", "Gattuso", LocalDate.of(1978, 1, 9), "Italia", "ringhiog@mail.com");
-        g2 = new Giocatore("Gigi", "Buffon", LocalDate.of(1978, 1, 28), "Italia", "gigibuff@mail.com");
+        g1 = new Giocatore("Ringhio", "Gattuso",10,"Punta", LocalDate.of(1978, 1, 9), "Italia", "ringhiog@mail.com");
+        g2 = new Giocatore("Gigi", "Buffon",1,"Portiere", LocalDate.of(1978, 1, 28), "Italia", "gigibuff@mail.com");
 
         //giocatori in rosa di prova
         gr1 = new GiocatoreInRosa(g1, "Centrocampista", "Disponibile", LocalDate.of(2025, 7, 4));
@@ -98,7 +98,7 @@ public class CalendarioTest {
         c.pianificaAllenamento(LocalDate.of(2025, 7, 4), LocalTime.of(15, 30, 45), 45, "Catania", "Sessione Mirata", "Upper Body");
 
         //verifico se effettivamente è presente un allenamento
-        assertSame(1, c.getEventi().size());
+        assertEquals(1, c.getEventi().size());
 
         //verifico sovrapposizione, se due eventi stesso giorno e stesso orario -> false
         assertFalse(c.pianificaAllenamento(LocalDate.of(2025, 7, 4), LocalTime.of(15, 30, 45), 45, "Catania", "Sessione Mirata", "Upper Body"));
@@ -118,7 +118,7 @@ public class CalendarioTest {
         c.pianificaAmichevole(LocalDate.of(2025, 8, 6), LocalTime.of(20, 10, 45), 100, "Barcelona", "Juventus");
 
         //verifico se sono stati aggiunti due amichevoli inizialmente
-        assertSame(2, c.getEventi().size());
+        assertEquals(2, c.getEventi().size());
 
         //verifico sovrapposizione, se due eventi stesso giorno e stesso orario -> false
         assertFalse(c.pianificaAmichevole(LocalDate.of(2025, 7, 4), LocalTime.of(15, 30, 45), 90, "Manhattan", "Inter"));
@@ -183,15 +183,15 @@ public class CalendarioTest {
         c.pianificaAmichevole(LocalDate.of(2025, 8, 6), LocalTime.of(20, 10, 45), 100, "Barcelona", "Juventus");
 
         //verifico se sono stati aggiunti due amichevoli inizialmente
-        assertSame(2, c.getEventi().size());
+        assertEquals(2, c.getEventi().size());
 
         //elimino l'evento di posizione 1
         c.rimuoviEvento(c.getEventi().get(1));
-        assertSame(1, c.getEventi().size());
+        assertEquals(1, c.getEventi().size());
 
         //elimino l'evento di posizione 0
         c.rimuoviEvento(c.getEventi().get(0));
-        assertSame(0, c.getEventi().size());
+        assertEquals(0, c.getEventi().size());
     }
 
     /**

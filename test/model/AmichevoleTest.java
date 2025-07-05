@@ -48,14 +48,14 @@ public class AmichevoleTest {
     public void testAggiungiDisponibilità() {
 
         //verifico che all'inizio non vi siano disponibilità
-        assertSame(0, a1.getDisponibilità().size());
+        assertEquals(0, a1.getDisponibilità().size());
 
         //aggiungo 2 disponibilità
         a1.aggiungiDisponibilità(d1);
         a1.aggiungiDisponibilità(d2);
 
         //verifico che effettivamente siano state inserite
-        assertSame(2, a1.getDisponibilità().size());
+        assertEquals(2, a1.getDisponibilità().size());
 
         //verifico che non siano null
         assertNotNull(a1.getDisponibilità());

@@ -48,14 +48,14 @@ public class AllenamentoTest {
     public void testAggiungiDisponibilità() {
         
         //verifico che all'inizio non vi siano disponibilità
-        assertSame(0,tr1.getDisponibilità().size());
+        assertEquals(0,tr1.getDisponibilità().size());
         
         //aggiungo 2 disponibilità
         tr1.aggiungiDisponibilità(d1);
         tr1.aggiungiDisponibilità(d2);
         
         //verifico che effettivamente siano state inserite
-        assertSame(2,tr1.getDisponibilità().size());
+        assertEquals(2,tr1.getDisponibilità().size());
         
         //verifico che non siano null
         assertNotNull(tr1.getDisponibilità());
