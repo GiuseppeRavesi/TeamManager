@@ -18,9 +18,9 @@ import model.Rosa;
  */
 public class TeamManager {
     private static TeamManager instance;
-    private Rosa r = new Rosa();
-    private Calendario c = new Calendario();
-    private List<Giocatore> listaGiocatori = new ArrayList<>();
+    private final Rosa r = new Rosa();
+    private final Calendario c = new Calendario();
+    private final List<Giocatore> listaGiocatori = new ArrayList<>();
     
     public static TeamManager getInstance() {
         if (instance == null) {
@@ -79,10 +79,39 @@ public class TeamManager {
     
     //UC3: Gestisci Disponibilità
     
-    public void aggiungiDisponibilita(Evento eventoSelezionato, boolean presenza, String motivazione) {
+    public void comunicaDisponibilita(Evento eventoSelezionato, boolean presenza, String motivazione) {
         c.aggiungiDisponibilità(eventoSelezionato, presenza, motivazione);
     }
     
+    //UC7: Gestisci Giocatore CRUD
+    public boolean creaGiocatore(String nome, String cognome, LocalDate dataNascita, String nazionalità, String email) {
+        for (Giocatore g : listaGiocatori) {
+            if (g.getEmail().equalsIgnoreCase(email)) {
+                return false;
+            }
+        }
+        Giocatore nuovoGiocatore = new Giocatore(nome, cognome, dataNascita, nazionalità, email);
+        listaGiocatori.add(nuovoGiocatore);
+        return true;
+    }
     
+    public boolean eliminaGiocatore(Giocatore giocatore) {
+        return listaGiocatori.remove(giocatore);
+    }
+    
+    public List<Giocatore> cercaGiocatori(String filtro) {
+        List<Giocatore> risultati = new ArrayList<>();
+        String filtroLower = filtro.toLowerCase();
+
+        for (Giocatore g : listaGiocatori) {
+            String nome = g.getNome().toLowerCase();
+            String cognome = g.getCognome().toLowerCase();
+
+            if (nome.contains(filtroLower) || cognome.contains(filtroLower)) {
+                risultati.add(g);
+            }
+        }
+        return risultati;
+    }
     
 }
