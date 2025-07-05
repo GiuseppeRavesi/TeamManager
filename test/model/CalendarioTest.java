@@ -139,7 +139,10 @@ public class CalendarioTest {
           controllando l'identità non il contenuto e quindi fa "==" tra i riferimenti/puntatori
           Mentre assertEquals confronta che due oggetti siano equivalenti per contenuto,
           usando il metodo equals() internamente. Qui ho cambiato solo assertNotSame con assertNotEquals, 
-          perché per il primo è sempre vero dato che sono oggetti diversi*/
+          perché per il primo è sempre vero dato che sono oggetti diversi
+          NOTA BENE: effettua modifiche in tutte le altre classi di test e anche in questa dove usi il same al posto
+                      del equals. Possiamo dare per buono ciò che in realtà non lo è.
+        */
         Amichevole a1_Old = new Amichevole(LocalDate.of(2025, 7, 4), LocalTime.of(15, 30, 45), 90, "Manhattan", "Inter");
         c.aggiornaEvento(a1, LocalDate.of(2026, 5, 18), LocalTime.of(22, 30, 55), 95, "CaltaCity", campiSpecifici);
 
