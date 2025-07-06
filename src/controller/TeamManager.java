@@ -66,10 +66,10 @@ public class TeamManager {
         return (c.pianificaAllenamento(data, orario, durata, luogo, tipologia, note));
     }
 
-    public void aggiornaEvento(Evento eventoSelezionato, LocalDate nuovaData,
+    public boolean aggiornaEvento(Evento eventoSelezionato, LocalDate nuovaData,
             LocalTime nuovoOrario, int nuovaDurata,
             String nuovoLuogo, Map<String, String> campiSpecifici) {
-        c.aggiornaEvento(eventoSelezionato, nuovaData, nuovoOrario,
+        return c.aggiornaEvento(eventoSelezionato, nuovaData, nuovoOrario,
                 nuovaDurata, nuovoLuogo, campiSpecifici);
     }
 
