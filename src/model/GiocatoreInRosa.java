@@ -1,23 +1,25 @@
 package model;
 
+import model.enums.Ruolo;
+import model.enums.Status;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
 public class GiocatoreInRosa {
 
-    private Giocatore giocatore;          
-    private String ruolo;
-    private String status;                
+    private Giocatore giocatore;
+    private Ruolo ruolo;               
+    private Status status;            
     private LocalDate dataInserimento;
 
-    public GiocatoreInRosa(Giocatore giocatore, String ruolo, String status, LocalDate dataInserimento) {
+    public GiocatoreInRosa(Giocatore giocatore, Ruolo ruolo, Status status, LocalDate dataInserimento) {
         this.giocatore = giocatore;
         this.ruolo = ruolo;
         this.status = status;
         this.dataInserimento = dataInserimento;
     }
 
-    
     public Giocatore getGiocatore() {
         return giocatore;
     }
@@ -26,19 +28,19 @@ public class GiocatoreInRosa {
         this.giocatore = giocatore;
     }
 
-    public String getRuolo() {
+    public Ruolo getRuolo() {
         return ruolo;
     }
 
-    public void setRuolo(String ruolo) {
+    public void setRuolo(Ruolo ruolo) {
         this.ruolo = ruolo;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -66,7 +68,6 @@ public class GiocatoreInRosa {
     @Override
     public String toString() {
         return giocatore.getNome() + " " + giocatore.getCognome()
-               + " | " + ruolo + " | " + status;
+               + " | " + ruolo.name() + " | " + status.name();
     }
 }
-
