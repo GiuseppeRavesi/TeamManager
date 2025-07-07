@@ -4,6 +4,8 @@ package model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import model.enums.Ruolo;
+import model.enums.Status;
 
 public class Rosa {
 
@@ -13,7 +15,7 @@ public class Rosa {
         this.giocatoriRosa = new ArrayList<>();
     }
 
-    public boolean aggiungiGiocatore(Giocatore g, String ruolo, String status) {
+    public boolean aggiungiGiocatore(Giocatore g, Ruolo ruolo, Status status) {
 
         if (giocatoriRosa.isEmpty()) {
             giocatoriRosa.add(new GiocatoreInRosa(g, ruolo, status, LocalDate.now()));
@@ -35,7 +37,7 @@ public class Rosa {
         return giocatoriRosa.remove(g);
     }
 
-    public boolean modificaGiocatore(Giocatore giocatoreBase, String nuovoRuolo, String nuovoStatus) {
+    public boolean modificaGiocatore(Giocatore giocatoreBase, Ruolo nuovoRuolo, Status nuovoStatus) {
         for (GiocatoreInRosa g : giocatoriRosa) {
             if (g.getGiocatore().equals(giocatoreBase)) {
                 g.setRuolo(nuovoRuolo);

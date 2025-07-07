@@ -9,6 +9,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
+import static model.enums.Ruolo.CENTROCAMPISTA;
+import static model.enums.Status.DISPONIBILE;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -50,8 +52,8 @@ public class CalendarioTest {
         g2 = new Giocatore("Gigi", "Buffon",1,"Portiere", LocalDate.of(1978, 1, 28), "Italia", "gigibuff@mail.com");
 
         //giocatori in rosa di prova
-        gr1 = new GiocatoreInRosa(g1, "Centrocampista", "Disponibile", LocalDate.of(2025, 7, 4));
-        gr2 = new GiocatoreInRosa(g2, "Centrocampista", "Disponibile", LocalDate.of(2025, 7, 4));
+        gr1 = new GiocatoreInRosa(g1, CENTROCAMPISTA, DISPONIBILE, LocalDate.of(2025, 7, 4));
+        gr2 = new GiocatoreInRosa(g2, CENTROCAMPISTA, DISPONIBILE, LocalDate.of(2025, 7, 4));
 
         //eventi di prova
         a1 = new Amichevole(LocalDate.of(2025, 7, 4), LocalTime.of(15, 30, 45), 90, "Manhattan", "Inter");

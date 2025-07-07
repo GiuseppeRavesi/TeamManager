@@ -11,6 +11,8 @@ import model.Evento;
 import model.Giocatore;
 import model.GiocatoreInRosa;
 import model.Rosa;
+import model.enums.Ruolo;
+import model.enums.Status;
 
 /**
  *
@@ -30,7 +32,7 @@ public class TeamManager {
     }
     
     // UC1: Gestisci Rosa
-    public boolean aggiungiGiocatoreRosa(Giocatore giocatoreSelezionato, String ruolo, String status) {
+    public boolean aggiungiGiocatoreRosa(Giocatore giocatoreSelezionato, Ruolo ruolo, Status status) {
         return r.aggiungiGiocatore(giocatoreSelezionato, ruolo, status);
     }
 
@@ -38,7 +40,7 @@ public class TeamManager {
         r.rimuoviGiocatore(g);
     }
 
-    public boolean modificaGiocatore(Giocatore giocatoreBase, String nuovoRuolo, String nuovoStatus) {
+    public boolean modificaGiocatore(Giocatore giocatoreBase, Ruolo nuovoRuolo, Status nuovoStatus) {
         return r.modificaGiocatore(giocatoreBase, nuovoRuolo, nuovoStatus);
     }
 
