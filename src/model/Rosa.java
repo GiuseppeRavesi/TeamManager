@@ -17,7 +17,8 @@ public class Rosa {
         this.giocatoriRosa = new ArrayList<>();
     }
 
-    public void aggiungiGiocatore(Giocatore g, Ruolo ruolo, Status status) throws GiocatoreDuplicatoException, RosaCompletaException {
+    public void aggiungiGiocatore(Giocatore g, Ruolo ruolo, Status status) 
+            throws GiocatoreDuplicatoException, RosaCompletaException {
         if (giocatoriRosa.size() >= 22) {
             throw new RosaCompletaException();
         }

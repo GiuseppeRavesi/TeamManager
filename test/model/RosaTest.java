@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
- */
 package model;
 
 import exception.GiocatoreDuplicatoException;
@@ -34,8 +30,8 @@ public class RosaTest {
     public void setUp() {
 
         //giocatori di prova
-        g1 = new Giocatore("Ringhio", "Gattuso", 10, "Punta", LocalDate.of(1978, 1, 9), "Italia", "ringhiog@mail.com");
-        g2 = new Giocatore("Gigi", "Buffon", 1, "Portiere", LocalDate.of(1978, 1, 28), "Italia", "gigibuff@mail.com");
+        g1 = new Giocatore("Ringhio", "Gattuso", 10, LocalDate.of(1978, 1, 9), "Italia", "ringhiog@mail.com");
+        g2 = new Giocatore("Gigi", "Buffon", 1, LocalDate.of(1978, 1, 28), "Italia", "gigibuff@mail.com");
 
         //giocatori in rosa di prova
         gr1 = new GiocatoreInRosa(g1, CENTROCAMPISTA, DISPONIBILE, LocalDate.of(2025, 7, 4));
@@ -75,7 +71,7 @@ public class RosaTest {
         // Riempie la rosa fino a 22 giocatori diversi
         for (int i = 0; i < 21; i++) {
             Giocatore g = new Giocatore("Nome" + i, "Cognome" + i, 
-                    i, "ruolo", LocalDate.now(),"Italia", "email" + i + "@example.com");
+                    i, LocalDate.now(),"Italia", "email" + i + "@example.com");
             r1.aggiungiGiocatore(g, Ruolo.DIFENSORE, Status.DISPONIBILE);
         }
         assertEquals(22, r1.getGiocatori().size());
@@ -115,7 +111,7 @@ public class RosaTest {
         r1.aggiungiGiocatore(g1, ATTACCANTE, DISPONIBILE);
 
         //creo backup gr1
-        GiocatoreInRosa gr1_Backup = new GiocatoreInRosa(new Giocatore("Ringhio", "Gattuso", 10, "Punta",
+        GiocatoreInRosa gr1_Backup = new GiocatoreInRosa(new Giocatore("Ringhio", "Gattuso", 10,
                 LocalDate.of(1978, 1, 9), "Italia", "ringhiog@mail.com"),
                 CENTROCAMPISTA, DISPONIBILE, LocalDate.of(2025, 7, 4));
 

@@ -45,8 +45,8 @@ public class CalendarioTest {
     @Before
     public void setUpClass() {
         //giocatori di prova
-        g1 = new Giocatore("Ringhio", "Gattuso",10,"Punta", LocalDate.of(1978, 1, 9), "Italia", "ringhiog@mail.com");
-        g2 = new Giocatore("Gigi", "Buffon",1,"Portiere", LocalDate.of(1978, 1, 28), "Italia", "gigibuff@mail.com");
+        g1 = new Giocatore("Ringhio", "Gattuso",10, LocalDate.of(1978, 1, 9), "Italia", "ringhiog@mail.com");
+        g2 = new Giocatore("Gigi", "Buffon",1, LocalDate.of(1978, 1, 28), "Italia", "gigibuff@mail.com");
 
         //giocatori in rosa di prova
         gr1 = new GiocatoreInRosa(g1, CENTROCAMPISTA, DISPONIBILE, LocalDate.of(2025, 7, 4));

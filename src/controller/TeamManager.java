@@ -35,7 +35,8 @@ public class TeamManager {
     }
     
     // UC1: Gestisci Rosa
-    public void aggiungiGiocatoreRosa(Giocatore giocatoreSelezionato, Ruolo ruolo, Status status) throws GiocatoreDuplicatoException, RosaCompletaException  {
+    public void aggiungiGiocatoreRosa(Giocatore giocatoreSelezionato, Ruolo ruolo, Status status) 
+            throws GiocatoreDuplicatoException, RosaCompletaException  {
         r.aggiungiGiocatore(giocatoreSelezionato, ruolo, status);
     }
 
@@ -90,13 +91,13 @@ public class TeamManager {
     
     //UC7: Gestisci Giocatore CRUD
     public boolean creaGiocatore(String nome, String cognome, int numMaglia,LocalDate dataNascita, 
-            String nazionalità, String email, String ruoloPreferito) {
+            String nazionalità, String email) {
         for (Giocatore g : listaGiocatori) {
             if (g.getEmail().equalsIgnoreCase(email)) {
                 return false;
             }
         }
-        Giocatore nuovoGiocatore = new Giocatore(nome, cognome, numMaglia, ruoloPreferito,
+        Giocatore nuovoGiocatore = new Giocatore(nome, cognome, numMaglia,
                 dataNascita, nazionalità, email);
         listaGiocatori.add(nuovoGiocatore);
         return true;
