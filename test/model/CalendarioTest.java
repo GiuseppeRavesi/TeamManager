@@ -1,10 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
- */
 package model;
 
 import controller.Session;
+import exception.SovrapposizioneEventoException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashMap;
@@ -94,20 +91,39 @@ public class CalendarioTest {
     /**
      * Test of pianificaAllenamento method, of class Calendario.
      */
-    @Test
+   @Test
     public void testPianificaAllenamento() {
-        //pianificazione allenamento
-        c.pianificaAllenamento(LocalDate.of(2025, 7, 4), LocalTime.of(15, 30, 45), 45, "Catania", "Sessione Mirata", "Upper Body");
+        try {
+            // Pianifico un primo allenamento valido
+            c.pianificaAllenamento(
+                    LocalDate.of(2025, 7, 4),
+                    LocalTime.of(15, 30, 45),
+                    45,
+                    "Catania",
+                    "Sessione Mirata",
+                    "Upper Body"
+            );
+        } catch (SovrapposizioneEventoException e) {
+            fail("Non dovrebbe lanciare eccezione qui!");
+        }
 
-        //verifico se effettivamente è presente un allenamento
+        // Verifico che sia stato aggiunto
         assertEquals(1, c.getEventi().size());
 
-        //verifico sovrapposizione, se due eventi stesso giorno e stesso orario -> false
-        assertFalse(c.pianificaAllenamento(LocalDate.of(2025, 7, 4), LocalTime.of(15, 30, 45), 45, "Catania", "Sessione Mirata", "Upper Body"));
+        // Provo a pianificare uno sovrapposto -> Deve lanciare l’eccezione
+        assertThrows(SovrapposizioneEventoException.class, () -> {
+            c.pianificaAllenamento(
+                    LocalDate.of(2025, 7, 4),
+                    LocalTime.of(15, 30, 45),
+                    45,
+                    "Catania",
+                    "Sessione Mirata",
+                    "Upper Body"
+            );
+        });
 
-        //verifico se effettivamente gli eventi aggiunti non siano null
+        // Verifico che la lista eventi non sia nulla
         assertNotNull(c.getEventi());
-
     }
 
     /**
@@ -115,70 +131,100 @@ public class CalendarioTest {
      */
     @Test
     public void testPianificaAmichevole() {
-        //pianificazione amichevoli
-        c.pianificaAmichevole(LocalDate.of(2025, 7, 4), LocalTime.of(15, 30, 45), 90, "Manhattan", "Inter");
-        c.pianificaAmichevole(LocalDate.of(2025, 8, 6), LocalTime.of(20, 10, 45), 100, "Barcelona", "Juventus");
+        try {
+            // Pianifico due amichevoli distinte
+            c.pianificaAmichevole(
+                    LocalDate.of(2025, 7, 4),
+                    LocalTime.of(15, 30, 45),
+                    90,
+                    "Manhattan",
+                    "Inter"
+            );
+            c.pianificaAmichevole(
+                    LocalDate.of(2025, 8, 6),
+                    LocalTime.of(20, 10, 45),
+                    100,
+                    "Barcelona",
+                    "Juventus"
+            );
+        } catch (SovrapposizioneEventoException e) {
+            fail("Non dovrebbe lanciare eccezione qui!");
+        }
 
-        //verifico se sono stati aggiunti due amichevoli inizialmente
         assertEquals(2, c.getEventi().size());
 
-        //verifico sovrapposizione, se due eventi stesso giorno e stesso orario -> false
-        assertFalse(c.pianificaAmichevole(LocalDate.of(2025, 7, 4), LocalTime.of(15, 30, 45), 90, "Manhattan", "Inter"));
+        // Tenta di creare un duplicato: deve lanciare eccezione
+        assertThrows(SovrapposizioneEventoException.class, () -> {
+            c.pianificaAmichevole(
+                    LocalDate.of(2025, 7, 4),
+                    LocalTime.of(15, 30, 45),
+                    90,
+                    "Manhattan",
+                    "Inter"
+            );
+        });
 
-        //verifico se effettivamente gli eventi aggiunti non siano null
         assertNotNull(c.getEventi());
     }
 
     /**
      * Test of aggiornaEvento method, of class Calendario.
      */
-    @Test
-    public void testAggiornaEvento() {
+   @Test
+public void testAggiornaEvento() throws SovrapposizioneEventoException {
 
-        //creo un evento a1 copia
-        Amichevole a1_Old = new Amichevole(LocalDate.of(2025, 7, 4), LocalTime.of(15, 30, 45), 90, "Manhattan", "Inter");
-        c.aggiornaEvento(a1, LocalDate.of(2026, 5, 18), LocalTime.of(22, 30, 55), 95, "CaltaCity", campiSpecifici);
+    // Creo due eventi non sovrapposti
+    c.pianificaAllenamento(
+        LocalDate.of(2025, 7, 4),
+        LocalTime.of(15, 0),
+        90,
+        "Stadio A",
+        "Tecnico",
+        "Note"
+    );
 
-        //verifico se effetivamente a1 è stato aggiornato confrontando i campi
-        assertNotEquals(a1_Old.getData(), a1.getData());
-        assertNotEquals(a1_Old.getOrario(), a1.getOrario());
-        assertNotEquals(a1_Old.getDurata(), a1.getDurata());
-        assertNotEquals(a1_Old.getLuogo(), a1.getLuogo());
-        assertNotEquals(a1_Old.getSquadraAvversaria(), a1.getSquadraAvversaria());
-        //------------------------------------------------------------------------
+    c.pianificaAmichevole(
+        LocalDate.of(2025, 7, 4),
+        LocalTime.of(18, 0),
+        60,
+        "Stadio A",
+        "Inter"
+    );
 
-        // Creo un primo evento
-        boolean ok1 = c.pianificaAllenamento(LocalDate.of(2025, 7, 4), LocalTime.of(15, 0), 90, "Stadio A", "Tecnico", "Note");
-        assertTrue(ok1);
+    Evento amichevole = c.getEventi().get(1);
 
-        // Creo un secondo evento
-        boolean ok2 = c.pianificaAmichevole(LocalDate.of(2025, 7, 4), LocalTime.of(18, 0), 60, "Stadio A", "Inter");
-        assertTrue(ok2);
+    // Caso 1: deve lanciare eccezione perché sovrapposto
+    assertThrows(SovrapposizioneEventoException.class, () -> {
+        c.aggiornaEvento(
+            amichevole,
+            LocalDate.of(2025, 7, 4),
+            LocalTime.of(15, 30), // si sovrappone all'allenamento
+            60,
+            "Stadio A",
+            campiSpecifici
+        );
+    });
 
-        // Modifico il secondo evento per sovrapporlo al primo
-        Evento amichevole = c.getEventi().get(1);
-        boolean conflitto = c.aggiornaEvento(amichevole, LocalDate.of(2025, 7, 4),
-                LocalTime.of(15, 30), // si sovrappone al primo
-                60,
-                "Stadio A",
-                campiSpecifici);
-        assertFalse(conflitto);  // deve fallire per conflitto
+    // Caso 2: deve andare a buon fine perché non c'è conflitto
+    c.aggiornaEvento(
+        amichevole,
+        LocalDate.of(2025, 7, 4),
+        LocalTime.of(19, 30), // non si sovrappone
+        60,
+        "Stadio A",
+        campiSpecifici
+    );
 
-        //Rimodifico il secondo evento per evitare i conflitti
-        Evento a = c.getEventi().get(1);
-        boolean conflitto1 = c.aggiornaEvento(amichevole, LocalDate.of(2025, 7, 4),
-                LocalTime.of(19, 30), //Non ci sono conflitti di orario
-                60,
-                "Stadio A",
-                campiSpecifici);
-        assertTrue(conflitto1);
-    }
+    // Verifico che l'evento sia stato aggiornato correttamente
+    assertEquals(LocalTime.of(19, 30), amichevole.getOrario());
+}
+
 
     /**
      * Test of rimuoviEvento method, of class Calendario.
      */
     @Test
-    public void testRimuoviEvento() {
+    public void testRimuoviEvento() throws SovrapposizioneEventoException {
 
         //pianificazione amichevoli
         c.pianificaAmichevole(LocalDate.of(2025, 7, 4), LocalTime.of(15, 30, 45), 90, "Manhattan", "Inter");
@@ -201,7 +247,7 @@ public class CalendarioTest {
      */
     //non mi serve
     @Test
-    public void testGetEventi() {
+    public void testGetEventi() throws SovrapposizioneEventoException {
         //verifico se effettivamente gli eventi aggiunti non siano null
         //pianificazione amichevoli
         c.pianificaAmichevole(LocalDate.of(2025, 7, 4), LocalTime.of(15, 30, 45), 90, "Manhattan", "Inter");

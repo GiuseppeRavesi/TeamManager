@@ -1,6 +1,7 @@
 package model;
 
 import controller.Session;
+import exception.SovrapposizioneEventoException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -15,28 +16,24 @@ public class Calendario {
         this.listaEventi = new ArrayList<>();
     }
 
-    public boolean pianificaAllenamento(LocalDate data, LocalTime orario,
-            int durata, String luogo, String tipologia, String note) {
-        if (verificaSovrapposizione(data, orario, durata, luogo)) {
-            return false;
-        }
+    public void pianificaAllenamento(LocalDate data, LocalTime orario,
+            int durata, String luogo, String tipologia, String note) throws SovrapposizioneEventoException{
+        verificaSovrapposizione(data, orario, durata, luogo); 
+         
         Allenamento allenamento = new Allenamento(data, orario, durata, luogo, tipologia, note);
         listaEventi.add(allenamento);
-        return true;
     }
 
     public boolean pianificaAmichevole(LocalDate data, LocalTime orario,
-            int durata, String luogo, String squadraAvversaria) {
-        if (verificaSovrapposizione(data, orario, durata, luogo)) {
-            return false;
-        }
+            int durata, String luogo, String squadraAvversaria) throws SovrapposizioneEventoException{
+        verificaSovrapposizione(data, orario, durata, luogo);
         Amichevole amichevole = new Amichevole(data, orario, durata, luogo, squadraAvversaria);
         listaEventi.add(amichevole);
         return true;
     }
 
-    public boolean aggiornaEvento(Evento eventoSelezionato, LocalDate nuovaData, LocalTime nuovoOrario,
-            int nuovaDurata, String nuovoLuogo, Map<String, String> campiSpecifici) {
+    public void aggiornaEvento(Evento eventoSelezionato, LocalDate nuovaData, LocalTime nuovoOrario,
+            int nuovaDurata, String nuovoLuogo, Map<String, String> campiSpecifici) throws SovrapposizioneEventoException {
 
         // Controllo conflitti con altri eventi
         for (Evento e : listaEventi) {
@@ -56,8 +53,7 @@ public class Calendario {
                 boolean sovrapposto = !(nuovoFine.isBefore(inizioEsistente) || nuovoInizio.isAfter(fineEsistente));
             
                 if (sovrapposto) {
-                    System.out.println("Conflitto di orario con un altro evento esistente!");
-                    return false; 
+                    throw new SovrapposizioneEventoException("Sovrapposizione: esiste già un evento"); 
                 }
             }
         }
@@ -76,8 +72,6 @@ public class Calendario {
             Amichevole am = (Amichevole) eventoSelezionato;
             am.setSquadraAvversaria(campiSpecifici.getOrDefault("squadraAvversaria", am.getSquadraAvversaria()));
         }
-
-        return true; 
     }
 
     public void rimuoviEvento(Evento eventoSelezionato) {
@@ -100,27 +94,30 @@ public class Calendario {
         eventoSelezionato.aggiungiDisponibilità(nuovaDisponibilità);
     }
     
-    private boolean verificaSovrapposizione(LocalDate data, LocalTime orarioInizio, int durata, String luogo) {
+    private void verificaSovrapposizione(LocalDate data, LocalTime orarioInizio, 
+            int durata, String luogo) throws SovrapposizioneEventoException {
     if (listaEventi.isEmpty()) {
-        return false; 
+        return; // Nessun conflitto
     }
 
     LocalTime inizioNuovo = orarioInizio;
     LocalTime fineNuovo = orarioInizio.plusMinutes(durata);
 
     for (Evento evento : listaEventi) {
-        if (!evento.getData().equals(data)) continue; 
-        if (!evento.getLuogo().equalsIgnoreCase(luogo)) continue; 
+        if (!evento.getData().equals(data)) continue;
+        if (!evento.getLuogo().equalsIgnoreCase(luogo)) continue;
 
         LocalTime inizioEsistente = evento.getOrario();
         LocalTime fineEsistente = inizioEsistente.plusMinutes(evento.getDurata());
 
         boolean sovrapposto = inizioNuovo.isBefore(fineEsistente) && inizioEsistente.isBefore(fineNuovo);
+
         if (sovrapposto) {
-            return true; 
+            throw new SovrapposizioneEventoException(
+                "Sovrapposizione: esiste già un evento a " + luogo 
+                        + " il " + data + " dalle " + inizioEsistente + " alle " + fineEsistente);
         }
     }
-
-    return false; 
 }
+
 }

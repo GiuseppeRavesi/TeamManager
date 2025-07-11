@@ -1,6 +1,9 @@
 
 package controller;
 
+import exception.GiocatoreDuplicatoException;
+import exception.RosaCompletaException;
+import exception.SovrapposizioneEventoException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -32,8 +35,8 @@ public class TeamManager {
     }
     
     // UC1: Gestisci Rosa
-    public boolean aggiungiGiocatoreRosa(Giocatore giocatoreSelezionato, Ruolo ruolo, Status status) {
-        return r.aggiungiGiocatore(giocatoreSelezionato, ruolo, status);
+    public void aggiungiGiocatoreRosa(Giocatore giocatoreSelezionato, Ruolo ruolo, Status status) throws GiocatoreDuplicatoException, RosaCompletaException  {
+        r.aggiungiGiocatore(giocatoreSelezionato, ruolo, status);
     }
 
     public void rimuoviGiocatoreDaRosa(GiocatoreInRosa g) {
@@ -58,20 +61,20 @@ public class TeamManager {
         return c.getEventi();
     }
     
-    public boolean pianificaAmichevole(LocalDate data, LocalTime orario, int durata,
-            String luogo, String squadraAvversaria) {
-        return (c.pianificaAmichevole(data, orario, durata, luogo, squadraAvversaria));
+    public void pianificaAmichevole(LocalDate data, LocalTime orario, int durata,
+            String luogo, String squadraAvversaria) throws SovrapposizioneEventoException {
+        c.pianificaAmichevole(data, orario, durata, luogo, squadraAvversaria);
     }
 
-    public boolean pianificaAllenamento(LocalDate data, LocalTime orario, int durata,
-            String luogo, String tipologia, String note) {
-        return (c.pianificaAllenamento(data, orario, durata, luogo, tipologia, note));
+    public void pianificaAllenamento(LocalDate data, LocalTime orario, int durata,
+            String luogo, String tipologia, String note) throws SovrapposizioneEventoException {
+        c.pianificaAllenamento(data, orario, durata, luogo, tipologia, note);
     }
 
-    public boolean aggiornaEvento(Evento eventoSelezionato, LocalDate nuovaData,
+    public void aggiornaEvento(Evento eventoSelezionato, LocalDate nuovaData,
             LocalTime nuovoOrario, int nuovaDurata,
-            String nuovoLuogo, Map<String, String> campiSpecifici) {
-        return c.aggiornaEvento(eventoSelezionato, nuovaData, nuovoOrario,
+            String nuovoLuogo, Map<String, String> campiSpecifici) throws SovrapposizioneEventoException {
+        c.aggiornaEvento(eventoSelezionato, nuovaData, nuovoOrario,
                 nuovaDurata, nuovoLuogo, campiSpecifici);
     }
 

@@ -1,6 +1,8 @@
 
 package model;
 
+import exception.GiocatoreDuplicatoException;
+import exception.RosaCompletaException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,23 +17,19 @@ public class Rosa {
         this.giocatoriRosa = new ArrayList<>();
     }
 
-    public boolean aggiungiGiocatore(Giocatore g, Ruolo ruolo, Status status) {
-
-        if (giocatoriRosa.isEmpty()) {
-            giocatoriRosa.add(new GiocatoreInRosa(g, ruolo, status, LocalDate.now()));
-            return true;
+    public void aggiungiGiocatore(Giocatore g, Ruolo ruolo, Status status) throws GiocatoreDuplicatoException, RosaCompletaException {
+        if (giocatoriRosa.size() >= 22) {
+            throw new RosaCompletaException();
         }
 
-        if (giocatoriRosa.size() <= 22) {
-            for (GiocatoreInRosa gr : giocatoriRosa) {
-                if (!gr.getGiocatore().equals(g)) {
-                    giocatoriRosa.add(new GiocatoreInRosa(g, ruolo, status, LocalDate.now()));
-                    return true;
-                }
+        for (GiocatoreInRosa gr : giocatoriRosa) {
+            if (gr.getGiocatore().equals(g)) {
+                throw new GiocatoreDuplicatoException();
             }
         }
-        return false;
+        giocatoriRosa.add(new GiocatoreInRosa(g, ruolo, status, LocalDate.now()));
     }
+
 
     public boolean rimuoviGiocatore(GiocatoreInRosa g) {
         return giocatoriRosa.remove(g);
