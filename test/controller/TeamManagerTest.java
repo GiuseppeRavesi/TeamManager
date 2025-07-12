@@ -43,7 +43,7 @@ public class TeamManagerTest {
     public void testCreaGiocatore() {
 
         //si procede a verificare se un giocatore viene creato correttamente -> TRUE
-        assertTrue(tm.creaGiocatore("Ringhio", "Gattuso", 10, LocalDate.of(1978, 1, 9), "Italia", "ringhiog@mail.com"));
+        assertTrue(tm.creaGiocatore("Ringhio", "Gattuso", LocalDate.of(1978, 1, 9), "Italia", "ringhiog@mail.com"));
         //verifico la dimensione della lista giocatori
         assertEquals(1, tm.getListaGiocatori().size());
 
@@ -51,7 +51,7 @@ public class TeamManagerTest {
         assertNotNull(tm.getListaGiocatori());
 
         //provo ad aggiungere lo stesso giocatore -> FALSE
-        assertFalse(tm.creaGiocatore("Ringhio", "Gattuso", 10, LocalDate.of(1978, 1, 9), "Italia", "ringhiog@mail.com"));
+        assertFalse(tm.creaGiocatore("Ringhio", "Gattuso", LocalDate.of(1978, 1, 9), "Italia", "ringhiog@mail.com"));
     }
 
     /**
@@ -61,7 +61,7 @@ public class TeamManagerTest {
     public void testEliminaGiocatore() {
         
         //inserisco un giocatore di prova
-        assertTrue(tm.creaGiocatore("Ringhio", "Gattuso", 10, LocalDate.of(1978, 1, 9), "Italia", "ringhiog@mail.com"));
+        assertTrue(tm.creaGiocatore("Ringhio", "Gattuso", LocalDate.of(1978, 1, 9), "Italia", "ringhiog@mail.com"));
         
         //elimino il giocatore inserito
         assertTrue(tm.eliminaGiocatore(tm.getListaGiocatori().get(0)));
@@ -78,7 +78,7 @@ public class TeamManagerTest {
     public void testCercaGiocatori() {
         
         //inserisco un giocatore di prova
-        assertTrue(tm.creaGiocatore("Ringhio", "Gattuso", 10, LocalDate.of(1978, 1, 9), "Italia", "ringhiog@mail.com"));
+        assertTrue(tm.creaGiocatore("Ringhio", "Gattuso", LocalDate.of(1978, 1, 9), "Italia", "ringhiog@mail.com"));
         
         //provo ad eseguire una ricerca, assicurandomi che inserendo il parametro di ricerca non sia vuota
         assertNotEquals(0,tm.cercaGiocatori("R").size());
