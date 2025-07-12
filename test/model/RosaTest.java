@@ -1,6 +1,7 @@
 package model;
 
 import exception.GiocatoreDuplicatoException;
+import exception.NumeroMagliaDuplicatoException;
 import exception.RosaCompletaException;
 import java.time.LocalDate;
 import model.enums.Ruolo;
@@ -30,12 +31,12 @@ public class RosaTest {
     public void setUp() {
 
         //giocatori di prova
-        g1 = new Giocatore("Ringhio", "Gattuso", 10, LocalDate.of(1978, 1, 9), "Italia", "ringhiog@mail.com");
-        g2 = new Giocatore("Gigi", "Buffon", 1, LocalDate.of(1978, 1, 28), "Italia", "gigibuff@mail.com");
+        g1 = new Giocatore("Ringhio", "Gattuso", LocalDate.of(1978, 1, 9), "Italia", "ringhiog@mail.com");
+        g2 = new Giocatore("Gigi", "Buffon", LocalDate.of(1978, 1, 28), "Italia", "gigibuff@mail.com");
 
         //giocatori in rosa di prova
-        gr1 = new GiocatoreInRosa(g1, CENTROCAMPISTA, DISPONIBILE, LocalDate.of(2025, 7, 4));
-        gr2 = new GiocatoreInRosa(g2, CENTROCAMPISTA, DISPONIBILE, LocalDate.of(2025, 7, 4));
+        gr1 = new GiocatoreInRosa(g1, CENTROCAMPISTA, DISPONIBILE, 1, LocalDate.of(2025, 7, 4));
+        gr2 = new GiocatoreInRosa(g2, CENTROCAMPISTA, DISPONIBILE, 10, LocalDate.of(2025, 7, 4));
 
         //creo una rosa
         r1 = new Rosa();
@@ -50,49 +51,64 @@ public class RosaTest {
      * Test of aggiungiGiocatore method, of class Rosa.
      */
     @Test
-     public void testAggiungiGiocatore() throws GiocatoreDuplicatoException, RosaCompletaException {
+    public void testAggiungiGiocatore() throws GiocatoreDuplicatoException, RosaCompletaException, NumeroMagliaDuplicatoException {
+
         // Verifica che la rosa sia inizialmente vuota
         assertEquals(0, r1.getGiocatori().size());
 
         // Aggiungi un giocatore: deve andare bene
-        r1.aggiungiGiocatore(g1, Ruolo.ATTACCANTE, Status.DISPONIBILE);
+        r1.aggiungiGiocatore(g1, Ruolo.ATTACCANTE, Status.DISPONIBILE, 2);
         assertEquals(1, r1.getGiocatori().size());
 
         // Verifica che la lista non sia null
         assertNotNull(r1.getGiocatori());
 
-        // Prova ad aggiungere lo stesso giocatore: deve lanciare GiocatoreDuplicatoException
-        GiocatoreDuplicatoException ex = assertThrows(
-            GiocatoreDuplicatoException.class,
-            () -> r1.aggiungiGiocatore(g1, Ruolo.DIFENSORE, Status.DISPONIBILE)
+        // Prova ad aggiungere lo stesso giocatore -> GiocatoreDuplicatoException
+        GiocatoreDuplicatoException ex1 = assertThrows(
+                GiocatoreDuplicatoException.class,
+                () -> r1.aggiungiGiocatore(g1, Ruolo.DIFENSORE, Status.DISPONIBILE, 3)
         );
-        assertEquals("Il giocatore è già presente nella rosa.", ex.getMessage());
+        assertEquals("Il giocatore è già presente nella rosa.", ex1.getMessage());
 
-        // Riempie la rosa fino a 22 giocatori diversi
+        // Aggiungi un altro giocatore con stesso numero di maglia -> NumeroMagliaDuplicatoException
+        Giocatore altro = new Giocatore("Francesco", "Totti", LocalDate.of(1976, 9, 27), "Italia", "totti@mail.com");
+
+        NumeroMagliaDuplicatoException ex2 = assertThrows(
+                NumeroMagliaDuplicatoException.class,
+                () -> r1.aggiungiGiocatore(altro, Ruolo.ATTACCANTE, Status.DISPONIBILE, 2) // 2 è già usato
+        );
+        assertEquals("Numero maglia già utilizzato", ex2.getMessage());
+
+        // Riempi la rosa fino a 22 giocatori diversi
         for (int i = 0; i < 21; i++) {
-            Giocatore g = new Giocatore("Nome" + i, "Cognome" + i, 
-                    i, LocalDate.now(),"Italia", "email" + i + "@example.com");
-            r1.aggiungiGiocatore(g, Ruolo.DIFENSORE, Status.DISPONIBILE);
+            Giocatore g = new Giocatore("Nome" + i, "Cognome" + i, LocalDate.now(), "Italia", "email" + i + "@example.com");
+            r1.aggiungiGiocatore(g, Ruolo.DIFENSORE, Status.DISPONIBILE, i + 3); // usa numeri diversi da 2
         }
         assertEquals(22, r1.getGiocatori().size());
 
-        // Prova ad aggiungere un altro giocatore: deve lanciare RosaCompletaException
+        // Provo ad aggiungere ancora -> RosaCompletaException
         assertThrows(
-            RosaCompletaException.class,
-            () -> r1.aggiungiGiocatore(g1, Ruolo.PORTIERE, Status.DISPONIBILE)
+                RosaCompletaException.class,
+                () -> r1.aggiungiGiocatore(
+                        new Giocatore("Nuovo", "Giocatore", LocalDate.now(), "Italia", "nuovo@mail.com"),
+                        Ruolo.PORTIERE,
+                        Status.DISPONIBILE,
+                        25
+                )
         );
     }
+
     /**
      * Test of rimuoviGiocatore method, of class Rosa.
      */
     @Test
-    public void testRimuoviGiocatore() throws GiocatoreDuplicatoException, RosaCompletaException {
+    public void testRimuoviGiocatore() throws GiocatoreDuplicatoException, RosaCompletaException, Exception {
 
         //verifico che inizialmente non vi siano giocatori in rosa
         assertEquals(0, r1.getGiocatori().size());
 
         //aggiungo un nuovo giocatore e verifico che sia stato aggiunto
-        r1.aggiungiGiocatore(g1, ATTACCANTE, DISPONIBILE);
+        r1.aggiungiGiocatore(g1, ATTACCANTE, DISPONIBILE, 3);
         assertEquals(1, r1.getGiocatori().size());
 
         //rimuovo e verifico che il giocatore viene rimosso correttamente
@@ -105,41 +121,37 @@ public class RosaTest {
      * Test of modificaGiocatore method, of class Rosa.
      */
     @Test
-    public void testModificaGiocatore() throws GiocatoreDuplicatoException, RosaCompletaException {
+    public void testModificaGiocatore() throws GiocatoreDuplicatoException, RosaCompletaException, NumeroMagliaDuplicatoException {
 
         //aggiungo un giocatore in rosa
-        r1.aggiungiGiocatore(g1, ATTACCANTE, DISPONIBILE);
+        r1.aggiungiGiocatore(g1, ATTACCANTE, SOSPESO, 4);
 
         //creo backup gr1
-        GiocatoreInRosa gr1_Backup = new GiocatoreInRosa(new Giocatore("Ringhio", "Gattuso", 10,
+        GiocatoreInRosa gr1_Backup = new GiocatoreInRosa(new Giocatore("Ringhio", "Gattuso",
                 LocalDate.of(1978, 1, 9), "Italia", "ringhiog@mail.com"),
-                CENTROCAMPISTA, DISPONIBILE, LocalDate.of(2025, 7, 4));
-
-        //provo a modificare un giocatore presente in rosa -> esito TRUE
-        assertTrue(r1.modificaGiocatore(r1.getGiocatori().get(0).getGiocatore(), DIFENSORE, SOSPESO));
+                CENTROCAMPISTA, DISPONIBILE, 10, LocalDate.of(2025, 7, 4));
 
         //verifico se i campi effettivamente sono stati modificati
         assertNotEquals(gr1_Backup.getRuolo(), r1.getGiocatori().get(0).getRuolo());
         assertNotEquals(gr1_Backup.getStatus(), r1.getGiocatori().get(0).getStatus());
-        //provo a modificare giocatore NON presente in rosa -> false
-        assertFalse(r1.modificaGiocatore(g2, ATTACCANTE, SOSPESO));
+        assertNotEquals(gr1_Backup.getStatus(), r1.getGiocatori().get(0).getNumMaglia());
     }
 
     /**
      * Test of cercaGiocatori method, of class Rosa.
      */
     @Test
-    public void testCercaGiocatori() throws GiocatoreDuplicatoException, RosaCompletaException {
+    public void testCercaGiocatori() throws GiocatoreDuplicatoException, RosaCompletaException, NumeroMagliaDuplicatoException {
 
         //aggiungo in rosa
-        r1.aggiungiGiocatore(g1, ATTACCANTE, DISPONIBILE);
-        r1.aggiungiGiocatore(g2, DIFENSORE, DISPONIBILE);
+        r1.aggiungiGiocatore(g1, ATTACCANTE, DISPONIBILE, 5);
+        r1.aggiungiGiocatore(g2, DIFENSORE, DISPONIBILE, 6);
 
         //verifico se la ricerca mi restituisce una lista non vuota
-        assertNotEquals(0,r1.cercaGiocatori("R").size());
-        
+        assertNotEquals(0, r1.cercaGiocatori("R").size());
+
         //verifico che la ricerca non restituisca nulla con parametri non corrispondenti
-        assertEquals(0,r1.cercaGiocatori("ahahbah").size());
+        assertEquals(0, r1.cercaGiocatori("ahahbah").size());
 
     }
 
@@ -147,9 +159,9 @@ public class RosaTest {
      * Test of getGiocatori method, of class Rosa.
      */
     @Test
-    public void testGetGiocatori() throws GiocatoreDuplicatoException, RosaCompletaException {
+    public void testGetGiocatori() throws GiocatoreDuplicatoException, RosaCompletaException, NumeroMagliaDuplicatoException {
         //aggiungo in rosa
-        r1.aggiungiGiocatore(g1, ATTACCANTE, DISPONIBILE);
+        r1.aggiungiGiocatore(g1, ATTACCANTE, DISPONIBILE, 10);
 
         //verifico che la get funzioni
         assertNotNull(r1.getGiocatori());

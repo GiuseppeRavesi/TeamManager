@@ -45,12 +45,12 @@ public class CalendarioTest {
     @Before
     public void setUpClass() {
         //giocatori di prova
-        g1 = new Giocatore("Ringhio", "Gattuso",10, LocalDate.of(1978, 1, 9), "Italia", "ringhiog@mail.com");
-        g2 = new Giocatore("Gigi", "Buffon",1, LocalDate.of(1978, 1, 28), "Italia", "gigibuff@mail.com");
+        g1 = new Giocatore("Ringhio", "Gattuso", LocalDate.of(1978, 1, 9), "Italia", "ringhiog@mail.com");
+        g2 = new Giocatore("Gigi", "Buffon", LocalDate.of(1978, 1, 28), "Italia", "gigibuff@mail.com");
 
         //giocatori in rosa di prova
-        gr1 = new GiocatoreInRosa(g1, CENTROCAMPISTA, DISPONIBILE, LocalDate.of(2025, 7, 4));
-        gr2 = new GiocatoreInRosa(g2, CENTROCAMPISTA, DISPONIBILE, LocalDate.of(2025, 7, 4));
+        gr1 = new GiocatoreInRosa(g1, CENTROCAMPISTA, DISPONIBILE, 10, LocalDate.of(2025, 7, 4));
+        gr2 = new GiocatoreInRosa(g2, CENTROCAMPISTA, DISPONIBILE, 1, LocalDate.of(2025, 7, 4));
 
         //eventi di prova
         a1 = new Amichevole(LocalDate.of(2025, 7, 4), LocalTime.of(15, 30, 45), 90, "Manhattan", "Inter");

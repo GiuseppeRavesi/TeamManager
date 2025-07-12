@@ -8,29 +8,26 @@ public class Giocatore {
 
     private String nome;
     private String cognome;
-    private int numMaglia;
     private LocalDate dataNascita;
     private String nazionalita;
     private String email;
     private static int contatore = 0;
     private int id;
 
-    public Giocatore(String nome, String cognome, int numMaglia,
+    public Giocatore(String nome, String cognome,
             LocalDate dataNascita, String nazionalita, String email) {
         this.nome = nome;
         this.cognome = cognome;
-        this.numMaglia = numMaglia;
         this.dataNascita = dataNascita;
         this.nazionalita = nazionalita;
         this.email = email;
         this.id = ++contatore;
     }
     
-    public Giocatore(int id, String nome, String cognome, int numMaglia,String ruoloPreferito,
+    public Giocatore(int id, String nome, String cognome,String ruoloPreferito,
             LocalDate dataNascita, String nazionalita, String email) {
         this.nome = nome;
         this.cognome = cognome;
-        this.numMaglia = numMaglia;
         this.dataNascita = dataNascita;
         this.nazionalita = nazionalita;
         this.email = email;

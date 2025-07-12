@@ -2,6 +2,7 @@
 package controller;
 
 import exception.GiocatoreDuplicatoException;
+import exception.NumeroMagliaDuplicatoException;
 import exception.RosaCompletaException;
 import exception.SovrapposizioneEventoException;
 import java.time.LocalDate;
@@ -35,17 +36,18 @@ public class TeamManager {
     }
     
     // UC1: Gestisci Rosa
-    public void aggiungiGiocatoreRosa(Giocatore giocatoreSelezionato, Ruolo ruolo, Status status) 
-            throws GiocatoreDuplicatoException, RosaCompletaException  {
-        r.aggiungiGiocatore(giocatoreSelezionato, ruolo, status);
+    public void aggiungiGiocatoreRosa(Giocatore giocatoreSelezionato, Ruolo ruolo, Status status, int numMaglia) 
+            throws Exception  {
+        r.aggiungiGiocatore(giocatoreSelezionato, ruolo, status, numMaglia);
     }
 
     public void rimuoviGiocatoreDaRosa(GiocatoreInRosa g) {
         r.rimuoviGiocatore(g);
     }
 
-    public boolean modificaGiocatore(Giocatore giocatoreBase, Ruolo nuovoRuolo, Status nuovoStatus) {
-        return r.modificaGiocatore(giocatoreBase, nuovoRuolo, nuovoStatus);
+    public void modificaGiocatore(Giocatore giocatoreBase, Ruolo nuovoRuolo, Status nuovoStatus, int numMaglia) 
+            throws NumeroMagliaDuplicatoException {
+        r.modificaGiocatore(giocatoreBase, nuovoRuolo, nuovoStatus, numMaglia);
     }
 
     public List<GiocatoreInRosa> cercaGiocatoriRosa(String filtro) {
@@ -97,8 +99,8 @@ public class TeamManager {
                 return false;
             }
         }
-        Giocatore nuovoGiocatore = new Giocatore(nome, cognome, numMaglia,
-                dataNascita, nazionalità, email);
+        Giocatore nuovoGiocatore = new Giocatore(nome, cognome,dataNascita,
+                nazionalità, email);
         listaGiocatori.add(nuovoGiocatore);
         return true;
     }

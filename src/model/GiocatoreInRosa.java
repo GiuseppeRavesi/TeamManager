@@ -10,13 +10,15 @@ public class GiocatoreInRosa {
 
     private Giocatore giocatore;
     private Ruolo ruolo;               
-    private Status status;            
+    private Status status;
+    private int numMaglia;
     private LocalDate dataInserimento;
 
-    public GiocatoreInRosa(Giocatore giocatore, Ruolo ruolo, Status status, LocalDate dataInserimento) {
+    public GiocatoreInRosa(Giocatore giocatore, Ruolo ruolo, Status status,int numMaglia, LocalDate dataInserimento) {
         this.giocatore = giocatore;
         this.ruolo = ruolo;
         this.status = status;
+        this.numMaglia = numMaglia;
         this.dataInserimento = dataInserimento;
     }
 
@@ -46,6 +48,14 @@ public class GiocatoreInRosa {
 
     public LocalDate getDataInserimento() {
         return dataInserimento;
+    }
+
+    public int getNumMaglia() {
+        return numMaglia;
+    }
+
+    public void setNumMaglia(int numMaglia) {
+        this.numMaglia = numMaglia;
     }
 
     public void setDataInserimento(LocalDate dataInserimento) {
