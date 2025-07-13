@@ -12,10 +12,10 @@ public abstract class Statistica {
     protected int idGiocatore;
     protected int idEvento;
 
-    private static int idCounter = 1;
+     private static int contatore = 0;
 
     public Statistica(int idGiocatore, int idEvento) {
-        this.id = generaId();
+        this.id = ++contatore;
         this.idGiocatore = idGiocatore;
         this.idEvento = idEvento;
     }
@@ -24,10 +24,6 @@ public abstract class Statistica {
         this.id = id;
         this.idGiocatore = idGiocatore;
         this.idEvento = idEvento;
-    }
-
-    protected int generaId() {
-        return idCounter++;
     }
 
     public int getId() {
