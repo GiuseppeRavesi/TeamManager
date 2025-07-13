@@ -91,7 +91,7 @@ public class CalendarioTest {
     /**
      * Test of pianificaAllenamento method, of class Calendario.
      */
-   @Test
+    @Test
     public void testPianificaAllenamento() {
         try {
             // Pianifico un primo allenamento valido
@@ -170,55 +170,54 @@ public class CalendarioTest {
     /**
      * Test of aggiornaEvento method, of class Calendario.
      */
-   @Test
-public void testAggiornaEvento() throws SovrapposizioneEventoException {
+    @Test
+    public void testAggiornaEvento() throws SovrapposizioneEventoException {
 
-    // Creo due eventi non sovrapposti
-    c.pianificaAllenamento(
-        LocalDate.of(2025, 7, 4),
-        LocalTime.of(15, 0),
-        90,
-        "Stadio A",
-        "Tecnico",
-        "Note"
-    );
-
-    c.pianificaAmichevole(
-        LocalDate.of(2025, 7, 4),
-        LocalTime.of(18, 0),
-        60,
-        "Stadio A",
-        "Inter"
-    );
-
-    Evento amichevole = c.getEventi().get(1);
-
-    // Caso 1: deve lanciare eccezione perché sovrapposto
-    assertThrows(SovrapposizioneEventoException.class, () -> {
-        c.aggiornaEvento(
-            amichevole,
-            LocalDate.of(2025, 7, 4),
-            LocalTime.of(15, 30), // si sovrappone all'allenamento
-            60,
-            "Stadio A",
-            campiSpecifici
+        // Creo due eventi non sovrapposti
+        c.pianificaAllenamento(
+                LocalDate.of(2025, 7, 4),
+                LocalTime.of(15, 0),
+                90,
+                "Stadio A",
+                "Tecnico",
+                "Note"
         );
-    });
 
-    // Caso 2: deve andare a buon fine perché non c'è conflitto
-    c.aggiornaEvento(
-        amichevole,
-        LocalDate.of(2025, 7, 4),
-        LocalTime.of(19, 30), // non si sovrappone
-        60,
-        "Stadio A",
-        campiSpecifici
-    );
+        c.pianificaAmichevole(
+                LocalDate.of(2025, 7, 4),
+                LocalTime.of(18, 0),
+                60,
+                "Stadio A",
+                "Inter"
+        );
 
-    // Verifico che l'evento sia stato aggiornato correttamente
-    assertEquals(LocalTime.of(19, 30), amichevole.getOrario());
-}
+        Evento amichevole = c.getEventi().get(1);
 
+        // Caso 1: deve lanciare eccezione perché sovrapposto
+        assertThrows(SovrapposizioneEventoException.class, () -> {
+            c.aggiornaEvento(
+                    amichevole,
+                    LocalDate.of(2025, 7, 4),
+                    LocalTime.of(15, 30), // si sovrappone all'allenamento
+                    60,
+                    "Stadio A",
+                    campiSpecifici
+            );
+        });
+
+        // Caso 2: deve andare a buon fine perché non c'è conflitto
+        c.aggiornaEvento(
+                amichevole,
+                LocalDate.of(2025, 7, 4),
+                LocalTime.of(19, 30), // non si sovrappone
+                60,
+                "Stadio A",
+                campiSpecifici
+        );
+
+        // Verifico che l'evento sia stato aggiornato correttamente
+        assertEquals(LocalTime.of(19, 30), amichevole.getOrario());
+    }
 
     /**
      * Test of rimuoviEvento method, of class Calendario.
@@ -273,4 +272,81 @@ public void testAggiornaEvento() throws SovrapposizioneEventoException {
         assertNotNull(a1.getDisponibilità());
     }
 
+    @Test
+    public void testConfrontaGiocatoriCompleto() {
+
+        /* Promemoria costruttore StatisticaAmichevole:
+        public StatisticaAmichevole(int idGiocatore, int idEvento, int minutiGiocati, int goal,
+            int autogoal, int cartelliniGialli, int cartelliniRossi, float distanzaTotalePercorsa,
+            int falliCommessi, int assist, int parate, int intercettiRiusciti, int passaggiChiave, int tiriTotali)
+        */
+        // Creo due eventi
+        Amichevole a1 = new Amichevole(LocalDate.now(), LocalTime.NOON, 90, "Stadio Olimpico", "Roma");
+        Amichevole a2 = new Amichevole(LocalDate.now().plusDays(1), LocalTime.NOON, 90, "San Siro", "Milan");
+        c.getEventi().add(a1);
+        c.getEventi().add(a2);
+
+        // Aggiungo statistiche per giocatore1
+        Disponibilità d1g1 = new Disponibilità(gr1.getGiocatore().getId(), a1.getId(), true, null);
+        d1g1.setStatistica(new StatisticaAmichevole(gr1.getGiocatore().getId(), a1.getId(), 90, 2, 1, 0, 0, 9.5f, 1, 0, 0, 3, 2, 1));
+        a1.aggiungiDisponibilità(d1g1);
+
+        Disponibilità d2g1 = new Disponibilità(gr1.getGiocatore().getId(), a2.getId(), true, null);
+        d2g1.setStatistica(new StatisticaAmichevole(gr1.getGiocatore().getId(), a2.getId(), 80, 1, 0, 1, 0, 10.5f, 0, 1, 0, 2, 1, 0));
+        a2.aggiungiDisponibilità(d2g1);
+
+        // Aggiungi statistiche per giocatore2
+        Disponibilità d1g2 = new Disponibilità(gr2.getGiocatore().getId(), a1.getId(), true, null);
+        d1g2.setStatistica(new StatisticaAmichevole(gr2.getGiocatore().getId(), a1.getId(), 90, 0, 2, 0, 1, 8.0f, 2, 1, 1, 1, 0, 2));
+        a1.aggiungiDisponibilità(d1g2);
+
+        // === Esecuzione ===
+        Map<String, Map<String, Number>> risultato = c.confrontaGiocatori(gr1, gr2);
+
+        // === Verifiche ===
+        // 1. Verifico struttura base
+        assertNotNull(risultato);
+        assertEquals(2, risultato.size());
+        assertTrue(risultato.containsKey("Ringhio Gattuso"));
+        assertTrue(risultato.containsKey("Gigi Buffon"));
+
+        Map<String, Number> statsG1 = risultato.get("Ringhio Gattuso");
+        Map<String, Number> statsG2 = risultato.get("Gigi Buffon");
+
+        // 2. Verifico tutti i campi per giocatore1 (somme attese)
+        assertEquals(3, statsG1.get("goal").intValue());           // 2 + 1
+        assertEquals(1, statsG1.get("assist").intValue());         // 0 + 1
+        assertEquals(170, statsG1.get("minutiGiocati").intValue()); // 90 + 80
+        assertEquals(1, statsG1.get("autogoal").intValue());       // 1 + 0
+        assertEquals(1, statsG1.get("cartelliniGialli").intValue());// 0 + 1
+        assertEquals(0, statsG1.get("cartelliniRossi").intValue()); // 0 + 0
+        assertEquals(1, statsG1.get("falliCommessi").intValue());  // 1 + 0
+        assertEquals(5, statsG1.get("intercettiRiusciti").intValue()); // 3 + 2
+        assertEquals(3, statsG1.get("passaggiChiave").intValue()); // 2 + 1
+        assertEquals(1, statsG1.get("tiriTotali").intValue());     // 1 + 0
+        assertEquals(0, statsG1.get("parate").intValue());         // 0 + 0
+        assertEquals(20.0f, statsG1.get("distanzaTotalePercorsa").floatValue(), 0.01f); // 9.5 + 10.
+
+        // 3. Verifico tutti i campi per giocatore2 (solo primo evento)
+        assertEquals(0, statsG2.get("goal").intValue());
+        assertEquals(1, statsG2.get("assist").intValue());
+        assertEquals(90, statsG2.get("minutiGiocati").intValue());
+        assertEquals(2, statsG2.get("autogoal").intValue());
+        assertEquals(0, statsG2.get("cartelliniGialli").intValue());
+        assertEquals(1, statsG2.get("cartelliniRossi").intValue());
+        assertEquals(2, statsG2.get("falliCommessi").intValue());
+        assertEquals(1, statsG2.get("intercettiRiusciti").intValue());
+        assertEquals(0, statsG2.get("passaggiChiave").intValue());
+        assertEquals(2, statsG2.get("tiriTotali").intValue());
+        assertEquals(1, statsG2.get("parate").intValue());
+        assertEquals(8.0f, statsG2.get("distanzaTotalePercorsa").floatValue(), 0.01f);
+
+        // 4. Verifico che i campi non siano null
+        assertNotNull(statsG1.get("passaggiChiave"));
+        assertNotNull(statsG2.get("intercettiRiusciti"));
+
+        // 5. Verifico tipi dei valori
+        assertTrue(statsG1.get("goal") instanceof Integer);
+        assertTrue(statsG1.get("distanzaTotalePercorsa") instanceof Float);
+    }
 }

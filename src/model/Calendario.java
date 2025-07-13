@@ -82,7 +82,7 @@ public class Calendario {
     }
 
     public List<Evento> getEventi() {
-        return new ArrayList<>(listaEventi);
+        return listaEventi;
     }
 
     public void aggiungiDisponibilità(Evento eventoSelezionato, boolean presenza, String motivazione) {
