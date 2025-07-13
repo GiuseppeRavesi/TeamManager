@@ -58,4 +58,12 @@ public abstract class Statistica {
     public int hashCode() {
         return Objects.hash(id, idGiocatore, idEvento);
     }
+
+    @Override
+    public String toString() {
+        return "Statistica{" + "id=" + id
+                + ", idGiocatore=" + idGiocatore 
+                + ", idEvento=" + idEvento + '}';
+    }
+   
 }

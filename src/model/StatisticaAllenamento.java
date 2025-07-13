@@ -87,4 +87,13 @@ public class StatisticaAllenamento extends Statistica {
         this.frequenzaCardiacaMedia = frequenzaCardiacaMedia;
     }
 
+    @Override
+    public String toString() {
+        return super.toString()+ "StatisticaAllenamento{" + "velocit\u00e0Max=" + velocitàMax 
+                + ", velocit\u00e0Media=" + velocitàMedia 
+                + ", valutazioneForzaFisica=" + valutazioneForzaFisica 
+                + ", valutazioneForzaTiro=" + valutazioneForzaTiro 
+                + ", frequenzaCardiacaMedia=" + frequenzaCardiacaMedia + '}';
+    }
+
 }

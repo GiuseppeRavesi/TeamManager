@@ -108,10 +108,7 @@ public class StatisticaAmichevole extends Statistica {
 
     @Override
     public String toString() {
-        return "StatisticaAmichevole {"
-                + "id=" + getId()
-                + ", idGiocatore=" + getIdGiocatore()
-                + ", idEvento=" + getIdEvento()
+        return  super.toString()+"StatisticaAmichevole {"
                 + ", minutiGiocati=" + minutiGiocati
                 + ", goal=" + goal
                 + ", autogoal=" + autogoal
