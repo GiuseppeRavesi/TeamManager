@@ -14,9 +14,14 @@ public class StatisticaAmichevole extends Statistica {
     private float distanzaTotalePercorsa;
     private int falliCommessi;
     private int assist;
+    private int parate;
+    private int intercettiRiusciti;
+    private int passaggiChiave;
+    private int tiriTotali;
 
-    public StatisticaAmichevole(int idGiocatore, int idEvento, int minutiGiocati,int goal, 
-            int autogoal, int cartelliniGialli, int cartelliniRossi, float distanzaTotalePercorsa, int falliCommessi,int assist) {
+    public StatisticaAmichevole(int idGiocatore, int idEvento, int minutiGiocati, int goal,
+            int autogoal, int cartelliniGialli, int cartelliniRossi, float distanzaTotalePercorsa,
+            int falliCommessi, int assist, int parate, int intercettiRiusciti, int passaggiChiave, int tiriTotali) {
         super(idGiocatore, idEvento);
         this.minutiGiocati = minutiGiocati;
         this.goal = goal;
@@ -26,11 +31,15 @@ public class StatisticaAmichevole extends Statistica {
         this.distanzaTotalePercorsa = distanzaTotalePercorsa;
         this.falliCommessi = falliCommessi;
         this.assist = assist;
+        this.parate = parate;
+        this.intercettiRiusciti = intercettiRiusciti;
+        this.passaggiChiave = passaggiChiave;
+        this.tiriTotali = tiriTotali;
     }
 
-    
     public StatisticaAmichevole(int id, int idGiocatore, int idEvento, int minutiGiocati, int goal, int autogoal,
-            int cartelliniGialli, int cartelliniRossi, float distanzaTotalePercorsa, int falliCommessi, int assist) {
+            int cartelliniGialli, int cartelliniRossi, float distanzaTotalePercorsa, int falliCommessi, int assist,
+            int parate, int intercettiRiusciti, int passaggiChiave, int tiriTotali) {
         super(id, idGiocatore, idEvento);
         this.minutiGiocati = minutiGiocati;
         this.goal = goal;
@@ -40,6 +49,41 @@ public class StatisticaAmichevole extends Statistica {
         this.distanzaTotalePercorsa = distanzaTotalePercorsa;
         this.falliCommessi = falliCommessi;
         this.assist = assist;
+        this.parate = parate;
+        this.intercettiRiusciti = intercettiRiusciti;
+        this.tiriTotali = tiriTotali;
+    }
+
+    public int getParate() {
+        return parate;
+    }
+
+    public void setParate(int parate) {
+        this.parate = parate;
+    }
+
+    public int getIntercettiRiusciti() {
+        return intercettiRiusciti;
+    }
+
+    public void setIntercettiRiusciti(int intercettiRiusciti) {
+        this.intercettiRiusciti = intercettiRiusciti;
+    }
+
+    public int getPassaggiChiave() {
+        return passaggiChiave;
+    }
+
+    public void setPassaggiChiave(int passaggiChiave) {
+        this.passaggiChiave = passaggiChiave;
+    }
+
+    public int getTiriTotali() {
+        return tiriTotali;
+    }
+
+    public void setTiriTotali(int tiriTotali) {
+        this.tiriTotali = tiriTotali;
     }
 
     public int getMinutiGiocati() {
@@ -108,7 +152,7 @@ public class StatisticaAmichevole extends Statistica {
 
     @Override
     public String toString() {
-        return  super.toString()+"StatisticaAmichevole {"
+        return super.toString() + "StatisticaAmichevole {"
                 + ", minutiGiocati=" + minutiGiocati
                 + ", goal=" + goal
                 + ", autogoal=" + autogoal

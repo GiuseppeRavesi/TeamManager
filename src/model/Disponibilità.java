@@ -58,6 +58,15 @@ public class Disponibilità {
         return statistica;
     }
 
+    public void setStatistica(Statistica statistica) {
+        this.statistica = statistica;
+    }
+    
+    public void rimuoviStatistica(){
+        this.statistica = null;
+    }
+    
+
     @Override
     public String toString() {
         return "Disponibilità{"

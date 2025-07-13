@@ -17,19 +17,19 @@ public class Calendario {
     }
 
     public void pianificaAllenamento(LocalDate data, LocalTime orario,
-            int durata, String luogo, String tipologia, String note) throws SovrapposizioneEventoException{
-        verificaSovrapposizione(data, orario, durata, luogo); 
-         
+            int durata, String luogo, String tipologia, String note) throws SovrapposizioneEventoException {
+
+        verificaSovrapposizione(data, orario, durata, luogo);
+
         Allenamento allenamento = new Allenamento(data, orario, durata, luogo, tipologia, note);
         listaEventi.add(allenamento);
     }
 
-    public boolean pianificaAmichevole(LocalDate data, LocalTime orario,
-            int durata, String luogo, String squadraAvversaria) throws SovrapposizioneEventoException{
+    public void pianificaAmichevole(LocalDate data, LocalTime orario,
+            int durata, String luogo, String squadraAvversaria) throws SovrapposizioneEventoException {
         verificaSovrapposizione(data, orario, durata, luogo);
         Amichevole amichevole = new Amichevole(data, orario, durata, luogo, squadraAvversaria);
         listaEventi.add(amichevole);
-        return true;
     }
 
     public void aggiornaEvento(Evento eventoSelezionato, LocalDate nuovaData, LocalTime nuovoOrario,
@@ -51,9 +51,9 @@ public class Calendario {
                 LocalTime nuovoFine = nuovoOrario.plusMinutes(nuovaDurata);
 
                 boolean sovrapposto = !(nuovoFine.isBefore(inizioEsistente) || nuovoInizio.isAfter(fineEsistente));
-            
+
                 if (sovrapposto) {
-                    throw new SovrapposizioneEventoException("Sovrapposizione: esiste già un evento"); 
+                    throw new SovrapposizioneEventoException("Sovrapposizione: esiste già un evento");
                 }
             }
         }
@@ -93,31 +93,145 @@ public class Calendario {
 
         eventoSelezionato.aggiungiDisponibilità(nuovaDisponibilità);
     }
-    
-    private void verificaSovrapposizione(LocalDate data, LocalTime orarioInizio, 
+
+    private void verificaSovrapposizione(LocalDate data, LocalTime orarioInizio,
             int durata, String luogo) throws SovrapposizioneEventoException {
-    if (listaEventi.isEmpty()) {
-        return; // Nessun conflitto
-    }
+        if (listaEventi.isEmpty()) {
+            return; // Nessun conflitto
+        }
 
-    LocalTime inizioNuovo = orarioInizio;
-    LocalTime fineNuovo = orarioInizio.plusMinutes(durata);
+        LocalTime inizioNuovo = orarioInizio;
+        LocalTime fineNuovo = orarioInizio.plusMinutes(durata);
 
-    for (Evento evento : listaEventi) {
-        if (!evento.getData().equals(data)) continue;
-        if (!evento.getLuogo().equalsIgnoreCase(luogo)) continue;
+        for (Evento evento : listaEventi) {
+            if (!evento.getData().equals(data)) {
+                continue;
+            }
+            if (!evento.getLuogo().equalsIgnoreCase(luogo)) {
+                continue;
+            }
 
-        LocalTime inizioEsistente = evento.getOrario();
-        LocalTime fineEsistente = inizioEsistente.plusMinutes(evento.getDurata());
+            LocalTime inizioEsistente = evento.getOrario();
+            LocalTime fineEsistente = inizioEsistente.plusMinutes(evento.getDurata());
 
-        boolean sovrapposto = inizioNuovo.isBefore(fineEsistente) && inizioEsistente.isBefore(fineNuovo);
+            boolean sovrapposto = inizioNuovo.isBefore(fineEsistente) && inizioEsistente.isBefore(fineNuovo);
 
-        if (sovrapposto) {
-            throw new SovrapposizioneEventoException(
-                "Sovrapposizione: esiste già un evento a " + luogo 
+            if (sovrapposto) {
+                throw new SovrapposizioneEventoException(
+                        "Sovrapposizione: esiste già un evento a " + luogo
                         + " il " + data + " dalle " + inizioEsistente + " alle " + fineEsistente);
+            }
         }
     }
-}
+
+    public void aggiungiStatisticaAllenamento(int idGiocatore, int idEvento,
+            Map<String, String> campiSpecifici) throws IllegalArgumentException {
+
+        Evento eventoTrovato = null;
+        for (Evento e : listaEventi) {
+            if (e.getId() == idEvento) {
+                eventoTrovato = e;
+                break;
+            }
+        }
+        if (eventoTrovato == null) {
+            throw new IllegalArgumentException("Evento non trovato");
+        }
+
+        Disponibilità disponibilitàTrovata = null;
+        for (Disponibilità d : eventoTrovato.getDisponibilità()) {
+            if (d.getIdGiocatore() == idGiocatore) {
+                disponibilitàTrovata = d;
+                break;
+            }
+        }
+        if (disponibilitàTrovata == null) {
+            throw new IllegalArgumentException("Disponibilità non trovata");
+        }
+
+        StatisticaAllenamento sa = new StatisticaAllenamento(
+                idGiocatore,
+                idEvento,
+                Float.parseFloat(campiSpecifici.get("velocitàMax")),
+                Float.parseFloat(campiSpecifici.get("velocitàMedia")),
+                Integer.parseInt(campiSpecifici.get("valutazioneForzaFisica")),
+                Integer.parseInt(campiSpecifici.get("valutazioneForzaTiro")),
+                Integer.parseInt(campiSpecifici.get("frequenzaCardiacaMedia"))
+        );
+
+        disponibilitàTrovata.setStatistica(sa);
+    }
+
+    public void aggiungiStatisticaAmichevole(int idGiocatore, int idEvento,
+            Map<String, String> campiSpecifici) throws IllegalArgumentException {
+
+        Evento eventoTrovato = null;
+        for (Evento e : listaEventi) {
+            if (e.getId() == idEvento) {
+                eventoTrovato = e;
+                break;
+            }
+        }
+        if (eventoTrovato == null) {
+            throw new IllegalArgumentException("Evento non trovato con id: " + idEvento);
+        }
+
+        Disponibilità disponibilitàTrovata = null;
+        for (Disponibilità d : eventoTrovato.getDisponibilità()) {
+            if (d.getIdGiocatore() == idGiocatore) {
+                disponibilitàTrovata = d;
+                break;
+            }
+        }
+        if (disponibilitàTrovata == null) {
+            throw new IllegalArgumentException("Disponibilità non trovata per giocatore: " + idGiocatore);
+        }
+
+        StatisticaAmichevole sa = new StatisticaAmichevole(
+                idGiocatore,
+                idEvento,
+                Integer.parseInt(campiSpecifici.get("minutiGiocati")),
+                Integer.parseInt(campiSpecifici.get("goal")),
+                Integer.parseInt(campiSpecifici.get("autogoal")),
+                Integer.parseInt(campiSpecifici.get("cartelliniGialli")),
+                Integer.parseInt(campiSpecifici.get("cartelliniRossi")),
+                Integer.parseInt(campiSpecifici.get("distanzaTotalePercorsa")),
+                Integer.parseInt(campiSpecifici.get("falliCommessi")),
+                Integer.parseInt(campiSpecifici.get("assist")),
+                Integer.parseInt(campiSpecifici.get("parate")),
+                Integer.parseInt(campiSpecifici.get("intercettiRiusciti")),
+                Integer.parseInt(campiSpecifici.get("passaggiChiave")),
+                Integer.parseInt(campiSpecifici.get("tiriTotali"))
+        );
+
+        disponibilitàTrovata.setStatistica(sa);
+    }
+
+    public void rimuoviStatistica(int idGiocatore, int idEvento) throws IllegalArgumentException{
+
+        Evento eventoTrovato = null;
+        for (Evento e : listaEventi) {
+            if (e.getId() == idEvento) {
+                eventoTrovato = e;
+                break;
+            }
+        }
+        if (eventoTrovato == null) {
+            throw new IllegalArgumentException("Evento non trovato");
+        }
+
+        Disponibilità disponibilitàTrovata = null;
+        for (Disponibilità d : eventoTrovato.getDisponibilità()) {
+            if (d.getIdGiocatore() == idGiocatore) {
+                disponibilitàTrovata = d;
+                break;
+            }
+        }
+        if (disponibilitàTrovata == null) {
+            throw new IllegalArgumentException("Disponibilità non trovata");
+        }
+
+        disponibilitàTrovata.rimuoviStatistica();
+    }
 
 }
