@@ -5,6 +5,7 @@ import exception.SovrapposizioneEventoException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -207,7 +208,7 @@ public class Calendario {
         disponibilitàTrovata.setStatistica(sa);
     }
 
-    public void rimuoviStatistica(int idGiocatore, int idEvento) throws IllegalArgumentException{
+    public void rimuoviStatistica(int idGiocatore, int idEvento) throws IllegalArgumentException {
 
         Evento eventoTrovato = null;
         for (Evento e : listaEventi) {
@@ -234,4 +235,78 @@ public class Calendario {
         disponibilitàTrovata.rimuoviStatistica();
     }
 
+    public Statistica visualizzaStoricoGiocatore(int idGiocatore, int idEvento) {
+        for (Evento e : listaEventi) {
+            if (e.getId() == idEvento) {
+                for (Disponibilità d : e.getDisponibilità()) {
+                    if (d.getIdGiocatore() == idGiocatore) {
+                        return d.getStatistica(); //Può essere null
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    //UC10 : CONFRONTA GIOCATORE
+    public Map<String, Map<String, Number>> confrontaGiocatori(GiocatoreInRosa g1, GiocatoreInRosa g2) {
+        Map<String, Number> stats1 = calcolaAggregati(g1);
+        Map<String, Number> stats2 = calcolaAggregati(g2);
+
+        Map<String, Map<String, Number>> confronto = new HashMap<>();
+        confronto.put(g1.getGiocatore().getNome() + " " + g1.getGiocatore().getCognome(), stats1);
+        confronto.put(g2.getGiocatore().getNome() + " " + g2.getGiocatore().getCognome(), stats2);
+
+        return confronto;
+    }
+
+    private Map<String, Number> calcolaAggregati(GiocatoreInRosa giocatore) {
+        Map<String, Number> aggregati = new HashMap<>();
+        int totalGoal = 0;
+        int totalAssist = 0;
+        int totalMinuti = 0;
+        int totalAutogoal = 0;
+        int totalCartelliniGialli = 0;
+        int totalCartelliniRossi = 0;
+        int totalFalliCommessi = 0;
+        int totalIntercetti = 0;
+        int totalPassaggiChiave = 0;
+        int totalTiriTotali = 0;
+        int totalParate = 0;
+        float totalDistanza = 0;
+        
+        for (Evento evento : listaEventi) {
+            for (Disponibilità disp : evento.getDisponibilità()) {
+                if (disp.getIdGiocatore() == giocatore.getGiocatore().getId() && disp.getStatistica() instanceof StatisticaAmichevole) {
+                    StatisticaAmichevole s = (StatisticaAmichevole) disp.getStatistica();
+                    totalGoal += s.getGoal();
+                    totalAssist += s.getAssist();
+                    totalMinuti += s.getMinutiGiocati();
+                    totalAutogoal += s.getAutogoal();
+                    totalCartelliniGialli += s.getCartelliniGialli();
+                    totalCartelliniRossi += s.getCartelliniRossi();
+                    totalFalliCommessi += s.getFalliCommessi();
+                    totalIntercetti += s.getIntercettiRiusciti();
+                    totalPassaggiChiave += s.getPassaggiChiave();
+                    totalTiriTotali += s.getTiriTotali();
+                    totalParate += s.getParate();
+                    totalDistanza += s.getDistanzaTotalePercorsa();
+                }
+            }
+        }
+        aggregati.put("goal", totalGoal);
+        aggregati.put("assist", totalAssist);
+        aggregati.put("minutiGiocati", totalMinuti);
+        aggregati.put("autogoal", totalAutogoal);
+        aggregati.put("cartelliniGialli", totalCartelliniGialli);
+        aggregati.put("cartelliniRossi", totalCartelliniRossi);
+        aggregati.put("falliCommessi", totalFalliCommessi);
+        aggregati.put("intercettiRiusciti", totalIntercetti);
+        aggregati.put("passaggiChiave", totalPassaggiChiave);
+        aggregati.put("tiriTotali", totalTiriTotali);
+        aggregati.put("parate", totalParate);
+        aggregati.put("distanzaTotalePercorsa", totalDistanza);
+
+        return aggregati;
+    }
 }

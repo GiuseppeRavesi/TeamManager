@@ -11,6 +11,7 @@ import model.Evento;
 import model.Giocatore;
 import model.GiocatoreInRosa;
 import model.Rosa;
+import model.Statistica;
 import model.enums.Ruolo;
 import model.enums.Status;
 
@@ -136,5 +137,15 @@ public class TeamManager {
     
     public void rimuoviStatistica(int idGiocatore, int idEvento) {
         c.rimuoviStatistica(idGiocatore, idEvento);
+    }
+    
+    public Statistica visualizzaStoricoGiocatore(int idGiocatore, int idEvento) {
+        return c.visualizzaStoricoGiocatore(idGiocatore, idEvento);
+        //gestire lato GUI il caso in cui la statistica == null, magari stampare un avvertimento
+    }
+    
+    //UC10 - Confronta Giocatore
+    public Map<String, Map<String, Number>> confrontaGiocatori(GiocatoreInRosa g1, GiocatoreInRosa g2){
+        return c.confrontaGiocatori(g1, g2);
     }
 }

@@ -1,5 +1,6 @@
 package model;
 
+
 /**
  *
  * @author Giuseppe Ravesi
@@ -66,7 +67,6 @@ public class Disponibilità {
         this.statistica = null;
     }
     
-
     @Override
     public String toString() {
         return "Disponibilità{"
