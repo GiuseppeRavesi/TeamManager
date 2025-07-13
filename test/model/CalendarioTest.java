@@ -271,6 +271,10 @@ public class CalendarioTest {
         //verifico se effettivamente il giocatore ha fornito correttamente la sua disponibilita per evento a1
         assertNotNull(a1.getDisponibilità());
     }
+    
+    /**
+     * Test of confrontaGiocatore method, of class Calendario.
+     */
 
     @Test
     public void testConfrontaGiocatoriCompleto() {
