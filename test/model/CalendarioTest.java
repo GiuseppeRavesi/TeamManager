@@ -370,6 +370,7 @@ public class CalendarioTest {
         int idGiocatore = sessione.getUtenteLoggato().getId();
 
         c.getEventi().clear();
+        // pianifico un allenamento
         try {
 
             c.pianificaAllenamento(LocalDate.now(), LocalTime.NOON, 120, "Catania", "fisico", "");
@@ -388,17 +389,23 @@ public class CalendarioTest {
 
         assertEquals("Evento non trovato", ex1.getMessage());
 
+        // provo ad aggiungere una disponibilità inesistente
         IllegalArgumentException ex2 = assertThrows(IllegalArgumentException.class, () -> {
             c.aggiungiStatisticaAllenamento(idGiocatore, c.getEventi().get(0).getId(), campiSpecifici2);
 
         });
         assertEquals("Disponibilità non trovata", ex2.getMessage());
 
+        // dopo aver testato che disponibilità è inesistente ne aggiungo una
         c.aggiungiDisponibilità(c.getEventi().get(0), true, null);
 
+        //aggiungo una statistica allenamento
         try {
 
             c.aggiungiStatisticaAllenamento(idGiocatore, c.getEventi().get(0).getId(), campiSpecifici2);
+
+            // verifico che la statistica sia statà aggiunta correttamente
+            assertNotNull(c.getEventi().get(0).getDisponibilità().get(0).getStatistica());
 
         } catch (IllegalArgumentException e) {
 
@@ -433,6 +440,74 @@ public class CalendarioTest {
 
         c.getEventi().clear();
 
+        // pianifico un amichevole
+        try {
+
+            c.pianificaAmichevole(LocalDate.now(), LocalTime.NOON, 120, "Catania", "milan");
+
+        } catch (SovrapposizioneEventoException e) {
+
+            System.out.println(e.getMessage());
+
+        }
+        // provo ad aggiungere ad un evento inesistente
+        IllegalArgumentException ex1 = assertThrows(IllegalArgumentException.class, () -> {
+            c.aggiungiStatisticaAmichevole(idGiocatore, 999, campiSpecifici3);
+
+        });
+
+        assertEquals("Evento non trovato con id: " + 999, ex1.getMessage());
+
+        // provo ad aggiungere una disponibilità inesistente
+        IllegalArgumentException ex2 = assertThrows(IllegalArgumentException.class, () -> {
+            c.aggiungiStatisticaAmichevole(idGiocatore, c.getEventi().get(0).getId(), campiSpecifici3);
+
+        });
+        assertEquals("Disponibilità non trovata per giocatore: " + idGiocatore, ex2.getMessage());
+
+        // dopo aver testato che disponibilità è inesistente ne aggiungo una
+        c.aggiungiDisponibilità(c.getEventi().get(0), true, null);
+
+        try {
+
+            c.aggiungiStatisticaAmichevole(idGiocatore, c.getEventi().get(0).getId(), campiSpecifici3);
+
+            // verifico che la statistica sia statà aggiunta correttamente
+            assertNotNull(c.getEventi().get(0).getDisponibilità().get(0).getStatistica());
+
+        } catch (IllegalArgumentException e) {
+
+            fail("test fallito");
+
+        }
+
+    }
+
+    @Test
+    public void testRimuoviStatistica() {
+
+        Map<String, String> campiSpecifici3 = new HashMap<>();
+        campiSpecifici3.put("minutiGiocati", "60");
+        campiSpecifici3.put("goal", "1");
+        campiSpecifici3.put("autogoal", "0");
+        campiSpecifici3.put("cartelliniGialli", "2");
+        campiSpecifici3.put("cartelliniRossi", "1");
+        campiSpecifici3.put("distanzaTotalePercorsa", "15");
+        campiSpecifici3.put("falliCommessi", "8");
+        campiSpecifici3.put("assist", "0");
+        campiSpecifici3.put("parate", "0");
+        campiSpecifici3.put("intercettiRiusciti", "1");
+        campiSpecifici3.put("passaggiChiave", "1");
+        campiSpecifici3.put("tiriTotali", "8");
+
+        u1 = new Utente("ringhiog@mail.com", "1234", "Giocatore,", gr1.getGiocatore().getId());
+        sessione.login(u1);
+
+        int idGiocatore = sessione.getUtenteLoggato().getId();
+
+        c.getEventi().clear();
+
+        //pianifico un amichevole
         try {
 
             c.pianificaAmichevole(LocalDate.now(), LocalTime.NOON, 120, "Catania", "milan");
@@ -443,33 +518,105 @@ public class CalendarioTest {
 
         }
 
+        // provo ad aggiungere ad un evento inesistente
         IllegalArgumentException ex1 = assertThrows(IllegalArgumentException.class, () -> {
-            c.aggiungiStatisticaAmichevole(idGiocatore, 999, campiSpecifici3);
+            c.rimuoviStatistica(idGiocatore, 999);
 
         });
-
-        assertEquals("Evento non trovato con id: " + 999, ex1.getMessage());
+        assertEquals("Evento non trovato", ex1.getMessage());
 
         IllegalArgumentException ex2 = assertThrows(IllegalArgumentException.class, () -> {
-            c.aggiungiStatisticaAmichevole(idGiocatore, c.getEventi().get(0).getId(), campiSpecifici3);
+            c.rimuoviStatistica(idGiocatore, c.getEventi().get(0).getId());
 
         });
-        assertEquals("Disponibilità non trovata per giocatore: " + idGiocatore , ex2.getMessage());
-          
-         c.aggiungiDisponibilità(c.getEventi().get(0), true, null);
+
+        // provo ad aggiungere una disponibilità inesistente
+        assertEquals("Disponibilità non trovata", ex2.getMessage());
+
+        // dopo aver testato che disponibilità è inesistente ne aggiungo una
+        c.aggiungiDisponibilità(c.getEventi().get(0), true, null);
 
         try {
 
             c.aggiungiStatisticaAmichevole(idGiocatore, c.getEventi().get(0).getId(), campiSpecifici3);
+
+            // verifico che la statistica sia statà aggiunta correttamente
+            assertNotNull(c.getEventi().get(0).getDisponibilità().get(0).getStatistica());
 
         } catch (IllegalArgumentException e) {
 
             fail("test fallito");
 
         }
-        
+
+        assertNotNull(c.getEventi().get(0).getDisponibilità().get(0).getStatistica());
+
+        // verifico che la statistica sia stata rimossa correttamente
+        c.rimuoviStatistica(idGiocatore, c.getEventi().get(0).getId());
+        assertNull(c.getEventi().get(0).getDisponibilità().get(0).getStatistica());
     }
-    
-    
+
+    @Test
+    public void testVisualizzaStorico() {
+
+        Map<String, String> campiSpecifici3 = new HashMap<>();
+        campiSpecifici3.put("minutiGiocati", "60");
+        campiSpecifici3.put("goal", "1");
+        campiSpecifici3.put("autogoal", "0");
+        campiSpecifici3.put("cartelliniGialli", "2");
+        campiSpecifici3.put("cartelliniRossi", "1");
+        campiSpecifici3.put("distanzaTotalePercorsa", "15");
+        campiSpecifici3.put("falliCommessi", "8");
+        campiSpecifici3.put("assist", "0");
+        campiSpecifici3.put("parate", "0");
+        campiSpecifici3.put("intercettiRiusciti", "1");
+        campiSpecifici3.put("passaggiChiave", "1");
+        campiSpecifici3.put("tiriTotali", "8");
+
+        u1 = new Utente("ringhiog@mail.com", "1234", "Giocatore,", gr1.getGiocatore().getId());
+        sessione.login(u1);
+
+        int idGiocatore = sessione.getUtenteLoggato().getId();
+        c.getEventi().clear();
+
+        // pianifico un amichevole
+        try {
+
+            c.pianificaAmichevole(LocalDate.now(), LocalTime.NOON, 120, "Catania", "milan");
+
+        } catch (SovrapposizioneEventoException e) {
+
+            System.out.println(e.getMessage());
+
+        }
+        // provo ad aggiungere una disponibilità inesistente
+        c.aggiungiDisponibilità(c.getEventi().get(0), true, null);
+
+        try {
+
+            c.aggiungiStatisticaAmichevole(idGiocatore, c.getEventi().get(0).getId(), campiSpecifici3);
+
+            // verifico che la statistica sia statà aggiunta correttamente
+            assertNotNull(c.getEventi().get(0).getDisponibilità().get(0).getStatistica());
+
+        } catch (IllegalArgumentException e) {
+
+            fail("test fallito");
+
+        }
+
+        // visualizzo la statistica
+        Statistica s = c.visualizzaStoricoGiocatore(idGiocatore, c.getEventi().get(0).getId());
+
+        // verifico che la visualizazzione sia avvenuta correttamnete
+        assertNotNull(s);
+        // rimuovo una statistica
+
+        c.rimuoviStatistica(idGiocatore, c.getEventi().get(0).getId());
+
+        // verifico che la visualizzaione sia Null
+        s = c.visualizzaStoricoGiocatore(idGiocatore, c.getEventi().get(0).getId());
+        assertNull(s);
+    }
 
 }
