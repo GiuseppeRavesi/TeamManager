@@ -97,6 +97,7 @@ public class RosaTest {
                 )
         );
         assertEquals("Rosa piena",ex3.getMessage());
+        // aggiunto verifica messaggio RosaCompletaException
     }
 
     /**
