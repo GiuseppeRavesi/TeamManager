@@ -87,7 +87,7 @@ public class RosaTest {
         assertEquals(22, r1.getGiocatori().size());
 
         // Provo ad aggiungere ancora -> RosaCompletaException
-        assertThrows(
+        RosaCompletaException ex3 = assertThrows(
                 RosaCompletaException.class,
                 () -> r1.aggiungiGiocatore(
                         new Giocatore("Nuovo", "Giocatore", LocalDate.now(), "Italia", "nuovo@mail.com"),
@@ -96,6 +96,7 @@ public class RosaTest {
                         25
                 )
         );
+        assertEquals("Rosa piena",ex3.getMessage());
     }
 
     /**
@@ -134,7 +135,7 @@ public class RosaTest {
         //verifico se i campi effettivamente sono stati modificati
         assertNotEquals(gr1_Backup.getRuolo(), r1.getGiocatori().get(0).getRuolo());
         assertNotEquals(gr1_Backup.getStatus(), r1.getGiocatori().get(0).getStatus());
-        assertNotEquals(gr1_Backup.getStatus(), r1.getGiocatori().get(0).getNumMaglia());
+        assertNotEquals(gr1_Backup.getNumMaglia(), r1.getGiocatori().get(0).getNumMaglia());
     }
 
     /**
