@@ -136,8 +136,9 @@ public class RosaTest {
         assertNotEquals(gr1_Backup.getRuolo(), r1.getGiocatori().get(0).getRuolo());
         assertNotEquals(gr1_Backup.getStatus(), r1.getGiocatori().get(0).getStatus());
         assertNotEquals(gr1_Backup.getNumMaglia(), r1.getGiocatori().get(0).getNumMaglia());
+        // sistemato getNumMaglia in gr1_backup
     }
-
+        
     /**
      * Test of cercaGiocatori method, of class Rosa.
      */
