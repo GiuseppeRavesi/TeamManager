@@ -619,4 +619,74 @@ public class CalendarioTest {
         assertNull(s);
     }
 
+    @Test
+    public void testSuggerisciSessioneMirata() {
+        // Configurazione
+        int idGiocatore = gr1.getGiocatore().getId();
+
+        // Crea 2 allenamenti con statistiche diverse
+        Allenamento allenamento1 = new Allenamento(
+                LocalDate.now(),
+                LocalTime.of(10, 0),
+                90,
+                "Campo A",
+                "Tecnico",
+                "Session di tiro e passaggio"
+        );
+
+        Allenamento allenamento2 = new Allenamento(
+                LocalDate.now().plusDays(1),
+                LocalTime.of(11, 0),
+                90,
+                "Campo B",
+                "Fisico",
+                "Lavoro aerobico e potenza"
+        );
+        StatisticaAllenamento stat1 = new StatisticaAllenamento(
+                idGiocatore, allenamento1.getId(),
+                25, // velocitàMax (bassa)
+                160, // frequenzaCardiaca (alta)
+                5, // forzaTiro (bassa)
+                5, // forzaFisica (bassa)
+                18 // velocitàMedia (bassa)
+        );
+
+        StatisticaAllenamento stat2 = new StatisticaAllenamento(
+                idGiocatore, allenamento2.getId(),
+                35, // velocitàMax (alta)
+                140, // frequenzaCardiaca (normale)
+                7, // forzaTiro (alta)
+                7, // forzaFisica (alta)
+                22 // velocitàMedia (alta)
+        );
+
+        // Aggiungi disponibilità
+        Disponibilità disp1 = new Disponibilità(idGiocatore, allenamento1.getId(), true, null, stat1);
+        Disponibilità disp2 = new Disponibilità(idGiocatore, allenamento2.getId(), true, null, stat2);
+
+        allenamento1.aggiungiDisponibilità(disp1);
+        allenamento2.aggiungiDisponibilità(disp2);
+
+        c.getEventi().add(allenamento1);
+        c.getEventi().add(allenamento2);
+
+        // Esecuzione
+        Map<String, Boolean> suggerimenti = c.suggerisciSessioneMirata(idGiocatore);
+
+        // Verifiche
+        assertNotNull(suggerimenti);
+        assertEquals(5, suggerimenti.size());
+
+        assertFalse(suggerimenti.get("allenamento sullo scatto"));
+        assertFalse(suggerimenti.get("allenamento sulla resistenza"));
+        assertFalse(suggerimenti.get("allenamento sul tiro"));
+        assertFalse(suggerimenti.get("allenamento sui pesi"));
+        assertFalse(suggerimenti.get("allenamento aerobico"));
+
+        // Test caso senza dati
+        assertThrows(IllegalArgumentException.class, () -> {
+            c.suggerisciSessioneMirata(999); // ID inesistente
+        });
+    }
+
 }
