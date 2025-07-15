@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import model.Calendario;
+import model.Disponibilità;
 import model.Evento;
 import model.Giocatore;
 import model.GiocatoreInRosa;
@@ -85,6 +86,10 @@ public class TeamManager {
     //UC3: Gestisci Disponibilità
     public void comunicaDisponibilita(Evento eventoSelezionato, boolean presenza, String motivazione) {
         c.aggiungiDisponibilità(eventoSelezionato, presenza, motivazione);
+    }
+    
+    public List<Disponibilità> visualizzaDisponibilitàGiocatore(int idGiocatoreRosa){
+       return c.visualizzaDisponibilitàGiocatore(idGiocatoreRosa);
     }
 
     //UC7: Gestisci Giocatore CRUD

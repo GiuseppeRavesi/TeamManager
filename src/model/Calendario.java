@@ -247,6 +247,18 @@ public class Calendario {
         }
         return null;
     }
+    
+    public List<Disponibilità> visualizzaDisponibilitàGiocatore(int idGiocatoreRosa){
+        List<Disponibilità> disp;
+        disp = new ArrayList<>();
+        for (Evento e : listaEventi){
+            for(Disponibilità d: e.getDisponibilità())
+                if(d.getIdGiocatore() == idGiocatoreRosa)
+                    disp.add(d);
+        }
+        
+        return disp;
+    }
 
     //UC10 : CONFRONTA GIOCATORE
     public Map<String, Map<String, Number>> confrontaGiocatori(GiocatoreInRosa g1, GiocatoreInRosa g2) {
@@ -254,8 +266,8 @@ public class Calendario {
         Map<String, Number> stats2 = calcolaAggregati(g2);
 
         Map<String, Map<String, Number>> confronto = new HashMap<>();
-        confronto.put(g1.getGiocatore().getNome() + " " + g1.getGiocatore().getCognome(), stats1);
-        confronto.put(g2.getGiocatore().getNome() + " " + g2.getGiocatore().getCognome(), stats2);
+        confronto.put(g1.getGiocatore().getNome() + " " + g1.getGiocatore().getCognome() + " " + g1.getNumMaglia(), stats1);
+        confronto.put(g2.getGiocatore().getNome() + " " + g2.getGiocatore().getCognome() + " " + g2.getNumMaglia(), stats2);
 
         return confronto;
     }
