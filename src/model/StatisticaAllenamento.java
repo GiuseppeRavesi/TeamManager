@@ -12,15 +12,9 @@ public class StatisticaAllenamento extends Statistica {
     private int valutazioneForzaTiro;
     private int frequenzaCardiacaMedia;
 
-    public StatisticaAllenamento(
-            int idGiocatore,
-            int idEvento,
-            float velocitàMax,
-            float velocitàMedia,
-            int valutazioneForzaFisica,
-            int valutazioneForzaTiro,
-            int frequenzaCardiacaMedia
-    ) {
+    public StatisticaAllenamento(int idGiocatore, int idEvento, float velocitàMax,
+            float velocitàMedia, int valutazioneForzaFisica, int valutazioneForzaTiro,
+            int frequenzaCardiacaMedia) {
         super(idGiocatore, idEvento);
         this.velocitàMax = velocitàMax;
         this.velocitàMedia = velocitàMedia;
@@ -29,15 +23,9 @@ public class StatisticaAllenamento extends Statistica {
         this.frequenzaCardiacaMedia = frequenzaCardiacaMedia;
     }
 
-    public StatisticaAllenamento(
-            int id,
-            int idGiocatore,
-            int idEvento,
-            float velocitàMax,
-            float velocitàMedia,
-            int valutazioneForzaFisica,
-            int valutazioneForzaTiro,
-            int frequenzaCardiacaMedia
+    public StatisticaAllenamento(int id, int idGiocatore, int idEvento, float velocitàMax,
+            float velocitàMedia, int valutazioneForzaFisica, int valutazioneForzaTiro,
+            int frequenzaCardiacaMedia 
     ) {
         super(id, idGiocatore, idEvento);
         this.velocitàMax = velocitàMax;

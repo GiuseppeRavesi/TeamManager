@@ -26,7 +26,7 @@ public class TeamManager {
     private final Rosa r = new Rosa();
     private final Calendario c = new Calendario();
     private final List<Giocatore> listaGiocatori = new ArrayList<>();
-    
+
     public static TeamManager getInstance() {
         if (instance == null) {
             instance = new TeamManager();
@@ -39,20 +39,20 @@ public class TeamManager {
             throws RosaCompletaException, NumeroMagliaDuplicatoException, GiocatoreDuplicatoException {
         r.aggiungiGiocatore(giocatoreSelezionato, ruolo, status, numMaglia);
     }
-    
+
     public void rimuoviGiocatoreDaRosa(GiocatoreInRosa g) {
         r.rimuoviGiocatore(g);
     }
-    
+
     public void modificaGiocatore(Giocatore giocatoreBase, Ruolo nuovoRuolo, Status nuovoStatus, int numMaglia)
             throws NumeroMagliaDuplicatoException {
         r.modificaGiocatore(giocatoreBase, nuovoRuolo, nuovoStatus, numMaglia);
     }
-    
+
     public List<GiocatoreInRosa> cercaGiocatoriRosa(String filtro) {
         return r.cercaGiocatori(filtro);
     }
-    
+
     public List<GiocatoreInRosa> visualizzaRosa() {
         return r.getGiocatori();
     }
@@ -61,24 +61,24 @@ public class TeamManager {
     public List<Evento> visualizzaCalendario() {
         return c.getEventi();
     }
-    
+
     public void pianificaAmichevole(LocalDate data, LocalTime orario, int durata,
             String luogo, String squadraAvversaria) throws SovrapposizioneEventoException {
         c.pianificaAmichevole(data, orario, durata, luogo, squadraAvversaria);
     }
-    
+
     public void pianificaAllenamento(LocalDate data, LocalTime orario, int durata,
             String luogo, String tipologia, String note) throws SovrapposizioneEventoException {
         c.pianificaAllenamento(data, orario, durata, luogo, tipologia, note);
     }
-    
+
     public void aggiornaEvento(Evento eventoSelezionato, LocalDate nuovaData,
             LocalTime nuovoOrario, int nuovaDurata,
             String nuovoLuogo, Map<String, String> campiSpecifici) throws SovrapposizioneEventoException {
         c.aggiornaEvento(eventoSelezionato, nuovaData, nuovoOrario,
                 nuovaDurata, nuovoLuogo, campiSpecifici);
     }
-    
+
     public void rimuoviEvento(Evento eventoSelezionato) {
         c.rimuoviEvento(eventoSelezionato);
     }
@@ -87,9 +87,9 @@ public class TeamManager {
     public void comunicaDisponibilita(Evento eventoSelezionato, boolean presenza, String motivazione) {
         c.aggiungiDisponibilità(eventoSelezionato, presenza, motivazione);
     }
-    
-    public List<Disponibilità> visualizzaDisponibilitàGiocatore(int idGiocatoreRosa){
-       return c.visualizzaDisponibilitàGiocatore(idGiocatoreRosa);
+
+    public List<Disponibilità> visualizzaDisponibilitàGiocatore(int idGiocatoreRosa) {
+        return c.visualizzaDisponibilitàGiocatore(idGiocatoreRosa);
     }
 
     //UC7: Gestisci Giocatore CRUD
@@ -105,26 +105,26 @@ public class TeamManager {
         listaGiocatori.add(nuovoGiocatore);
         return true;
     }
-    
+
     public boolean eliminaGiocatore(Giocatore giocatore) {
         return listaGiocatori.remove(giocatore);
     }
-    
+
     public List<Giocatore> cercaGiocatori(String filtro) {
         List<Giocatore> risultati = new ArrayList<>();
         String filtroLower = filtro.toLowerCase();
-        
+
         for (Giocatore g : listaGiocatori) {
             String nome = g.getNome().toLowerCase();
             String cognome = g.getCognome().toLowerCase();
-            
+
             if (nome.contains(filtroLower) || cognome.contains(filtroLower)) {
                 risultati.add(g);
             }
         }
         return risultati;
     }
-    
+
     public List<Giocatore> getListaGiocatori() {
         return listaGiocatori;
     }
@@ -134,23 +134,28 @@ public class TeamManager {
             Map<String, String> campiSpecifici) throws IllegalArgumentException {
         c.aggiungiStatisticaAllenamento(idGiocatore, idEvento, campiSpecifici);
     }
-    
+
     public void aggiungiStatisticaAmichevole(int idGiocatore, int idEvento,
             Map<String, String> campiSpecifici) throws IllegalArgumentException {
         c.aggiungiStatisticaAmichevole(idGiocatore, idEvento, campiSpecifici);
     }
-    
+
     public void rimuoviStatistica(int idGiocatore, int idEvento) {
         c.rimuoviStatistica(idGiocatore, idEvento);
     }
-    
+
     public Statistica visualizzaStoricoGiocatore(int idGiocatore, int idEvento) {
         return c.visualizzaStoricoGiocatore(idGiocatore, idEvento);
         //gestire lato GUI il caso in cui la statistica == null, magari stampare un avvertimento
     }
-    
+
+    //UC9: Suggerisci Sessione Mirata
+    public Map<String, Boolean> suggerisciSessioneMirata(int idGiocatore) {
+        return c.suggerisciSessioneMirata(idGiocatore);
+    }
+
     //UC10 - Confronta Giocatore
-    public Map<String, Map<String, Number>> confrontaGiocatori(GiocatoreInRosa g1, GiocatoreInRosa g2){
+    public Map<String, Map<String, Number>> confrontaGiocatori(GiocatoreInRosa g1, GiocatoreInRosa g2) {
         return c.confrontaGiocatori(g1, g2);
     }
 }

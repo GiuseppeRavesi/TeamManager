@@ -247,16 +247,18 @@ public class Calendario {
         }
         return null;
     }
-    
-    public List<Disponibilità> visualizzaDisponibilitàGiocatore(int idGiocatoreRosa){
+
+    public List<Disponibilità> visualizzaDisponibilitàGiocatore(int idGiocatoreRosa) {
         List<Disponibilità> disp;
         disp = new ArrayList<>();
-        for (Evento e : listaEventi){
-            for(Disponibilità d: e.getDisponibilità())
-                if(d.getIdGiocatore() == idGiocatoreRosa)
+        for (Evento e : listaEventi) {
+            for (Disponibilità d : e.getDisponibilità()) {
+                if (d.getIdGiocatore() == idGiocatoreRosa) {
                     disp.add(d);
+                }
+            }
         }
-        
+
         return disp;
     }
 
@@ -286,7 +288,7 @@ public class Calendario {
         int totalTiriTotali = 0;
         int totalParate = 0;
         float totalDistanza = 0;
-        
+
         for (Evento evento : listaEventi) {
             for (Disponibilità disp : evento.getDisponibilità()) {
                 if (disp.getIdGiocatore() == giocatore.getGiocatore().getId() && disp.getStatistica() instanceof StatisticaAmichevole) {
@@ -321,4 +323,52 @@ public class Calendario {
 
         return aggregati;
     }
+
+    public Map<String, Boolean> suggerisciSessioneMirata(int idGiocatore) {
+        float sommaVelocitaMax = 0;
+        float sommaFrequenzaCardiaca = 0;
+        float sommaForzaTiro = 0;
+        float sommaForzaFisica = 0;
+        float sommaVelocitaMedia = 0;
+
+        int count = 0;
+
+        for (Evento evento : listaEventi) {
+            if (evento instanceof Allenamento) {
+                for (Disponibilità disp : evento.getDisponibilità()) {
+                    if (disp.getIdGiocatore() == idGiocatore && disp.getStatistica() instanceof StatisticaAllenamento) {
+                        StatisticaAllenamento sa = (StatisticaAllenamento) disp.getStatistica();
+
+                        sommaVelocitaMax += sa.getVelocitàMax();
+                        sommaFrequenzaCardiaca += sa.getFrequenzaCardiacaMedia();
+                        sommaForzaTiro += sa.getValutazioneForzaTiro();
+                        sommaForzaFisica += sa.getValutazioneForzaFisica();
+                        sommaVelocitaMedia += sa.getVelocitàMedia();
+                        count++;
+                    }
+                }
+            }
+        }
+
+        Map<String, Boolean> suggerimenti = new HashMap<>();
+
+        if (count == 0) {
+            throw new IllegalArgumentException("Impossibile suggerire una sessione per questo giocatore");
+        }
+
+        float mediaVelocitaMax = sommaVelocitaMax / count;
+        float mediaFrequenzaCardiaca = sommaFrequenzaCardiaca / count;
+        float mediaForzaTiro = sommaForzaTiro / count;
+        float mediaForzaFisica = sommaForzaFisica / count;
+        float mediaVelocitaMedia = sommaVelocitaMedia / count;
+
+        suggerimenti.put("allenamento sullo scatto", mediaVelocitaMax < 30);
+        suggerimenti.put("allenamento sulla resistenza", mediaFrequenzaCardiaca > 150);
+        suggerimenti.put("allenamento sul tiro", mediaForzaTiro < 6);
+        suggerimenti.put("allenamento sui pesi", mediaForzaFisica < 6);
+        suggerimenti.put("allenamento aerobico", mediaVelocitaMedia < 20);
+        
+        return suggerimenti;
+    }
+
 }
