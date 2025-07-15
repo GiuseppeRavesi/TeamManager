@@ -40,8 +40,8 @@ public class TeamManager {
         r.aggiungiGiocatore(giocatoreSelezionato, ruolo, status, numMaglia);
     }
 
-    public void rimuoviGiocatoreDaRosa(GiocatoreInRosa g) {
-        r.rimuoviGiocatore(g);
+    public boolean rimuoviGiocatoreDaRosa(GiocatoreInRosa g) {
+        return r.rimuoviGiocatore(g);
     }
 
     public void modificaGiocatore(Giocatore giocatoreBase, Ruolo nuovoRuolo, Status nuovoStatus, int numMaglia)
