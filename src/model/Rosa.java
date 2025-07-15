@@ -17,7 +17,8 @@ public class Rosa {
         this.giocatoriRosa = new ArrayList<>();
     }
 
-    public void aggiungiGiocatore(Giocatore g, Ruolo ruolo, Status status, int numMaglia) throws RosaCompletaException, NumeroMagliaDuplicatoException, GiocatoreDuplicatoException {
+    public void aggiungiGiocatore(Giocatore g, Ruolo ruolo, Status status, int numMaglia) 
+            throws RosaCompletaException, NumeroMagliaDuplicatoException, GiocatoreDuplicatoException {
         if (giocatoriRosa.size() >= 22) {
             throw new RosaCompletaException();
         }
@@ -40,7 +41,8 @@ public class Rosa {
         return giocatoriRosa.remove(g);
     }
 
-    public void modificaGiocatore(Giocatore giocatoreBase, Ruolo nuovoRuolo, Status nuovoStatus, int nuovoNumMaglia) throws NumeroMagliaDuplicatoException {
+    public void modificaGiocatore(Giocatore giocatoreBase, Ruolo nuovoRuolo, Status nuovoStatus, int nuovoNumMaglia) 
+            throws NumeroMagliaDuplicatoException {
         for (GiocatoreInRosa g : giocatoriRosa) {
             if (g.getGiocatore().equals(giocatoreBase)) {
                 g.setRuolo(nuovoRuolo);
