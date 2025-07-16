@@ -4,6 +4,7 @@ import exception.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.Calendario;
@@ -101,6 +102,20 @@ public class TeamManager {
     public Map<String, Double> calcolaMediaPresenzeAssenzeMeseCorrente(){
         return c.calcolaMediaPresenzeAssenzeMeseCorrente();
     }
+    
+    public Map<String, Integer> contaGiocatoriPerStatus() {
+    Map<String, Integer> conteggio = new HashMap<>();
+    conteggio.put("DISPONIBILE", 0);
+    conteggio.put("INFORTUNATO", 0);
+    conteggio.put("SOSPESO", 0);
+
+    for (GiocatoreInRosa g : r.getGiocatori()) {
+        String stato = g.getStatus().name();
+        conteggio.put(stato, conteggio.get(stato) + 1);
+    }
+
+    return conteggio;
+}
     
     //UC6 - Gestisci Progressi Giocatore
     public void aggiungiStatisticaAllenamento(int idGiocatore, int idEvento,
