@@ -381,7 +381,6 @@ public class Calendario {
 
         List<GiocatoreInRosa> suggeriti = new ArrayList<>();
 
-        // Seleziona portiere
         List<GiocatoreInRosa> portieri = rosa.stream()
                 .filter(g -> g.getRuolo() == Ruolo.PORTIERE)
                 .sorted((g1, g2) -> Integer.compare(
@@ -392,7 +391,6 @@ public class Calendario {
                 .toList();
         suggeriti.addAll(portieri);
 
-        // Seleziona difensori
         List<GiocatoreInRosa> difensori = rosa.stream()
                 .filter(g -> g.getRuolo() == Ruolo.DIFENSORE)
                 .sorted((g1, g2) -> Integer.compare(
@@ -403,7 +401,6 @@ public class Calendario {
                 .toList();
         suggeriti.addAll(difensori);
 
-        // Seleziona centrocampisti
         List<GiocatoreInRosa> centrocampisti = rosa.stream()
                 .filter(g -> g.getRuolo() == Ruolo.CENTROCAMPISTA)
                 .sorted((g1, g2) -> Integer.compare(
@@ -414,7 +411,6 @@ public class Calendario {
                 .toList();
         suggeriti.addAll(centrocampisti);
 
-        // Seleziona attaccanti
         List<GiocatoreInRosa> attaccanti = rosa.stream()
                 .filter(g -> g.getRuolo() == Ruolo.ATTACCANTE)
                 .sorted((g1, g2) -> Integer.compare(
@@ -426,6 +422,29 @@ public class Calendario {
         suggeriti.addAll(attaccanti);
 
         return suggeriti;
+    }
+
+    public Map<String, Integer> conteggiaEventiFuturi() {
+        int allenamentiFuturi = 0;
+        int amichevoliFuture = 0;
+
+        LocalDate oggi = LocalDate.now();
+
+        for (Evento e : listaEventi) {
+            if (e.getData().isAfter(oggi)) {
+                if (e instanceof Allenamento) {
+                    allenamentiFuturi++;
+                } else if (e instanceof Amichevole) {
+                    amichevoliFuture++;
+                }
+            }
+        }
+
+        Map<String, Integer> conteggio = new HashMap<>();
+        conteggio.put("allenamentiFuturi", allenamentiFuturi);
+        conteggio.put("amichevoliFuture", amichevoliFuture);
+
+        return conteggio;
     }
 
 }

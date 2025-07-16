@@ -92,6 +92,13 @@ public class TeamManager {
         return c.visualizzaDisponibilitàGiocatore(idGiocatoreRosa);
     }
 
+    //UC4 - Analizza Andamento Rosa
+    
+    public Map<String, Integer> conteggiaEventiFuturi(){
+        return c.conteggiaEventiFuturi();
+    }
+    
+    
     //UC6 - Gestisci Progressi Giocatore
     public void aggiungiStatisticaAllenamento(int idGiocatore, int idEvento,
             Map<String, String> campiSpecifici) throws IllegalArgumentException {
