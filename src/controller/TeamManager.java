@@ -98,6 +98,9 @@ public class TeamManager {
         return c.conteggiaEventiFuturi();
     }
     
+    public Map<String, Double> calcolaMediaPresenzeAssenzeMeseCorrente(){
+        return c.calcolaMediaPresenzeAssenzeMeseCorrente();
+    }
     
     //UC6 - Gestisci Progressi Giocatore
     public void aggiungiStatisticaAllenamento(int idGiocatore, int idEvento,

@@ -447,4 +447,40 @@ public class Calendario {
         return conteggio;
     }
 
+    public Map<String, Double> calcolaMediaPresenzeAssenzeMeseCorrente() {
+        LocalDate oggi = LocalDate.now();
+        int meseCorrente = oggi.getMonthValue();
+        int annoCorrente = oggi.getYear();
+
+        int totalePresenze = 0;
+        int totaleAssenze = 0;
+
+        for (Evento e : listaEventi) {
+            if (e.getData().getMonthValue() == meseCorrente && e.getData().getYear() == annoCorrente) {
+                for (Disponibilità d : e.getDisponibilità()) {
+                    if (d.isPresenza()) {
+                        totalePresenze++;
+                    } else {
+                        totaleAssenze++;
+                    }
+                }
+            }
+        }
+
+        int totaleDisponibilità = totalePresenze + totaleAssenze;
+
+        double percentualePresenze = 0.0;
+        double percentualeAssenze = 0.0;
+
+        if (totaleDisponibilità > 0) {
+            percentualePresenze = ((double) totalePresenze / totaleDisponibilità) * 100;
+            percentualeAssenze = ((double) totaleAssenze / totaleDisponibilità) * 100;
+        }
+
+        Map<String, Double> risultato = new HashMap<>();
+        risultato.put("presenze", percentualePresenze);
+        risultato.put("assenze", percentualeAssenze);
+
+        return risultato;
+    }
 }
