@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import model.enums.Ruolo;
 
 public class Calendario {
 
@@ -367,8 +368,64 @@ public class Calendario {
         suggerimenti.put("allenamento sul tiro", mediaForzaTiro < 6);
         suggerimenti.put("allenamento sui pesi", mediaForzaFisica < 6);
         suggerimenti.put("allenamento aerobico", mediaVelocitaMedia < 20);
-        
+
         return suggerimenti;
+    }
+
+    public List<GiocatoreInRosa> suggerisciFormazione(String modulo, List<GiocatoreInRosa> rosa) {
+        String[] numeri = modulo.split("-");
+        int numDif = Integer.parseInt(numeri[0]);
+        int numCen = Integer.parseInt(numeri[1]);
+        int numAtt = Integer.parseInt(numeri[2]);
+        int numPor = 1;
+
+        List<GiocatoreInRosa> suggeriti = new ArrayList<>();
+
+        // Seleziona portiere
+        List<GiocatoreInRosa> portieri = rosa.stream()
+                .filter(g -> g.getRuolo() == Ruolo.PORTIERE)
+                .sorted((g1, g2) -> Integer.compare(
+                calcolaAggregati(g2).get("parate").intValue(),
+                calcolaAggregati(g1).get("parate").intValue()
+        ))
+                .limit(numPor)
+                .toList();
+        suggeriti.addAll(portieri);
+
+        // Seleziona difensori
+        List<GiocatoreInRosa> difensori = rosa.stream()
+                .filter(g -> g.getRuolo() == Ruolo.DIFENSORE)
+                .sorted((g1, g2) -> Integer.compare(
+                calcolaAggregati(g2).get("intercettiRiusciti").intValue(),
+                calcolaAggregati(g1).get("intercettiRiusciti").intValue()
+        ))
+                .limit(numDif)
+                .toList();
+        suggeriti.addAll(difensori);
+
+        // Seleziona centrocampisti
+        List<GiocatoreInRosa> centrocampisti = rosa.stream()
+                .filter(g -> g.getRuolo() == Ruolo.CENTROCAMPISTA)
+                .sorted((g1, g2) -> Integer.compare(
+                calcolaAggregati(g2).get("passaggiChiave").intValue(),
+                calcolaAggregati(g1).get("passaggiChiave").intValue()
+        ))
+                .limit(numCen)
+                .toList();
+        suggeriti.addAll(centrocampisti);
+
+        // Seleziona attaccanti
+        List<GiocatoreInRosa> attaccanti = rosa.stream()
+                .filter(g -> g.getRuolo() == Ruolo.ATTACCANTE)
+                .sorted((g1, g2) -> Integer.compare(
+                calcolaAggregati(g2).get("goal").intValue(),
+                calcolaAggregati(g1).get("goal").intValue()
+        ))
+                .limit(numAtt)
+                .toList();
+        suggeriti.addAll(attaccanti);
+
+        return suggeriti;
     }
 
 }

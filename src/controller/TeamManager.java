@@ -92,6 +92,26 @@ public class TeamManager {
         return c.visualizzaDisponibilitàGiocatore(idGiocatoreRosa);
     }
 
+    //UC6 - Gestisci Progressi Giocatore
+    public void aggiungiStatisticaAllenamento(int idGiocatore, int idEvento,
+            Map<String, String> campiSpecifici) throws IllegalArgumentException {
+        c.aggiungiStatisticaAllenamento(idGiocatore, idEvento, campiSpecifici);
+    }
+
+    public void aggiungiStatisticaAmichevole(int idGiocatore, int idEvento,
+            Map<String, String> campiSpecifici) throws IllegalArgumentException {
+        c.aggiungiStatisticaAmichevole(idGiocatore, idEvento, campiSpecifici);
+    }
+
+    public void rimuoviStatistica(int idGiocatore, int idEvento) {
+        c.rimuoviStatistica(idGiocatore, idEvento);
+    }
+
+    public Statistica visualizzaStoricoGiocatore(int idGiocatore, int idEvento) {
+        return c.visualizzaStoricoGiocatore(idGiocatore, idEvento);
+        //gestire lato GUI il caso in cui la statistica == null, magari stampare un avvertimento
+    }
+
     //UC7: Gestisci Giocatore CRUD
     public boolean creaGiocatore(String nome, String cognome, LocalDate dataNascita,
             String nazionalità, String email) {
@@ -128,28 +148,14 @@ public class TeamManager {
     public List<Giocatore> getListaGiocatori() {
         return listaGiocatori;
     }
-
-    //UC6 - Gestisci Progressi Giocatore
-    public void aggiungiStatisticaAllenamento(int idGiocatore, int idEvento,
-            Map<String, String> campiSpecifici) throws IllegalArgumentException {
-        c.aggiungiStatisticaAllenamento(idGiocatore, idEvento, campiSpecifici);
+    
+    //UC8: Suggerisci Formazione
+    public List<GiocatoreInRosa> suggerisciFormazione (String modulo){
+        return c.suggerisciFormazione(modulo, r.getGiocatori());
     }
-
-    public void aggiungiStatisticaAmichevole(int idGiocatore, int idEvento,
-            Map<String, String> campiSpecifici) throws IllegalArgumentException {
-        c.aggiungiStatisticaAmichevole(idGiocatore, idEvento, campiSpecifici);
-    }
-
-    public void rimuoviStatistica(int idGiocatore, int idEvento) {
-        c.rimuoviStatistica(idGiocatore, idEvento);
-    }
-
-    public Statistica visualizzaStoricoGiocatore(int idGiocatore, int idEvento) {
-        return c.visualizzaStoricoGiocatore(idGiocatore, idEvento);
-        //gestire lato GUI il caso in cui la statistica == null, magari stampare un avvertimento
-    }
-
+    
     //UC9: Suggerisci Sessione Mirata
+
     public Map<String, Boolean> suggerisciSessioneMirata(int idGiocatore) {
         return c.suggerisciSessioneMirata(idGiocatore);
     }
