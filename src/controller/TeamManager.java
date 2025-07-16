@@ -116,6 +116,9 @@ public class TeamManager {
 
     return conteggio;
 }
+    public Map<String, Double> calcolaMediaStatisticaRosa(){
+        return c.calcolaMediaStatisticaRosa(r.getGiocatori());
+    }
     
     //UC6 - Gestisci Progressi Giocatore
     public void aggiungiStatisticaAllenamento(int idGiocatore, int idEvento,

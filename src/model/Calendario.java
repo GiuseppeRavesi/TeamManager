@@ -483,4 +483,63 @@ public class Calendario {
 
         return risultato;
     }
+
+    public Map<String, Double> calcolaMediaStatisticaRosa(List<GiocatoreInRosa> rosa) {
+        double mediaGoal = 0;
+        double mediaAssist = 0;
+        double mediaGialli = 0;
+        double mediaRossi = 0;
+        double mediaFalli = 0;
+
+        int giocatoriConsiderati = 0;
+
+        for (GiocatoreInRosa g : rosa) {
+            int sommaGoal = 0, sommaAssist = 0, sommaGialli = 0, sommaRossi = 0, sommaFalli = 0;
+            int count = 0;
+
+            for (Evento evento : listaEventi) {
+                for (Disponibilità d : evento.getDisponibilità()) {
+                    if (d.getIdGiocatore() == g.getGiocatore().getId()
+                            && d.getStatistica() instanceof StatisticaAmichevole s) {
+
+                        sommaGoal += s.getGoal();
+                        sommaAssist += s.getAssist();
+                        sommaGialli += s.getCartelliniGialli();
+                        sommaRossi += s.getCartelliniRossi();
+                        sommaFalli += s.getFalliCommessi();
+                        count++;
+                    }
+                }
+            }
+            if (count > 0) {
+                mediaGoal += (double) sommaGoal / count;
+                mediaAssist += (double) sommaAssist / count;
+                mediaGialli += (double) sommaGialli / count;
+                mediaRossi += (double) sommaRossi / count;
+                mediaFalli += (double) sommaFalli / count;
+                giocatoriConsiderati++;
+            }
+        }
+
+        Map<String, Double> medieGlobali = new HashMap<>();
+
+        if (giocatoriConsiderati == 0) {
+            // Nessun dato disponibile
+            medieGlobali.put("goal", 0.0);
+            medieGlobali.put("assist", 0.0);
+            medieGlobali.put("cartelliniGialli", 0.0);
+            medieGlobali.put("cartelliniRossi", 0.0);
+            medieGlobali.put("falliCommessi", 0.0);
+            return medieGlobali;
+        }
+
+        medieGlobali.put("goal", mediaGoal / giocatoriConsiderati);
+        medieGlobali.put("assist", mediaAssist / giocatoriConsiderati);
+        medieGlobali.put("cartelliniGialli", mediaGialli / giocatoriConsiderati);
+        medieGlobali.put("cartelliniRossi", mediaRossi / giocatoriConsiderati);
+        medieGlobali.put("falliCommessi", mediaFalli / giocatoriConsiderati);
+
+        return medieGlobali;
+    }
+
 }
