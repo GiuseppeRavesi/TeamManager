@@ -24,7 +24,7 @@ public class Giocatore {
         this.id = ++contatore;
     }
     
-    public Giocatore(int id, String nome, String cognome,String ruoloPreferito,
+    public Giocatore(int id, String nome, String cognome,
             LocalDate dataNascita, String nazionalita, String email) {
         this.nome = nome;
         this.cognome = cognome;
