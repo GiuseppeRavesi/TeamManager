@@ -4,9 +4,13 @@ import controller.Session;
 import exception.SovrapposizioneEventoException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import model.enums.Ruolo;
 import static model.enums.Ruolo.*;
+import model.enums.Status;
 import static model.enums.Status.*;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -687,6 +691,104 @@ public class CalendarioTest {
         assertThrows(IllegalArgumentException.class, () -> {
             c.suggerisciSessioneMirata(999); // ID inesistente
         });
+    }
+
+    @Test
+    public void testSuggerisciFormazione() {
+
+        List<GiocatoreInRosa> rosa = new ArrayList<>();
+
+        rosa.add(new GiocatoreInRosa(new Giocatore("Luca", "Bianchi", LocalDate.of(1999, 5, 10), "Italia", "luca.bianchi@email.com"), Ruolo.PORTIERE, Status.DISPONIBILE, 1, LocalDate.of(2024, 8, 1)));
+        rosa.add(new GiocatoreInRosa(new Giocatore("Marco", "Rossi", LocalDate.of(2000, 3, 22), "Italia", "marco.rossi@email.com"), Ruolo.PORTIERE, Status.INFORTUNATO, 12, LocalDate.of(2024, 8, 1)));
+
+        rosa.add(new GiocatoreInRosa(new Giocatore("Andrea", "Verdi", LocalDate.of(1998, 8, 14), "Italia", "andrea.verdi@email.com"), Ruolo.DIFENSORE, Status.DISPONIBILE, 2, LocalDate.of(2024, 8, 1)));
+        rosa.add(new GiocatoreInRosa(new Giocatore("Stefano", "Neri", LocalDate.of(2001, 1, 10), "Italia", "stefano.neri@email.com"), Ruolo.DIFENSORE, Status.DISPONIBILE, 3, LocalDate.of(2024, 8, 1)));
+        rosa.add(new GiocatoreInRosa(new Giocatore("Matteo", "Moretti", LocalDate.of(1997, 12, 5), "Italia", "matteo.moretti@email.com"), Ruolo.DIFENSORE, Status.SOSPESO, 4, LocalDate.of(2024, 8, 1)));
+        rosa.add(new GiocatoreInRosa(new Giocatore("Lorenzo", "Ferrari", LocalDate.of(1996, 6, 30), "Italia", "lorenzo.ferrari@email.com"), Ruolo.DIFENSORE, Status.DISPONIBILE, 5, LocalDate.of(2024, 8, 1)));
+        rosa.add(new GiocatoreInRosa(new Giocatore("Paolo", "Gentile", LocalDate.of(1998, 2, 1), "Italia", "paolo.gentile@email.com"), Ruolo.DIFENSORE, Status.DISPONIBILE, 6, LocalDate.of(2024, 8, 1)));
+
+        rosa.add(new GiocatoreInRosa(new Giocatore("Giorgio", "Rinaldi", LocalDate.of(1995, 11, 11), "Italia", "giorgio.rinaldi@email.com"), Ruolo.CENTROCAMPISTA, Status.DISPONIBILE, 7, LocalDate.of(2024, 8, 1)));
+        rosa.add(new GiocatoreInRosa(new Giocatore("Francesco", "Esposito", LocalDate.of(1999, 4, 9), "Italia", "francesco.esposito@email.com"), Ruolo.CENTROCAMPISTA, Status.DISPONIBILE, 8, LocalDate.of(2024, 8, 1)));
+        rosa.add(new GiocatoreInRosa(new Giocatore("Davide", "Caputo", LocalDate.of(2002, 10, 3), "Italia", "davide.caputo@email.com"), Ruolo.CENTROCAMPISTA, Status.DISPONIBILE, 9, LocalDate.of(2024, 8, 1)));
+        rosa.add(new GiocatoreInRosa(new Giocatore("Simone", "De Luca", LocalDate.of(1997, 9, 18), "Italia", "simone.deluca@email.com"), Ruolo.CENTROCAMPISTA, Status.DISPONIBILE, 10, LocalDate.of(2024, 8, 1)));
+        rosa.add(new GiocatoreInRosa(new Giocatore("Alessandro", "Fiore", LocalDate.of(2000, 1, 25), "Italia", "alessandro.fiore@email.com"), Ruolo.CENTROCAMPISTA, Status.DISPONIBILE, 11, LocalDate.of(2024, 8, 1)));
+
+        rosa.add(new GiocatoreInRosa(new Giocatore("Federico", "Giuliani", LocalDate.of(2001, 3, 19), "Italia", "federico.giuliani@email.com"), Ruolo.ATTACCANTE, Status.DISPONIBILE, 14, LocalDate.of(2024, 8, 1)));
+        rosa.add(new GiocatoreInRosa(new Giocatore("Nicola", "Sartori", LocalDate.of(1996, 7, 27), "Italia", "nicola.sartori@email.com"), Ruolo.ATTACCANTE, Status.DISPONIBILE, 15, LocalDate.of(2024, 8, 1)));
+        rosa.add(new GiocatoreInRosa(new Giocatore("Edoardo", "Marino", LocalDate.of(1998, 5, 2), "Italia", "edoardo.marino@email.com"), Ruolo.ATTACCANTE, Status.DISPONIBILE, 16, LocalDate.of(2024, 8, 1)));
+        rosa.add(new GiocatoreInRosa(new Giocatore("Luca", "Serra", LocalDate.of(1995, 10, 13), "Italia", "luca.serra@email.com"), Ruolo.ATTACCANTE, Status.DISPONIBILE, 17, LocalDate.of(2024, 8, 1)));
+        rosa.add(new GiocatoreInRosa(new Giocatore("Tommaso", "Bianchi", LocalDate.of(1999, 11, 20), "Italia", "tommaso.bianchi@email.com"), Ruolo.ATTACCANTE, Status.DISPONIBILE, 18, LocalDate.of(2024, 8, 1)));
+
+        rosa.add(new GiocatoreInRosa(new Giocatore("Gabriele", "Martini", LocalDate.of(2003, 6, 12), "Italia", "gabriele.martini@email.com"), Ruolo.CENTROCAMPISTA, Status.DISPONIBILE, 19, LocalDate.of(2024, 8, 1)));
+        rosa.add(new GiocatoreInRosa(new Giocatore("Riccardo", "Pellegrini", LocalDate.of(1996, 2, 6), "Italia", "riccardo.pellegrini@email.com"), Ruolo.DIFENSORE, Status.DISPONIBILE, 20, LocalDate.of(2024, 8, 1)));
+        rosa.add(new GiocatoreInRosa(new Giocatore("Christian", "Conti", LocalDate.of(1997, 8, 15), "Italia", "christian.conti@email.com"), Ruolo.DIFENSORE, Status.DISPONIBILE, 21, LocalDate.of(2024, 8, 1)));
+        rosa.add(new GiocatoreInRosa(new Giocatore("Antonio", "Greco", LocalDate.of(2000, 12, 1), "Italia", "antonio.greco@email.com"), Ruolo.ATTACCANTE, Status.DISPONIBILE, 22, LocalDate.of(2024, 8, 1)));
+
+// Allenamenti
+        Allenamento a1 = new Allenamento(LocalDate.of(2024, 9, 2), LocalTime.of(17, 0), 90, "Campo A", "Tattico", "Prove di pressing alto");
+        Allenamento a2 = new Allenamento(LocalDate.of(2024, 9, 5), LocalTime.of(18, 0), 90, "Campo A", "Tecnico", "Finalizzazioni e calci piazzati");
+        Allenamento a3 = new Allenamento(LocalDate.of(2024, 9, 8), LocalTime.of(17, 0), 90, "Campo B", "Atletico", "Lavoro su resistenza e velocità");
+        Allenamento a4 = new Allenamento(LocalDate.of(2024, 9, 12), LocalTime.of(18, 0), 90, "Campo B", "Tattico", "Costruzione dal basso");
+        Allenamento a5 = new Allenamento(LocalDate.of(2024, 9, 15), LocalTime.of(17, 30), 90, "Campo A", "Tecnico", "Controllo palla e passaggi rapidi");
+
+// Amichevoli
+        Amichevole am1 = new Amichevole(LocalDate.of(2024, 9, 3), LocalTime.of(19, 0), 90, "Stadio Comunale", "Real Rocca");
+        Amichevole am2 = new Amichevole(LocalDate.of(2024, 9, 9), LocalTime.of(20, 0), 90, "Stadio B", "Virtus Leonzio");
+        Amichevole am3 = new Amichevole(LocalDate.of(2024, 9, 16), LocalTime.of(18, 30), 90, "Stadio A", "Polisportiva Etna");
+
+// Inserimento nel calendario
+        c.getEventi().add(a1);
+        c.getEventi().add(a2);
+        c.getEventi().add(a3);
+        c.getEventi().add(a4);
+        c.getEventi().add(a5);
+
+        c.getEventi().add(am1);
+        c.getEventi().add(am2);
+        c.getEventi().add(am3);
+
+// Lista delle disponibilità da aggiungere agli eventi
+        for (Evento evento : c.getEventi()) {
+            if (evento instanceof Amichevole) {
+                for (GiocatoreInRosa g : rosa) {
+                    int idGiocatore = g.getGiocatore().getId();
+                    int idEvento = evento.getId();
+
+                    // Crea una statistica fittizia
+                    StatisticaAmichevole stat = new StatisticaAmichevole(
+                            idGiocatore,
+                            idEvento,
+                            60 + (int) (Math.random() * 31), // minuti giocati tra 60 e 90
+                            (int) (Math.random() * 2), // goal
+                            0,
+                            (int) (Math.random() * 2), // gialli
+                            0,
+                            8 + (float) (Math.random() * 4), // distanza 8–12 km
+                            (int) (Math.random() * 4),
+                            (int) (Math.random() * 3),
+                            (g.getRuolo() == Ruolo.PORTIERE) ? (int) (Math.random() * 5) : 0,
+                            (g.getRuolo() == Ruolo.DIFENSORE) ? (int) (Math.random() * 6) : 0,
+                            (g.getRuolo() == Ruolo.CENTROCAMPISTA) ? (int) (Math.random() * 5) : 0,
+                            (int) (Math.random() * 6)
+                    );
+
+                    // Crea disponibilità con presenza = true e assegna la statistica
+                    Disponibilità disp = new Disponibilità(idGiocatore, idEvento, true, null);
+                    disp.setStatistica(stat);  // ipotizzando che ci sia un setter per la statistica
+
+                    // Aggiungiamo la disponibilità all’evento
+                    evento.getDisponibilità().add(disp);
+
+                }
+            }
+        }
+
+        System.out.println(c.suggerisciFormazione("4-3-3", rosa));
+
+        List<GiocatoreInRosa> formazione = new ArrayList<>();
+        formazione = c.suggerisciFormazione("4-3-3", rosa);
+        assertEquals(11, formazione.size());
+
     }
 
 }
