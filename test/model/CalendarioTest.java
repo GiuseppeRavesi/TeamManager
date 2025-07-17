@@ -791,4 +791,26 @@ public class CalendarioTest {
 
     }
 
+    @Test
+    public void testConteggiaEventiFuturi() {
+        // Svuoto gli eventi esistenti per un test pulito
+        c.getEventi().clear();
+
+        // Data corrente
+        LocalDate oggi = LocalDate.now();
+
+        // Creo eventi passati e futuri
+        c.getEventi().add(new Allenamento(oggi.minusDays(1), LocalTime.NOON, 90, "Campo A", "fisico", "test"));
+        c.getEventi().add(new Amichevole(oggi.minusDays(1), LocalTime.NOON, 90, "Campo B", "Team A"));
+
+        c.getEventi().add(new Allenamento(oggi.plusDays(1), LocalTime.NOON, 90, "Campo A", "tattico", "test futuro"));
+        c.getEventi().add(new Allenamento(oggi.plusDays(2), LocalTime.NOON, 90, "Campo B", "tecnico", "test futuro 2"));
+        c.getEventi().add(new Amichevole(oggi.plusDays(3), LocalTime.NOON, 90, "Campo C", "Team B"));
+
+        // Esecuzione metodo
+        Map<String, Integer> risultato = c.conteggiaEventiFuturi();
+
+        assertEquals(2, risultato.get("allenamentiFuturi").intValue());
+        assertEquals(1, risultato.get("amichevoliFuture").intValue());
+    }
 }
