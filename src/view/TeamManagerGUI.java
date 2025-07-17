@@ -4,6 +4,8 @@
  */
 package view;
 
+import controller.PersistenceHandler;
+import controller.TeamManager;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -241,6 +243,10 @@ public class TeamManagerGUI extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        PersistenceHandler handler = new PersistenceHandler();
+        handler.loadAll();
+        TeamManager.getInstance().inizializzaDatiDaPersistence(handler);
+        
         new TeamManagerGUI().setVisible(true);
     }
 
