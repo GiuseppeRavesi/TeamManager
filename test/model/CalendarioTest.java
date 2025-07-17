@@ -813,4 +813,31 @@ public class CalendarioTest {
         assertEquals(2, risultato.get("allenamentiFuturi").intValue());
         assertEquals(1, risultato.get("amichevoliFuture").intValue());
     }
+
+    @Test
+    public void testCalcolaMediaPresenzeAssenzeMeseCorrente() {
+        // Svuoto eventi
+        c.getEventi().clear();
+
+        // Data di oggi
+        LocalDate oggi = LocalDate.now();
+        int idGiocatore = gr1.getGiocatore().getId();
+
+        // Creo evento nel mese corrente
+        Allenamento eventoCorrente = new Allenamento(oggi, LocalTime.NOON, 90, "Campo X", "fisico", "sessione test");
+        Disponibilità pres = new Disponibilità(idGiocatore, eventoCorrente.getId(), true, null);
+        Disponibilità ass = new Disponibilità(idGiocatore + 1, eventoCorrente.getId(), false, null);
+        eventoCorrente.getDisponibilità().add(pres);
+        eventoCorrente.getDisponibilità().add(ass);
+
+        // Aggiungo evento
+        c.getEventi().add(eventoCorrente);
+
+        // Esecuzione metodo
+        Map<String, Double> risultato = c.calcolaMediaPresenzeAssenzeMeseCorrente();
+
+        // Verifica (1 presenza e 1 assenza => 50% ciascuna)
+        assertEquals(50.0, risultato.get("presenze"), 0.01);
+        assertEquals(50.0, risultato.get("assenze"), 0.01);
+    }
 }
