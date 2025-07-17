@@ -198,4 +198,14 @@ public class TeamManager {
     public Map<String, Map<String, Number>> confrontaGiocatori(GiocatoreInRosa g1, GiocatoreInRosa g2) {
         return c.confrontaGiocatori(g1, g2);
     }
+
+    public Rosa getR() {
+        return r;
+    }
+
+    public Calendario getC() {
+        return c;
+    }
+    
+    
 }
