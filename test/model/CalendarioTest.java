@@ -5,6 +5,7 @@ import exception.SovrapposizioneEventoException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -840,4 +841,50 @@ public class CalendarioTest {
         assertEquals(50.0, risultato.get("presenze"), 0.01);
         assertEquals(50.0, risultato.get("assenze"), 0.01);
     }
+
+    @Test
+    public void testCalcolaMediaStatisticaRosa() {
+        // Pulizia eventi precedenti (importantissimo!)
+        c.getEventi().clear();
+
+        // Creo due giocatori in rosa
+        GiocatoreInRosa g1 = new GiocatoreInRosa(
+                new Giocatore("Mario", "Rossi", LocalDate.of(1990, 1, 1), "Italia", "mario@rossi.com"),
+                Ruolo.CENTROCAMPISTA, Status.DISPONIBILE, 1, LocalDate.now()
+        );
+        GiocatoreInRosa g2 = new GiocatoreInRosa(
+                new Giocatore("Luigi", "Verdi", LocalDate.of(1992, 5, 10), "Italia", "luigi@verdi.com"),
+                Ruolo.ATTACCANTE, Status.DISPONIBILE, 2, LocalDate.now()
+        );
+
+        List<GiocatoreInRosa> rosa = Arrays.asList(g1, g2);
+
+        // Creo due eventi amichevoli
+        Amichevole a1 = new Amichevole(LocalDate.now().minusDays(1), LocalTime.NOON, 90, "Stadio A", "Avversari A");
+        Amichevole a2 = new Amichevole(LocalDate.now().minusDays(2), LocalTime.NOON, 90, "Stadio B", "Avversari B");
+        c.getEventi().add(a1);
+        c.getEventi().add(a2);
+
+        // g1 ha 2 statistiche
+        StatisticaAmichevole statG1A1 = new StatisticaAmichevole(g1.getGiocatore().getId(), a1.getId(), 90, 1, 0, 1, 0, 10, 1, 1, 0, 1, 1, 0);
+        StatisticaAmichevole statG1A2 = new StatisticaAmichevole(g1.getGiocatore().getId(), a2.getId(), 90, 3, 0, 0, 0, 9, 0, 2, 0, 2, 2, 0);
+
+        // g2 ha 1 statistica
+        StatisticaAmichevole statG2A1 = new StatisticaAmichevole(g2.getGiocatore().getId(), a1.getId(), 90, 0, 0, 2, 0, 8, 2, 0, 0, 0, 0, 0);
+
+        // Aggiungo le disponibilità con statistiche
+        a1.aggiungiDisponibilità(new Disponibilità(g1.getGiocatore().getId(), a1.getId(), true, null, statG1A1));
+        a2.aggiungiDisponibilità(new Disponibilità(g1.getGiocatore().getId(), a2.getId(), true, null, statG1A2));
+        a1.aggiungiDisponibilità(new Disponibilità(g2.getGiocatore().getId(), a1.getId(), true, null, statG2A1));
+
+        // Esecuzione del metodo
+        Map<String, Double> medie = c.calcolaMediaStatisticaRosa(rosa);
+
+        assertEquals(1.0, medie.get("goal"), 0.01); 
+        assertEquals(0.75, medie.get("assist"), 0.01); 
+        assertEquals(1.25, medie.get("cartelliniGialli"), 0.01);
+        assertEquals(0.0, medie.get("cartelliniRossi"), 0.01); 
+        assertEquals(1.25, medie.get("falliCommessi"), 0.01); 
+    }
+
 }
