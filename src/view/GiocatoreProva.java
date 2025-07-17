@@ -13,6 +13,9 @@ import java.util.Objects;
  *
  * @author enzov
  */
+
+
+
 public class GiocatoreProva {
     
     private int id;

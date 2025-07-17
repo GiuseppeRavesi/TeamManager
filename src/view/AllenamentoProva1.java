@@ -11,6 +11,9 @@ import java.time.LocalTime;
  *
  * @author enzov
  */
+
+
+
 public class AllenamentoProva1 extends EventoProva1 {
     private String tipologia;
     private String note;

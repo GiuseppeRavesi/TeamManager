@@ -13,6 +13,9 @@ import javax.swing.DefaultListModel;
  *
  * @author enzov
  */
+
+
+
 public class PlayerRosaPanel extends javax.swing.JPanel {
 
     /**

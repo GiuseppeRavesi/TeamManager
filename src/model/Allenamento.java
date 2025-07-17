@@ -14,6 +14,9 @@ public class Allenamento extends Evento {
         this.note = note;
     }
 
+    
+    
+    
     //per caricamento da file
     public Allenamento(int id, LocalDate data, LocalTime orario, int durata, String luogo, String tipologia, String note) {
         super(id, data, orario, durata, luogo);

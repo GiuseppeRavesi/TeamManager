@@ -8,6 +8,9 @@ package view;
  *
  * @author enzov
  */
+
+
+
 public class PlayerPanel extends javax.swing.JPanel {
 
     /**

@@ -8,6 +8,9 @@ package view;
  *
  * @author enzov
  */
+
+
+
 public class CoachPanel extends javax.swing.JPanel {
     
     

@@ -21,6 +21,8 @@ import javax.swing.JPanel;
  *
  * @author enzov
  */
+
+
 public class TeamManagerGUI extends javax.swing.JFrame {
 
     /**

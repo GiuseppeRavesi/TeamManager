@@ -12,6 +12,9 @@ import javax.swing.JRadioButton;
  *
  * @author enzov
  */
+
+
+
 public class LoginPanel extends javax.swing.JPanel {
 
     /**

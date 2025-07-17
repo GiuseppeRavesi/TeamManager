@@ -14,6 +14,11 @@ import javax.swing.JOptionPane;
  *
  * @author enzov
  */
+
+
+
+
+
 public class CreatePlayerPanel extends javax.swing.JPanel {
 
     /**
