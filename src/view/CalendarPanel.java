@@ -17,9 +17,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import modelProva.AllenamentoProva;
-import modelProva.AmichevoleProva;
-import modelProva.EventoProva;
 import view.TeamManagerGUI;
 
 /**

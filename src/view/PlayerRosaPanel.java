@@ -8,7 +8,6 @@ import java.awt.Color;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
-import modelProva.GiocatoreProva;
 
 /**
  *

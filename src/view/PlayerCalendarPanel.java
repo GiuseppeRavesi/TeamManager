@@ -11,12 +11,6 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import modelProva.AllenamentoProva;
-import modelProva.AllenamentoProva1;
-import modelProva.AmichevoleProva;
-import modelProva.AmichevoleProva1;
-import modelProva.EventoProva;
-import modelProva.EventoProva1;
 
 /**
  *
