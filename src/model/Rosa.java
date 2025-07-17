@@ -72,6 +72,11 @@ public class Rosa {
         return giocatoriRosa;
     }
 
+    public void setGiocatoriRosa(List<GiocatoreInRosa> giocatoriRosa) {
+        this.giocatoriRosa = giocatoriRosa;
+    }
+
+    
     public void stampaRosa() {
         for (GiocatoreInRosa g : giocatoriRosa) {
             System.out.println(g);

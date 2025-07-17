@@ -86,6 +86,10 @@ public class Calendario {
         return listaEventi;
     }
 
+    public void setListaEventi(List<Evento> listaEventi) {
+        this.listaEventi = listaEventi;
+    }
+    
     public void aggiungiDisponibilità(Evento eventoSelezionato, boolean presenza, String motivazione) {
         int idGiocatore = Session.getInstance().getUtenteLoggato().getId();
 

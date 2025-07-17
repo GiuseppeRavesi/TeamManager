@@ -26,7 +26,7 @@ public class TeamManager {
     private static TeamManager instance;
     private final Rosa r = new Rosa();
     private final Calendario c = new Calendario();
-    private final List<Giocatore> listaGiocatori = new ArrayList<>();
+    private List<Giocatore> listaGiocatori = new ArrayList<>();
 
     public static TeamManager getInstance() {
         if (instance == null) {
@@ -34,6 +34,12 @@ public class TeamManager {
         }
         return instance;
     }
+    
+    public void inizializzaDatiDaPersistence(PersistenceHandler handler) {
+    this.listaGiocatori = handler.getListaGiocatori();
+    this.r.setGiocatoriRosa(handler.getRosa());
+    this.c.setListaEventi(handler.getListaEventi());
+}
 
     // UC1: Gestisci Rosa
     public void aggiungiGiocatoreRosa(Giocatore giocatoreSelezionato, Ruolo ruolo, Status status, int numMaglia)
