@@ -196,4 +196,214 @@
         <nazionalita>Norvegese</nazionalita>
         <email>e.haaland@example.com</email>
     </giocatore>
+    <giocatore id="29">
+        <nome>Frenkie</nome>
+        <cognome>de Jong</cognome>
+        <dataNascita>1997-05-12</dataNascita>
+        <nazionalita>Olandese</nazionalita>
+        <email>f.dejong@example.com</email>
+    </giocatore>
+    <giocatore id="30">
+        <nome>Joshua</nome>
+        <cognome>Kimmich</cognome>
+        <dataNascita>1995-02-08</dataNascita>
+        <nazionalita>Tedesca</nazionalita>
+        <email>j.kimmich@example.com</email>
+    </giocatore>
+    <giocatore id="31">
+        <nome>Bernardo</nome>
+        <cognome>Silva</cognome>
+        <dataNascita>1994-08-10</dataNascita>
+        <nazionalita>Portoghese</nazionalita>
+        <email>b.silva@example.com</email>
+    </giocatore>
+    <giocatore id="32">
+        <nome>Ruben</nome>
+        <cognome>Dias</cognome>
+        <dataNascita>1997-05-14</dataNascita>
+        <nazionalita>Portoghese</nazionalita>
+        <email>r.dias@example.com</email>
+    </giocatore>
+    <giocatore id="33">
+        <nome>Phil</nome>
+        <cognome>Foden</cognome>
+        <dataNascita>2000-05-28</dataNascita>
+        <nazionalita>Inglese</nazionalita>
+        <email>p.foden@example.com</email>
+    </giocatore>
+    <giocatore id="34">
+        <nome>Pedri</nome>
+        <cognome>González</cognome>
+        <dataNascita>2002-11-25</dataNascita>
+        <nazionalita>Spagnola</nazionalita>
+        <email>p.gonzalez@example.com</email>
+    </giocatore>
+    <giocatore id="35">
+        <nome>Gavi</nome>
+        <cognome>Paez</cognome>
+        <dataNascita>2004-08-05</dataNascita>
+        <nazionalita>Spagnola</nazionalita>
+        <email>g.paez@example.com</email>
+    </giocatore>
+    <giocatore id="36">
+        <nome>Vinicius</nome>
+        <cognome>Junior</cognome>
+        <dataNascita>2000-07-12</dataNascita>
+        <nazionalita>Brasiliana</nazionalita>
+        <email>v.junior@example.com</email>
+    </giocatore>
+    <giocatore id="37">
+        <nome>Rodrygo</nome>
+        <cognome>Goes</cognome>
+        <dataNascita>2001-01-09</dataNascita>
+        <nazionalita>Brasiliana</nazionalita>
+        <email>r.goes@example.com</email>
+    </giocatore>
+    <giocatore id="38">
+        <nome>Federico</nome>
+        <cognome>Valverde</cognome>
+        <dataNascita>1998-07-22</dataNascita>
+        <nazionalita>Uruguayana</nazionalita>
+        <email>f.valverde@example.com</email>
+    </giocatore>
+    <giocatore id="39">
+        <nome>Jude</nome>
+        <cognome>Bellingham</cognome>
+        <dataNascita>2003-06-29</dataNascita>
+        <nazionalita>Inglese</nazionalita>
+        <email>j.bellingham@example.com</email>
+    </giocatore>
+    <giocatore id="40">
+        <nome>Jamal</nome>
+        <cognome>Musiala</cognome>
+        <dataNascita>2003-02-26</dataNascita>
+        <nazionalita>Tedesca</nazionalita>
+        <email>j.musiala@example.com</email>
+    </giocatore>
+    <giocatore id="41">
+        <nome>Alphonso</nome>
+        <cognome>Davies</cognome>
+        <dataNascita>2000-11-02</dataNascita>
+        <nazionalita>Canadese</nazionalita>
+        <email>a.davies@example.com</email>
+    </giocatore>
+    <giocatore id="42">
+        <nome>Dušan</nome>
+        <cognome>Vlahović</cognome>
+        <dataNascita>2000-01-28</dataNascita>
+        <nazionalita>Serba</nazionalita>
+        <email>d.vlahovic@example.com</email>
+    </giocatore>
+    <giocatore id="43">
+        <nome>Lautaro</nome>
+        <cognome>Martínez</cognome>
+        <dataNascita>1997-08-22</dataNascita>
+        <nazionalita>Argentina</nazionalita>
+        <email>l.martinez@example.com</email>
+    </giocatore>
+    <giocatore id="44">
+        <nome>Nicolò</nome>
+        <cognome>Barella</cognome>
+        <dataNascita>1997-02-07</dataNascita>
+        <nazionalita>Italiana</nazionalita>
+        <email>n.barella@example.com</email>
+    </giocatore>
+    <giocatore id="45">
+        <nome>Alessandro</nome>
+        <cognome>Bastoni</cognome>
+        <dataNascita>1999-04-13</dataNascita>
+        <nazionalita>Italiana</nazionalita>
+        <email>a.bastoni@example.com</email>
+    </giocatore>
+    <giocatore id="46">
+        <nome>Mike</nome>
+        <cognome>Maignan</cognome>
+        <dataNascita>1995-07-03</dataNascita>
+        <nazionalita>Francese</nazionalita>
+        <email>m.maignan@example.com</email>
+    </giocatore>
+    <giocatore id="47">
+        <nome>Rafael</nome>
+        <cognome>Leão</cognome>
+        <dataNascita>1999-06-10</dataNascita>
+        <nazionalita>Portoghese</nazionalita>
+        <email>r.leao@example.com</email>
+    </giocatore>
+    <giocatore id="48">
+        <nome>Khvicha</nome>
+        <cognome>Kvaratskhelia</cognome>
+        <dataNascita>2001-02-12</dataNascita>
+        <nazionalita>Georgiana</nazionalita>
+        <email>k.kvaratskhelia@example.com</email>
+    </giocatore>
+    <giocatore id="49">
+        <nome>Victor</nome>
+        <cognome>Osimhen</cognome>
+        <dataNascita>1998-12-29</dataNascita>
+        <nazionalita>Nigeriana</nazionalita>
+        <email>v.osimhen@example.com</email>
+    </giocatore>
+    <giocatore id="50">
+        <nome>Kim</nome>
+        <cognome>Min-jae</cognome>
+        <dataNascita>1996-11-15</dataNascita>
+        <nazionalita>Coreana</nazionalita>
+        <email>k.minjae@example.com</email>
+    </giocatore>
+    <giocatore id="51">
+        <nome>Sergej</nome>
+        <cognome>Milinković-Savić</cognome>
+        <dataNascita>1995-02-27</dataNascita>
+        <nazionalita>Serba</nazionalita>
+        <email>s.milinkovic@example.com</email>
+    </giocatore>
+    <giocatore id="52">
+        <nome>Martin</nome>
+        <cognome>Ødegaard</cognome>
+        <dataNascita>1998-12-17</dataNascita>
+        <nazionalita>Norvegese</nazionalita>
+        <email>m.odegaard@example.com</email>
+    </giocatore>
+    <giocatore id="53">
+        <nome>Bukayo</nome>
+        <cognome>Saka</cognome>
+        <dataNascita>2001-09-05</dataNascita>
+        <nazionalita>Inglese</nazionalita>
+        <email>b.saka@example.com</email>
+    </giocatore>
+    <giocatore id="54">
+        <nome>Gabriel</nome>
+        <cognome>Martinelli</cognome>
+        <dataNascita>2001-06-18</dataNascita>
+        <nazionalita>Brasiliana</nazionalita>
+        <email>g.martinelli@example.com</email>
+    </giocatore>
+    <giocatore id="55">
+        <nome>Declan</nome>
+        <cognome>Rice</cognome>
+        <dataNascita>1999-01-14</dataNascita>
+        <nazionalita>Inglese</nazionalita>
+        <email>d.rice@example.com</email>
+    </giocatore>
+    <giocatore id="56">
+        <nome>Enzo</nome>
+        <cognome>Fernández</cognome>
+        <dataNascita>2001-01-17</dataNascita>
+        <nazionalita>Argentina</nazionalita>
+        <email>e.fernandez@example.com</email>
+    </giocatore>
+    <giocatore id="57">
+        <nome>Julian</nome>
+        <cognome>Álvarez</cognome>
+        <dataNascita>2000-01-31</dataNascita>
+        <nazionalita>Argentina</nazionalita>
+        <email>j.alvarez@example.com</email>
+    </giocatore>
+    <giocatore id="58">
+        <nome>Joško</nome>
+        <cognome>Gvardiol</cognome>
+        <dataNascita>2002-01-23</dataNascita>
+        <nazionalita>Croata</nazionalita>
+        <email>j.gvardiol@example.com</email>
+    </giocatore>
 </giocatori>
