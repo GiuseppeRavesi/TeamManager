@@ -14,6 +14,7 @@ import model.Giocatore;
 import model.GiocatoreInRosa;
 import model.Rosa;
 import model.Statistica;
+import model.Utente;
 import model.enums.Ruolo;
 import model.enums.Status;
 
@@ -27,6 +28,7 @@ public class TeamManager {
     private final Rosa r = new Rosa();
     private final Calendario c = new Calendario();
     private List<Giocatore> listaGiocatori = new ArrayList<>();
+    private List<Utente> listaUtenti = new ArrayList<>();
 
     public static TeamManager getInstance() {
         if (instance == null) {
@@ -39,6 +41,7 @@ public class TeamManager {
     this.listaGiocatori = handler.getListaGiocatori();
     this.r.setGiocatoriRosa(handler.getRosa());
     this.c.setListaEventi(handler.getListaEventi());
+    this.listaUtenti = handler.getListaUtenti();
 }
 
     // UC1: Gestisci Rosa
@@ -205,6 +208,10 @@ public class TeamManager {
 
     public Calendario getC() {
         return c;
+    }
+
+    public List<Utente> getListaUtenti() {
+        return listaUtenti;
     }
     
     
