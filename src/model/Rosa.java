@@ -17,7 +17,7 @@ public class Rosa {
         this.giocatoriRosa = new ArrayList<>();
     }
 
-    public void aggiungiGiocatore(Giocatore g, Ruolo ruolo, Status status, int numMaglia) 
+    public void aggiungiGiocatore(Giocatore g, Ruolo ruolo, Status status, int numMaglia)
             throws RosaCompletaException, NumeroMagliaDuplicatoException, GiocatoreDuplicatoException {
         if (giocatoriRosa.size() >= 22) {
             throw new RosaCompletaException();
@@ -41,16 +41,19 @@ public class Rosa {
         return giocatoriRosa.remove(g);
     }
 
-    public void modificaGiocatore(Giocatore giocatoreBase, Ruolo nuovoRuolo, Status nuovoStatus, int nuovoNumMaglia) 
+    public void modificaGiocatore(Giocatore giocatoreBase, Ruolo nuovoRuolo, Status nuovoStatus, int nuovoNumMaglia)
             throws NumeroMagliaDuplicatoException {
         for (GiocatoreInRosa g : giocatoriRosa) {
-            if (g.getGiocatore().equals(giocatoreBase)) {
-                g.setRuolo(nuovoRuolo);
-                g.setStatus(nuovoStatus);
-                g.setNumMaglia(nuovoNumMaglia);
+            if (g.getNumMaglia() != nuovoNumMaglia) {
+                if (g.getGiocatore().equals(giocatoreBase)) {
+                    g.setRuolo(nuovoRuolo);
+                    g.setStatus(nuovoStatus);
+                    g.setNumMaglia(nuovoNumMaglia);
+                }
+            }else{
+                throw new NumeroMagliaDuplicatoException();
             }
-        }
-        throw new NumeroMagliaDuplicatoException();
+        }   
     }
 
     public List<GiocatoreInRosa> cercaGiocatori(String filtro) {
@@ -76,7 +79,6 @@ public class Rosa {
         this.giocatoriRosa = giocatoriRosa;
     }
 
-    
     public void stampaRosa() {
         for (GiocatoreInRosa g : giocatoriRosa) {
             System.out.println(g);
