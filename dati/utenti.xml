@@ -61,4 +61,76 @@
         <password>buffon1</password>
         <ruolo>GIOCATORE</ruolo>
     </utente>
+
+    <utente id="8">
+        <email>r.lewandowski@example.com</email>
+        <password>lewa9</password>
+        <ruolo>GIOCATORE</ruolo>
+    </utente>
+
+    <utente id="29">
+        <email>f.dejong@example.com</email>
+        <password>dejong21</password>
+        <ruolo>GIOCATORE</ruolo>
+    </utente>
+
+    <utente id="30">
+        <email>j.kimmich@example.com</email>
+        <password>kimmich6</password>
+        <ruolo>GIOCATORE</ruolo>
+    </utente>
+
+    <utente id="32">
+        <email>r.dias@example.com</email>
+        <password>dias3</password>
+        <ruolo>GIOCATORE</ruolo>
+    </utente>
+
+    <utente id="36">
+        <email>v.junior@example.com</email>
+        <password>vinijr20</password>
+        <ruolo>GIOCATORE</ruolo>
+    </utente>
+
+    <utente id="39">
+        <email>j.bellingham@example.com</email>
+        <password>belling22</password>
+        <ruolo>GIOCATORE</ruolo>
+    </utente>
+
+    <utente id="41">
+        <email>a.davies@example.com</email>
+        <password>davies19</password>
+        <ruolo>GIOCATORE</ruolo>
+    </utente>
+
+    <utente id="43">
+        <email>l.martinez@example.com</email>
+        <password>lautaro23</password>
+        <ruolo>GIOCATORE</ruolo>
+    </utente>
+
+    <utente id="46">
+        <email>m.maignan@example.com</email>
+        <password>maignan16</password>
+        <ruolo>GIOCATORE</ruolo>
+    </utente>
+
+    <utente id="49">
+        <email>v.osimhen@example.com</email>
+        <password>osi18</password>
+        <ruolo>GIOCATORE</ruolo>
+    </utente>
+
+    <utente id="53">
+        <email>b.saka@example.com</email>
+        <password>saka7</password>
+        <ruolo>GIOCATORE</ruolo>
+    </utente>
+
+    <utente id="58">
+        <email>j.gvardiol@example.com</email>
+        <password>gvar24</password>
+        <ruolo>GIOCATORE</ruolo>
+    </utente>
 </utenti>
