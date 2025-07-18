@@ -106,6 +106,7 @@ public class PersistenceHandler {
                 Giocatore g = new Giocatore(id, nome, cognome, dataNascita, nazionalità, email);
                 listaGiocatori.add(g);
             }
+            System.out.println("Caricamento giocatori completato. Giocatori nell'archivio: " + listaGiocatori.size());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -183,12 +184,15 @@ public class PersistenceHandler {
             for (int i = 0; i < nodoRosa.getLength(); i++) {
                 Element elem = (Element) nodoRosa.item(i);
 
-                Ruolo ruolo = Ruolo.valueOf(elem.getAttribute("ruolo"));
-                Status status = Status.valueOf(elem.getAttribute("status"));
-                int numeroMaglia = Integer.parseInt(elem.getAttribute("numeroMaglia"));
-                LocalDate dataInserimento = LocalDate.parse(elem.getAttribute("dataInserimento"));
+                String ruoloStr = elem.getElementsByTagName("ruolo").item(0).getTextContent();
+                String statusStr = elem.getElementsByTagName("status").item(0).getTextContent();
 
-                // Parsing del giocatore annidato
+                Ruolo ruolo = Ruolo.valueOf(ruoloStr.toUpperCase());
+                Status status = Status.valueOf(statusStr.toUpperCase());
+
+                int numeroMaglia = Integer.parseInt(elem.getElementsByTagName("numeroMaglia").item(0).getTextContent());
+                LocalDate dataInserimento = LocalDate.parse(elem.getElementsByTagName("dataEntrata").item(0).getTextContent());
+
                 Element giocatoreElem = (Element) elem.getElementsByTagName("giocatore").item(0);
                 int idGiocatore = Integer.parseInt(giocatoreElem.getAttribute("id"));
                 String nome = giocatoreElem.getElementsByTagName("nome").item(0).getTextContent();
@@ -298,16 +302,17 @@ public class PersistenceHandler {
                 Element eventoElem = (Element) eventoNodes.item(i);
 
                 int id = Integer.parseInt(eventoElem.getAttribute("id"));
+                String tipo = eventoElem.getAttribute("tipo"); 
                 LocalDate data = LocalDate.parse(eventoElem.getElementsByTagName("data").item(0).getTextContent());
                 LocalTime orario = LocalTime.parse(eventoElem.getElementsByTagName("orario").item(0).getTextContent());
                 int durata = Integer.parseInt(eventoElem.getElementsByTagName("durata").item(0).getTextContent());
                 String luogo = eventoElem.getElementsByTagName("luogo").item(0).getTextContent();
 
                 Evento evento;
-                if (eventoElem.getNodeName().equals("amichevole")) {
+                if (tipo.equals("amichevole")) {
                     String squadraAvversaria = eventoElem.getElementsByTagName("squadraAvversaria").item(0).getTextContent();
                     evento = new Amichevole(id, data, orario, durata, luogo, squadraAvversaria);
-                } else { // Allenamento
+                } else {
                     String tipologia = eventoElem.getElementsByTagName("tipologia").item(0).getTextContent();
                     String note = eventoElem.getElementsByTagName("note").item(0).getTextContent();
                     evento = new Allenamento(id, data, orario, durata, luogo, tipologia, note);
@@ -362,6 +367,7 @@ public class PersistenceHandler {
 
                 listaEventi.add(evento);
             }
+            System.out.println("Caricamento eventi completato. Eventi nel calendario: " + listaEventi.size());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -500,7 +506,7 @@ public class PersistenceHandler {
                 Utente utente = new Utente(email, password, ruolo, id);
                 listaUtenti.add(utente);
             }
-
+            System.out.println("Caricamento utenti completato. numero Utenti: " + listaUtenti.size());
         } catch (Exception e) {
             e.printStackTrace();
         }
