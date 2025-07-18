@@ -187,6 +187,8 @@ public class LoginPanel extends javax.swing.JPanel {
 
             parentFrame.getSession().login(myUser);
 
+            parentFrame.enableMenu();
+            
             if (myUser.getRuolo().equals("GIOCATORE")) {
 
                 int id = parentFrame.getSession().getUtenteLoggato().getId();

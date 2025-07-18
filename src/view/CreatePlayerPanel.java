@@ -41,6 +41,7 @@ public class CreatePlayerPanel extends javax.swing.JPanel {
     }
 
     public void logout() {
+        parentFrame.getSession().logout();
         setEmptyField();
     }
 
