@@ -75,14 +75,11 @@ public class GiocatoreInRosa {
         return Objects.hash(giocatore);
     }
 
-    @Override
-    public String toString() {
-        return giocatore.getNome() + " " + giocatore.getCognome()
-               + " | " + ruolo.name() + " | " + status.name();
-    }
+   
     
     //metodo to string di enzov
-    public String toString2() {
+    @Override
+    public String toString() {
         return String.format("%-12s %-12s %-4s %-20s %-10s", giocatore.getNome(), giocatore.getCognome(), "#" + numMaglia, ruolo, status);
     }
 }

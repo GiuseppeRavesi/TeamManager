@@ -183,7 +183,7 @@
             <Component class="javax.swing.JLabel" name="playerRole">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="14" style="0"/>
+                  <Font name="Segoe UI" size="13" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="jLabel9"/>
               </Properties>
@@ -637,10 +637,10 @@
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="5">
                     <StringItem index="0" value="Seleziona ruolo"/>
-                    <StringItem index="1" value="Attaccante"/>
-                    <StringItem index="2" value="Centrocampista"/>
-                    <StringItem index="3" value="Difensore"/>
-                    <StringItem index="4" value="Portiere"/>
+                    <StringItem index="1" value="ATTACCANTE"/>
+                    <StringItem index="2" value="CENTROCAMPISTA"/>
+                    <StringItem index="3" value="DIFENSORE"/>
+                    <StringItem index="4" value="PORTIERE"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -664,9 +664,9 @@
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="4">
                     <StringItem index="0" value="Seleziona status"/>
-                    <StringItem index="1" value="Disponibile"/>
-                    <StringItem index="2" value="Sospeso"/>
-                    <StringItem index="3" value="Infortunato"/>
+                    <StringItem index="1" value="DISPONIBILE"/>
+                    <StringItem index="2" value="INFORTUNATO"/>
+                    <StringItem index="3" value="SOSPESO"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -1015,7 +1015,7 @@
             <Component class="javax.swing.JLabel" name="playerRole1">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="14" style="0"/>
+                  <Font name="Segoe UI" size="13" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="jLabel9"/>
               </Properties>

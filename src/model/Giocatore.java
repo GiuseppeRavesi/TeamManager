@@ -94,8 +94,10 @@ public class Giocatore {
         return Objects.hash(nome.toLowerCase(), cognome.toLowerCase(), dataNascita, email.toLowerCase());
     }
 
+  
+    
     @Override
     public String toString() {
-        return nome + " " + cognome + " (" + nazionalita + ") - " + email;
+        return String.format("%-12s %-12s %-4s", nome, cognome,email);
     }
 }

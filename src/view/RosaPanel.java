@@ -4,7 +4,9 @@
  */
 package view;
 
+import exception.GiocatoreDuplicatoException;
 import exception.NumeroMagliaDuplicatoException;
+import exception.RosaCompletaException;
 import static java.lang.Integer.parseInt;
 import java.awt.Color;
 import java.awt.List;
@@ -69,11 +71,10 @@ public class RosaPanel extends javax.swing.JPanel {
 
         giocatori = parentFrame.getTM().getListaGiocatori();
 
+        listaFiltro = new ArrayList<>();
+
         model = new DefaultListModel<String>();
         searchModel = new DefaultListModel<String>();
-
-        setSquadra();
-        setListaGiocatori();
 
         initializeList();
 
@@ -85,7 +86,7 @@ public class RosaPanel extends javax.swing.JPanel {
         indexListElement = -1;
         model.clear();
         for (GiocatoreInRosa p : rosa) {
-            model.addElement(p.toString2());
+            model.addElement(p.toString());
         }
         jList1.setModel(model);
 
@@ -113,11 +114,11 @@ public class RosaPanel extends javax.swing.JPanel {
     private void initialiteSearchList() {
         indexJList2 = -1;
         searchModel.clear();
-        listaFiltrata.addAll(listaGiocatori);
+        listaFiltro.addAll(giocatori);
         searchPlayerField.setText("");
 
         int count = 0;
-        for (GiocatoreProva p : listaGiocatori) {
+        for (Giocatore p : giocatori) {
             searchModel.addElement(p.toString());
             count++;
         }
@@ -131,7 +132,7 @@ public class RosaPanel extends javax.swing.JPanel {
 
     private void dynamicSearch() {
         searchModel.clear();
-        listaFiltrata.clear();
+        listaFiltro.clear();
         setindexListElement(-1);
 
         // listaFiltrata.addAll(tm.cercaGiocatori( searchPlayerField.getText()) );
@@ -289,15 +290,16 @@ public class RosaPanel extends javax.swing.JPanel {
             dialogRemovePlayer.setResizable(false);
             dialogRemovePlayer.setModal(true);
 
-            GiocatoreProva giocatoreSel = squadra.get(indexListElement);
-            System.out.println(giocatoreSel.getNome());
-            playerName1.setText(giocatoreSel.getNome());
-            playerSurname1.setText(giocatoreSel.getCognome());
-            numberPlayer1.setText(String.valueOf(giocatoreSel.getNumMaglia()));
-            playerRole1.setText(giocatoreSel.getRuolo());
-            playerStatus1.setText(giocatoreSel.getStatus());
+            Giocatore giocatoreSel = null;
+            for (Giocatore p : giocatori) {
 
-            dialogRemovePlayer.setVisible(true);
+                if (p.getId() == rosa.get(indexListElement).getGiocatore().getId()) {
+                    giocatoreSel = p;
+                    removeDialogOperation(p);
+                    break;
+                }
+
+            }
         } else {
             JOptionPane.showMessageDialog(
                     null,
@@ -309,6 +311,16 @@ public class RosaPanel extends javax.swing.JPanel {
         }
     }
 
+    private void removeDialogOperation(Giocatore giocatoreSel) {
+        playerName1.setText(giocatoreSel.getNome());
+        playerSurname1.setText(giocatoreSel.getCognome());
+        numberPlayer1.setText(String.valueOf(rosa.get(indexListElement).getNumMaglia()));
+        playerRole1.setText(rosa.get(indexListElement).getRuolo().toString());
+        playerStatus1.setText(rosa.get(indexListElement).getStatus().toString());
+
+        dialogRemovePlayer.setVisible(true);
+    }
+
     private void setUpAddDialog() {
         initialiteSearchList();
         dialogAddPlayer.setLocationRelativeTo(null);
@@ -318,74 +330,7 @@ public class RosaPanel extends javax.swing.JPanel {
         dialogAddPlayer.setVisible(true);
         jComboBox3.setSelectedIndex(0);
         jComboBox4.setSelectedIndex(0);
-    }
-
-    private void setSquadra() {
-        squadra.add(new GiocatoreProva(1, "Luca", "Rossi", "luca.rossi@email.com", LocalDate.of(1995, 3, 12), 10, "Attivo", "Attaccante"));
-        squadra.add(new GiocatoreProva(2, "Marco", "Bianchi", "marco.bianchi@email.com", LocalDate.of(1993, 6, 22), 1, "Attivo", "Portiere"));
-        squadra.add(new GiocatoreProva(3, "Alessandro", "Verdi", "alessandro.verdi@email.com", LocalDate.of(1996, 1, 9), 4, "Attivo", "Difensore"));
-        squadra.add(new GiocatoreProva(4, "Giovanni", "Neri", "giovanni.neri@email.com", LocalDate.of(1998, 4, 18), 8, "Attivo", "Centrocampista"));
-        squadra.add(new GiocatoreProva(5, "Davide", "Ferrari", "davide.ferrari@email.com", LocalDate.of(1994, 12, 5), 5, "Infortunato", "Difensore"));
-        squadra.add(new GiocatoreProva(6, "Matteo", "Esposito", "matteo.esposito@email.com", LocalDate.of(1997, 2, 14), 7, "Attivo", "Centrocampista"));
-        squadra.add(new GiocatoreProva(7, "Simone", "Gallo", "simone.gallo@email.com", LocalDate.of(1999, 7, 3), 11, "Attivo", "Attaccante"));
-        squadra.add(new GiocatoreProva(8, "Andrea", "Fontana", "andrea.fontana@email.com", LocalDate.of(1992, 9, 26), 6, "Attivo", "Difensore"));
-        squadra.add(new GiocatoreProva(9, "Francesco", "Marino", "francesco.marino@email.com", LocalDate.of(1991, 11, 8), 2, "Squalificato", "Difensore"));
-        squadra.add(new GiocatoreProva(10, "Riccardo", "Conti", "riccardo.conti@email.com", LocalDate.of(1995, 5, 19), 3, "Attivo", "Difensore"));
-        squadra.add(new GiocatoreProva(11, "Stefano", "Pellegrini", "stefano.pellegrini@email.com", LocalDate.of(2000, 8, 30), 9, "Attivo", "Attaccante"));
-        squadra.add(new GiocatoreProva(12, "Fabio", "De Luca", "fabio.deluca@email.com", LocalDate.of(1996, 10, 21), 13, "Attivo", "Centrocampista"));
-        squadra.add(new GiocatoreProva(13, "Giorgio", "Rinaldi", "giorgio.rinaldi@email.com", LocalDate.of(1997, 1, 15), 14, "Attivo", "Difensore"));
-        squadra.add(new GiocatoreProva(14, "Emanuele", "Costa", "emanuele.costa@email.com", LocalDate.of(1993, 3, 3), 15, "Infortunato", "Attaccante"));
-        squadra.add(new GiocatoreProva(15, "Federico", "Barbieri", "federico.barbieri@email.com", LocalDate.of(1994, 6, 11), 16, "Attivo", "Portiere"));
-        squadra.add(new GiocatoreProva(16, "Daniele", "Sala", "daniele.sala@email.com", LocalDate.of(1992, 8, 17), 17, "Attivo", "Centrocampista"));
-        squadra.add(new GiocatoreProva(17, "Lorenzo", "Martini", "lorenzo.martini@email.com", LocalDate.of(1990, 12, 25), 18, "Attivo", "Difensore"));
-        squadra.add(new GiocatoreProva(18, "Nicola", "Bianco", "nicola.bianco@email.com", LocalDate.of(1998, 7, 13), 19, "Squalificato", "Attaccante"));
-        squadra.add(new GiocatoreProva(19, "Pietro", "Fabbri", "pietro.fabbri@email.com", LocalDate.of(1996, 5, 20), 20, "Attivo", "Difensore"));
-        squadra.add(new GiocatoreProva(20, "Valerio", "Grassi", "valerio.grassi@email.com", LocalDate.of(1995, 9, 4), 21, "Attivo", "Centrocampista"));
-        squadra.add(new GiocatoreProva(21, "Massimo", "Gentile", "massimo.gentile@email.com", LocalDate.of(1997, 11, 2), 22, "Attivo", "Attaccante"));
-        //squadra.add(new GiocatoreProva(22, "Enrico", "Longo", "enrico.longo@email.com", LocalDate.of(1999, 2, 28), 23, "Attivo", "Difensore"));
-    }
-
-    private void setListaGiocatori() {
-        listaGiocatori.add(new GiocatoreProva(1, "Luca", "Rossi", "luca.rossi@email.com", LocalDate.of(1995, 3, 12), 10, "Attivo", "Attaccante"));
-        listaGiocatori.add(new GiocatoreProva(2, "Marco", "Bianchi", "marco.bianchi@email.com", LocalDate.of(1993, 6, 22), 1, "Attivo", "Portiere"));
-        listaGiocatori.add(new GiocatoreProva(3, "Alessandro", "Verdi", "alessandro.verdi@email.com", LocalDate.of(1996, 1, 9), 4, "Attivo", "Difensore"));
-        listaGiocatori.add(new GiocatoreProva(4, "Giovanni", "Neri", "giovanni.neri@email.com", LocalDate.of(1998, 4, 18), 8, "Attivo", "Centrocampista"));
-        listaGiocatori.add(new GiocatoreProva(5, "Davide", "Ferrari", "davide.ferrari@email.com", LocalDate.of(1994, 12, 5), 5, "Infortunato", "Difensore"));
-        listaGiocatori.add(new GiocatoreProva(6, "Matteo", "Esposito", "matteo.esposito@email.com", LocalDate.of(1997, 2, 14), 7, "Attivo", "Centrocampista"));
-        listaGiocatori.add(new GiocatoreProva(7, "Simone", "Gallo", "simone.gallo@email.com", LocalDate.of(1999, 7, 3), 11, "Attivo", "Attaccante"));
-        listaGiocatori.add(new GiocatoreProva(8, "Andrea", "Fontana", "andrea.fontana@email.com", LocalDate.of(1992, 9, 26), 6, "Attivo", "Difensore"));
-        listaGiocatori.add(new GiocatoreProva(9, "Francesco", "Marino", "francesco.marino@email.com", LocalDate.of(1991, 11, 8), 2, "Squalificato", "Difensore"));
-        listaGiocatori.add(new GiocatoreProva(10, "Riccardo", "Conti", "riccardo.conti@email.com", LocalDate.of(1995, 5, 19), 3, "Attivo", "Difensore"));
-        listaGiocatori.add(new GiocatoreProva(11, "Stefano", "Pellegrini", "stefano.pellegrini@email.com", LocalDate.of(2000, 8, 30), 9, "Attivo", "Attaccante"));
-        listaGiocatori.add(new GiocatoreProva(12, "Fabio", "De Luca", "fabio.deluca@email.com", LocalDate.of(1996, 10, 21), 13, "Attivo", "Centrocampista"));
-        listaGiocatori.add(new GiocatoreProva(13, "Giorgio", "Rinaldi", "giorgio.rinaldi@email.com", LocalDate.of(1997, 1, 15), 14, "Attivo", "Difensore"));
-        listaGiocatori.add(new GiocatoreProva(14, "Emanuele", "Costa", "emanuele.costa@email.com", LocalDate.of(1993, 3, 3), 15, "Infortunato", "Attaccante"));
-        listaGiocatori.add(new GiocatoreProva(15, "Federico", "Barbieri", "federico.barbieri@email.com", LocalDate.of(1994, 6, 11), 16, "Attivo", "Portiere"));
-        listaGiocatori.add(new GiocatoreProva(16, "Daniele", "Sala", "daniele.sala@email.com", LocalDate.of(1992, 8, 17), 17, "Attivo", "Centrocampista"));
-        listaGiocatori.add(new GiocatoreProva(17, "Lorenzo", "Martini", "lorenzo.martini@email.com", LocalDate.of(1990, 12, 25), 18, "Attivo", "Difensore"));
-        listaGiocatori.add(new GiocatoreProva(18, "Nicola", "Bianco", "nicola.bianco@email.com", LocalDate.of(1998, 7, 13), 19, "Squalificato", "Attaccante"));
-        listaGiocatori.add(new GiocatoreProva(19, "Pietro", "Fabbri", "pietro.fabbri@email.com", LocalDate.of(1996, 5, 20), 20, "Attivo", "Difensore"));
-        listaGiocatori.add(new GiocatoreProva(20, "Valerio", "Grassi", "valerio.grassi@email.com", LocalDate.of(1995, 9, 4), 21, "Attivo", "Centrocampista"));
-        listaGiocatori.add(new GiocatoreProva(21, "Massimo", "Gentile", "massimo.gentile@email.com", LocalDate.of(1997, 11, 2), 22, "Attivo", "Attaccante"));
-        listaGiocatori.add(new GiocatoreProva(22, "Enrico", "Longo", "enrico.longo@email.com", LocalDate.of(1999, 2, 28), 23, "Attivo", "Difensore"));
-        listaGiocatori.add(new GiocatoreProva(23, "Tommaso", "Caruso", "tommaso.caruso@email.com", LocalDate.of(1993, 5, 2), 24, "Attivo", "Difensore"));
-        listaGiocatori.add(new GiocatoreProva(24, "Leonardo", "Moretti", "leonardo.moretti@email.com", LocalDate.of(1996, 8, 11), 25, "Attivo", "Attaccante"));
-        listaGiocatori.add(new GiocatoreProva(25, "Gabriele", "Mancini", "gabriele.mancini@email.com", LocalDate.of(1995, 3, 7), 26, "Attivo", "Centrocampista"));
-        listaGiocatori.add(new GiocatoreProva(26, "Samuel", "Silvestri", "samuel.silvestri@email.com", LocalDate.of(1997, 9, 30), 27, "Attivo", "Difensore"));
-        listaGiocatori.add(new GiocatoreProva(27, "Michele", "Testa", "michele.testa@email.com", LocalDate.of(1992, 1, 19), 28, "Infortunato", "Portiere"));
-        listaGiocatori.add(new GiocatoreProva(28, "Alberto", "Basile", "alberto.basile@email.com", LocalDate.of(1994, 12, 8), 29, "Attivo", "Difensore"));
-        listaGiocatori.add(new GiocatoreProva(29, "Carlo", "Santoro", "carlo.santoro@email.com", LocalDate.of(1993, 6, 14), 30, "Attivo", "Centrocampista"));
-        listaGiocatori.add(new GiocatoreProva(30, "Christian", "Palmieri", "christian.palmieri@email.com", LocalDate.of(1998, 4, 16), 31, "Attivo", "Attaccante"));
-        listaGiocatori.add(new GiocatoreProva(31, "Vincenzo", "Parisi", "vincenzo.parisi@email.com", LocalDate.of(1999, 11, 5), 32, "Squalificato", "Difensore"));
-        listaGiocatori.add(new GiocatoreProva(32, "Salvatore", "Monti", "salvatore.monti@email.com", LocalDate.of(1996, 2, 23), 33, "Attivo", "Centrocampista"));
-        listaGiocatori.add(new GiocatoreProva(33, "Diego", "Martino", "diego.martino@email.com", LocalDate.of(1995, 10, 3), 34, "Attivo", "Difensore"));
-        listaGiocatori.add(new GiocatoreProva(34, "Fabian", "De Santis", "fabian.desantis@email.com", LocalDate.of(1991, 5, 28), 35, "Attivo", "Attaccante"));
-        listaGiocatori.add(new GiocatoreProva(35, "Antonio", "Bellini", "antonio.bellini@email.com", LocalDate.of(1994, 7, 12), 36, "Attivo", "Portiere"));
-        listaGiocatori.add(new GiocatoreProva(36, "Giulio", "Ruggieri", "giulio.ruggieri@email.com", LocalDate.of(1997, 12, 1), 37, "Attivo", "Centrocampista"));
-        listaGiocatori.add(new GiocatoreProva(37, "Raffaele", "Ferretti", "raffaele.ferretti@email.com", LocalDate.of(1990, 3, 15), 38, "Attivo", "Difensore"));
-        listaGiocatori.add(new GiocatoreProva(38, "Sebastiano", "Vitale", "sebastiano.vitale@email.com", LocalDate.of(1998, 6, 9), 39, "Infortunato", "Attaccante"));
-        listaGiocatori.add(new GiocatoreProva(39, "Claudio", "Negri", "claudio.negri@email.com", LocalDate.of(1993, 9, 21), 40, "Attivo", "Difensore"));
-
+        jComboBox5.setSelectedIndex(0);
     }
 
     /**
@@ -484,7 +429,7 @@ public class RosaPanel extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setText("ruolo attuale:");
 
-        playerRole.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        playerRole.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         playerRole.setText("jLabel9");
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -682,7 +627,7 @@ public class RosaPanel extends javax.swing.JPanel {
         jLabel15.setText("Seleziona status");
 
         jComboBox3.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleziona ruolo", "Attaccante", "Centrocampista", "Difensore", "Portiere" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleziona ruolo", "ATTACCANTE", "CENTROCAMPISTA", "DIFENSORE", "PORTIERE" }));
         jComboBox3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox3ActionPerformed(evt);
@@ -692,7 +637,7 @@ public class RosaPanel extends javax.swing.JPanel {
         jLabel16.setText("Seleziona ruolo");
 
         jComboBox4.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleziona status", "Disponibile", "Sospeso", "Infortunato" }));
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleziona status", "DISPONIBILE", "INFORTUNATO", "SOSPESO" }));
         jComboBox4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox4ActionPerformed(evt);
@@ -837,7 +782,7 @@ public class RosaPanel extends javax.swing.JPanel {
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel12.setText("ruolo attuale:");
 
-        playerRole1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        playerRole1.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         playerRole1.setText("jLabel9");
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -1108,63 +1053,63 @@ public class RosaPanel extends javax.swing.JPanel {
             flag++;
         }
 
-            try {
+        try {
 
-                if (flag == 3) {
-                    Ruolo ruolo = null;
-                    Status status = null;
-                    int numMaglia;
-                    String message = "";
+            if (flag == 3) {
+                Ruolo ruolo = null;
+                Status status = null;
+                int numMaglia;
+                String message = "";
 
-                    //setto enum ruolo
-                    if ("ATTACCANTE".equals(jComboBox1.getSelectedItem().toString())) {
-                        ruolo = Ruolo.ATTACCANTE;
-                    } else if ("CENTROCAMPISTA".equals(jComboBox1.getSelectedItem().toString())) {
-                        ruolo = Ruolo.CENTROCAMPISTA;
-                    } else if ("DIFENSORE".equals(jComboBox1.getSelectedItem().toString())) {
-                        ruolo = Ruolo.DIFENSORE;
-                    } else if ("PORTIERE".equals(jComboBox1.getSelectedItem().toString())) {
-                        ruolo = Ruolo.PORTIERE;
-                    }
-
-                    //setto enum status
-                    if ("DISPONIBILE".equals(jComboBox2.getSelectedItem().toString())) {
-                        status = Status.DISPONIBILE;
-                    } else if ("INFORTUNATO".equals(jComboBox2.getSelectedItem().toString())) {
-                        status = Status.INFORTUNATO;
-                    } else if ("SOSPESO".equals(jComboBox2.getSelectedItem().toString())) {
-                        status = Status.SOSPESO;
-                    }
-
-                    //setto numMaglia
-                    String numMagliaString = jComboBox6.getSelectedItem().toString().replaceAll("\\s+", "");
-                    numMaglia = parseInt(numMagliaString);
-
-                    System.out.println(rosa.get(indexListElement).getGiocatore());
-                    System.out.println(numMaglia);
-                    parentFrame.getTM().modificaGiocatore(rosa.get(indexListElement).getGiocatore(),
-                            ruolo, status, numMaglia);
-
-                    initializeList();
-                    dialogModifyPlayer.setVisible(false);
-                    
-                } else if (flag < 3) {
-                    JOptionPane.showMessageDialog(
-                            null,
-                            "Seleziona un nuovo ruolo e un nuovo status e un nuovo numero maglia!",
-                            "Errore",
-                            JOptionPane.PLAIN_MESSAGE
-                    );
+                //setto enum ruolo
+                if ("ATTACCANTE".equals(jComboBox1.getSelectedItem().toString())) {
+                    ruolo = Ruolo.ATTACCANTE;
+                } else if ("CENTROCAMPISTA".equals(jComboBox1.getSelectedItem().toString())) {
+                    ruolo = Ruolo.CENTROCAMPISTA;
+                } else if ("DIFENSORE".equals(jComboBox1.getSelectedItem().toString())) {
+                    ruolo = Ruolo.DIFENSORE;
+                } else if ("PORTIERE".equals(jComboBox1.getSelectedItem().toString())) {
+                    ruolo = Ruolo.PORTIERE;
                 }
 
-            } catch (NumeroMagliaDuplicatoException | IllegalArgumentException e) {
+                //setto enum status
+                if ("DISPONIBILE".equals(jComboBox2.getSelectedItem().toString())) {
+                    status = Status.DISPONIBILE;
+                } else if ("INFORTUNATO".equals(jComboBox2.getSelectedItem().toString())) {
+                    status = Status.INFORTUNATO;
+                } else if ("SOSPESO".equals(jComboBox2.getSelectedItem().toString())) {
+                    status = Status.SOSPESO;
+                }
+
+                //setto numMaglia
+                String numMagliaString = jComboBox6.getSelectedItem().toString().replaceAll("\\s+", "");
+                numMaglia = parseInt(numMagliaString);
+
+                System.out.println(rosa.get(indexListElement).getGiocatore());
+                System.out.println(numMaglia);
+                parentFrame.getTM().modificaGiocatore(rosa.get(indexListElement).getGiocatore(),
+                        ruolo, status, numMaglia);
+
+                initializeList();
+                dialogModifyPlayer.setVisible(false);
+
+            } else if (flag < 3) {
                 JOptionPane.showMessageDialog(
                         null,
-                        e.getMessage(),
+                        "Seleziona un nuovo ruolo e un nuovo status e un nuovo numero maglia!",
                         "Errore",
                         JOptionPane.PLAIN_MESSAGE
                 );
             }
+
+        } catch (NumeroMagliaDuplicatoException | IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    e.getMessage(),
+                    "Errore",
+                    JOptionPane.PLAIN_MESSAGE
+            );
+        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -1174,81 +1119,87 @@ public class RosaPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        int flag = 0;
-        int maxSize = 0;
-        int noSet = 1;
-        if (squadra.size() == 22) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    "Rosa piena!",
-                    "Errore",
-                    JOptionPane.PLAIN_MESSAGE
-            );
-            maxSize++;
-        }
+        // TODO add your handling code here
 
-        if (indexJList2 >= 0) {
-            for (GiocatoreProva p : squadra) {
-                if (p.equals(listaFiltrata.get(indexJList2))) {
-                    flag++;
-                }
-            }
-            if (flag == 0 && maxSize != 1) {
-                int checkBox = 0;
+        try {
+            if (indexJList2 >= 0) {
+
+                int flag = 0;
+
                 if (jComboBox3.getSelectedIndex() > 0) {
-                    checkBox++;
+                    flag++;
                 }
 
                 if (jComboBox4.getSelectedIndex() > 0) {
-                    checkBox++;
+                    flag++;
                 }
-                if (checkBox == 2) {
-                    squadra.add(listaFiltrata.get(indexJList2));
-                    noSet = 0;
-                } else {
+
+                if (jComboBox5.getSelectedIndex() > 0) {
+                    flag++;
+                }
+
+                if (flag == 3) {
+                    Ruolo ruolo = null;
+                    Status status = null;
+                    int numMaglia;
+                    String message = "";
+
+                    //setto enum ruolo
+                    if ("ATTACCANTE".equals(jComboBox3.getSelectedItem().toString())) {
+                        ruolo = Ruolo.ATTACCANTE;
+                    } else if ("CENTROCAMPISTA".equals(jComboBox3.getSelectedItem().toString())) {
+                        ruolo = Ruolo.CENTROCAMPISTA;
+                    } else if ("DIFENSORE".equals(jComboBox3.getSelectedItem().toString())) {
+                        ruolo = Ruolo.DIFENSORE;
+                    } else if ("PORTIERE".equals(jComboBox3.getSelectedItem().toString())) {
+                        ruolo = Ruolo.PORTIERE;
+                    }
+
+                    //setto enum status
+                    if ("DISPONIBILE".equals(jComboBox4.getSelectedItem().toString())) {
+                        status = Status.DISPONIBILE;
+                    } else if ("INFORTUNATO".equals(jComboBox4.getSelectedItem().toString())) {
+                        status = Status.INFORTUNATO;
+                    } else if ("SOSPESO".equals(jComboBox4.getSelectedItem().toString())) {
+                        status = Status.SOSPESO;
+                    }
+
+                    //setto numMaglia
+                    String numMagliaString = jComboBox5.getSelectedItem().toString().replaceAll("\\s+", "");
+                    numMaglia = parseInt(numMagliaString);
+
+                    parentFrame.getTM().aggiungiGiocatoreRosa(listaFiltro.get(indexJList2), ruolo, status, numMaglia);
+                    
+                    initializeList();
+                    dialogAddPlayer.setVisible(false);
+
+                } else if (flag < 3) {
                     JOptionPane.showMessageDialog(
                             null,
-                            "Seleziona un ruolo e uno status",
+                            "Seleziona un nuovo ruolo e un nuovo status e un nuovo numero maglia!",
                             "Errore",
                             JOptionPane.PLAIN_MESSAGE
                     );
-                    noSet = 1;
                 }
+
+            } else {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Seleziona un giocatore!",
+                        "Errore",
+                        JOptionPane.PLAIN_MESSAGE
+                );
             }
 
-            /*
-                try{
-                    
-                    tm.addGiocatore( listaFiltrata.get(indexListElement))
-                }catch(Exception e){
-            
-            }
-            
-            
-            
-             */
-        } else if (maxSize != 1) {
+        } catch (RosaCompletaException | NumeroMagliaDuplicatoException | GiocatoreDuplicatoException e) {
             JOptionPane.showMessageDialog(
                     null,
-                    "Seleziona un giocatore!",
+                    e.getMessage(),
                     "Errore",
                     JOptionPane.PLAIN_MESSAGE
             );
         }
 
-        if (flag == 1 && maxSize == 0) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    "Giocatore già presente in rosa!",
-                    "Errore",
-                    JOptionPane.PLAIN_MESSAGE
-            );
-        } else if (flag == 0 && indexJList2 != -1 && noSet == 0) {
-            dialogAddPlayer.setVisible(false);
-            initializeList();
-
-        }
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -1274,7 +1225,7 @@ public class RosaPanel extends javax.swing.JPanel {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        squadra.remove(indexListElement);
+        parentFrame.getTM().rimuoviGiocatoreDaRosa(rosa.get(indexListElement));
         initializeList();
         dialogRemovePlayer.setVisible(false);
     }//GEN-LAST:event_jButton5ActionPerformed
