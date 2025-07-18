@@ -380,4 +380,250 @@
             </disponibile>
         </disponibilita>
     </evento>
+    <evento id="21" tipo="amichevole">
+        <data>2025-08-15</data>
+        <orario>20:45:00</orario>
+        <durata>90</durata>
+        <luogo>Stadio Prestige</luogo>
+        <squadraAvversaria>All Stars FC</squadraAvversaria>
+        <disponibilita>
+            <disponibile idGiocatore="1" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="2101" minutiGiocati="90" goal="0" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="8500" falliCommessi="2" assist="1" parate="0" intercettiRiusciti="3" passaggiChiave="2" tiriTotali="1"/>
+            </disponibile>
+            <disponibile idGiocatore="4" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="2102" minutiGiocati="90" goal="2" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="9200" falliCommessi="1" assist="0" parate="0" intercettiRiusciti="0" passaggiChiave="3" tiriTotali="6"/>
+            </disponibile>
+            <disponibile idGiocatore="7" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="2103" minutiGiocati="90" goal="1" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="10500" falliCommessi="0" assist="2" parate="0" intercettiRiusciti="1" passaggiChiave="5" tiriTotali="4"/>
+            </disponibile>
+            <disponibile idGiocatore="9" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="2104" minutiGiocati="90" goal="0" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="9800" falliCommessi="2" assist="3" parate="0" intercettiRiusciti="2" passaggiChiave="4" tiriTotali="1"/>
+            </disponibile>
+            <disponibile idGiocatore="12" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="2105" minutiGiocati="90" goal="0" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="3800" falliCommessi="0" assist="0" parate="5" intercettiRiusciti="0" passaggiChiave="0" tiriTotali="0"/>
+            </disponibile>
+            <disponibile idGiocatore="29" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="2106" minutiGiocati="90" goal="0" autogoal="0" cartelliniGialli="1" cartelliniRossi="0" distanzaTotalePercorsa="10200" falliCommessi="1" assist="1" parate="0" intercettiRiusciti="3" passaggiChiave="2" tiriTotali="0"/>
+            </disponibile>
+            <disponibile idGiocatore="36" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="2107" minutiGiocati="90" goal="1" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="9500" falliCommessi="0" assist="0" parate="0" intercettiRiusciti="0" passaggiChiave="3" tiriTotali="5"/>
+            </disponibile>
+            <disponibile idGiocatore="43" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="2108" minutiGiocati="90" goal="0" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="8900" falliCommessi="2" assist="0" parate="0" intercettiRiusciti="1" passaggiChiave="2" tiriTotali="4"/>
+            </disponibile>
+            <disponibile idGiocatore="49" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="2109" minutiGiocati="90" goal="1" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="9400" falliCommessi="1" assist="0" parate="0" intercettiRiusciti="0" passaggiChiave="1" tiriTotali="3"/>
+            </disponibile>
+            <disponibile idGiocatore="58" presente="false">
+                <motivazione>Infortunio al menisco</motivazione>
+            </disponibile>
+        </disponibilita>
+    </evento>
+
+    <evento id="22" tipo="allenamento">
+        <data>2025-10-08</data>
+        <orario>10:30:00</orario>
+        <durata>120</durata>
+        <luogo>Centro Sportivo Avanzato</luogo>
+        <tipologia>Preparazione fisica avanzata</tipologia>
+        <note>Test prestazionali con tecnologia GPS</note>
+        <disponibilita>
+            <disponibile idGiocatore="5" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="2201" velocitaMax="31.5" velocitaMedia="18.2" valutazioneForzaFisica="9" valutazioneForzaTiro="9" frequenzaCardiacaMedia="145"/>
+            </disponibile>
+            <disponibile idGiocatore="11" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="2202" velocitaMax="30.0" velocitaMedia="17.5" valutazioneForzaFisica="8" valutazioneForzaTiro="7" frequenzaCardiacaMedia="142"/>
+            </disponibile>
+            <disponibile idGiocatore="15" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="2203" velocitaMax="28.8" velocitaMedia="16.8" valutazioneForzaFisica="8" valutazioneForzaTiro="8" frequenzaCardiacaMedia="140"/>
+            </disponibile>
+            <disponibile idGiocatore="22" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="2204" velocitaMax="27.5" velocitaMedia="15.2" valutazioneForzaFisica="7" valutazioneForzaTiro="6" frequenzaCardiacaMedia="135"/>
+            </disponibile>
+            <disponibile idGiocatore="30" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="2205" velocitaMax="30.2" velocitaMedia="17.8" valutazioneForzaFisica="9" valutazioneForzaTiro="8" frequenzaCardiacaMedia="143"/>
+            </disponibile>
+            <disponibile idGiocatore="32" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="2206" velocitaMax="29.5" velocitaMedia="17.0" valutazioneForzaFisica="8" valutazioneForzaTiro="6" frequenzaCardiacaMedia="141"/>
+            </disponibile>
+            <disponibile idGiocatore="39" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="2207" velocitaMax="31.0" velocitaMedia="18.0" valutazioneForzaFisica="9" valutazioneForzaTiro="8" frequenzaCardiacaMedia="144"/>
+            </disponibile>
+            <disponibile idGiocatore="41" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="2208" velocitaMax="32.1" velocitaMedia="18.5" valutazioneForzaFisica="9" valutazioneForzaTiro="7" frequenzaCardiacaMedia="146"/>
+            </disponibile>
+            <disponibile idGiocatore="53" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="2209" velocitaMax="30.5" velocitaMedia="17.7" valutazioneForzaFisica="8" valutazioneForzaTiro="9" frequenzaCardiacaMedia="142"/>
+            </disponibile>
+            <disponibile idGiocatore="7" presente="false">
+                <motivazione>Riposo programmato</motivazione>
+            </disponibile>
+        </disponibilita>
+    </evento>
+
+    <evento id="23" tipo="amichevole">
+        <data>2026-03-12</data>
+        <orario>20:00:00</orario>
+        <durata>90</durata>
+        <luogo>Stadio Globale</luogo>
+        <squadraAvversaria>United Selection</squadraAvversaria>
+        <disponibilita>
+            <disponibile idGiocatore="4" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="2301" minutiGiocati="90" goal="1" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="9100" falliCommessi="1" assist="0" parate="0" intercettiRiusciti="0" passaggiChiave="2" tiriTotali="4"/>
+            </disponibile>
+            <disponibile idGiocatore="5" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="2302" minutiGiocati="90" goal="0" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="9700" falliCommessi="0" assist="3" parate="0" intercettiRiusciti="1" passaggiChiave="6" tiriTotali="2"/>
+            </disponibile>
+            <disponibile idGiocatore="8" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="2303" minutiGiocati="90" goal="2" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="8800" falliCommessi="1" assist="0" parate="0" intercettiRiusciti="0" passaggiChiave="1" tiriTotali="5"/>
+            </disponibile>
+            <disponibile idGiocatore="12" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="2304" minutiGiocati="90" goal="0" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="3700" falliCommessi="0" assist="0" parate="3" intercettiRiusciti="0" passaggiChiave="0" tiriTotali="0"/>
+            </disponibile>
+            <disponibile idGiocatore="22" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="2305" minutiGiocati="90" goal="0" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="3400" falliCommessi="0" assist="0" parate="2" intercettiRiusciti="0" passaggiChiave="0" tiriTotali="0"/>
+            </disponibile>
+            <disponibile idGiocatore="29" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="2306" minutiGiocati="90" goal="0" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="10100" falliCommessi="1" assist="1" parate="0" intercettiRiusciti="4" passaggiChiave="3" tiriTotali="1"/>
+            </disponibile>
+            <disponibile idGiocatore="36" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="2307" minutiGiocati="90" goal="1" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="9600" falliCommessi="0" assist="0" parate="0" intercettiRiusciti="0" passaggiChiave="4" tiriTotali="6"/>
+            </disponibile>
+            <disponibile idGiocatore="43" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="2308" minutiGiocati="90" goal="0" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="9000" falliCommessi="2" assist="0" parate="0" intercettiRiusciti="2" passaggiChiave="3" tiriTotali="3"/>
+            </disponibile>
+            <disponibile idGiocatore="49" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="2309" minutiGiocati="90" goal="0" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="9300" falliCommessi="1" assist="0" parate="0" intercettiRiusciti="0" passaggiChiave="2" tiriTotali="4"/>
+            </disponibile>
+            <disponibile idGiocatore="58" presente="false">
+                <motivazione>Squalifica</motivazione>
+            </disponibile>
+        </disponibilita>
+    </evento>
+
+    <evento id="24" tipo="allenamento">
+        <data>2026-05-14</data>
+        <orario>11:00:00</orario>
+        <durata>75</durata>
+        <luogo>Campo Principale</luogo>
+        <tipologia>Tattica pre-partita</tipologia>
+        <note>Preparazione specifica per prossimo avversario</note>
+        <disponibilita>
+            <disponibile idGiocatore="1" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="2401" velocitaMax="28.0" velocitaMedia="16.0" valutazioneForzaFisica="7" valutazioneForzaTiro="7" frequenzaCardiacaMedia="135"/>
+            </disponibile>
+            <disponibile idGiocatore="4" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="2402" velocitaMax="30.5" velocitaMedia="17.5" valutazioneForzaFisica="8" valutazioneForzaTiro="9" frequenzaCardiacaMedia="142"/>
+            </disponibile>
+            <disponibile idGiocatore="5" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="2403" velocitaMax="29.8" velocitaMedia="17.2" valutazioneForzaFisica="8" valutazioneForzaTiro="9" frequenzaCardiacaMedia="140"/>
+            </disponibile>
+            <disponibile idGiocatore="7" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="2404" velocitaMax="31.2" velocitaMedia="18.0" valutazioneForzaFisica="9" valutazioneForzaTiro="8" frequenzaCardiacaMedia="144"/>
+            </disponibile>
+            <disponibile idGiocatore="9" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="2405" velocitaMax="29.5" velocitaMedia="17.0" valutazioneForzaFisica="8" valutazioneForzaTiro="8" frequenzaCardiacaMedia="141"/>
+            </disponibile>
+            <disponibile idGiocatore="11" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="2406" velocitaMax="28.8" velocitaMedia="16.5" valutazioneForzaFisica="8" valutazioneForzaTiro="7" frequenzaCardiacaMedia="138"/>
+            </disponibile>
+            <disponibile idGiocatore="12" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="2407" velocitaMax="27.0" velocitaMedia="15.0" valutazioneForzaFisica="7" valutazioneForzaTiro="6" frequenzaCardiacaMedia="132"/>
+            </disponibile>
+            <disponibile idGiocatore="15" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="2408" velocitaMax="28.5" velocitaMedia="16.2" valutazioneForzaFisica="7" valutazioneForzaTiro="8" frequenzaCardiacaMedia="136"/>
+            </disponibile>
+            <disponibile idGiocatore="29" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="2409" velocitaMax="30.0" velocitaMedia="17.5" valutazioneForzaFisica="8" valutazioneForzaTiro="7" frequenzaCardiacaMedia="140"/>
+            </disponibile>
+            <disponibile idGiocatore="30" presente="false">
+                <motivazione>Leggera contrattura</motivazione>
+            </disponibile>
+        </disponibilita>
+    </evento>
+
+    <evento id="25" tipo="amichevole">
+        <data>2026-08-08</data>
+        <orario>18:00:00</orario>
+        <durata>90</durata>
+        <luogo>Stadio Estivo</luogo>
+        <squadraAvversaria>Summer Selection</squadraAvversaria>
+        <disponibilita>
+            <disponibile idGiocatore="1" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="2501" minutiGiocati="90" goal="0" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="8600" falliCommessi="1" assist="0" parate="0" intercettiRiusciti="4" passaggiChiave="1" tiriTotali="0"/>
+            </disponibile>
+            <disponibile idGiocatore="4" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="2502" minutiGiocati="90" goal="1" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="9300" falliCommessi="0" assist="0" parate="0" intercettiRiusciti="0" passaggiChiave="2" tiriTotali="5"/>
+            </disponibile>
+            <disponibile idGiocatore="5" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="2503" minutiGiocati="90" goal="0" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="9800" falliCommessi="0" assist="2" parate="0" intercettiRiusciti="0" passaggiChiave="5" tiriTotali="3"/>
+            </disponibile>
+            <disponibile idGiocatore="7" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="2504" minutiGiocati="90" goal="1" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="10400" falliCommessi="1" assist="1" parate="0" intercettiRiusciti="1" passaggiChiave="4" tiriTotali="4"/>
+            </disponibile>
+            <disponibile idGiocatore="9" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="2505" minutiGiocati="90" goal="0" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="9900" falliCommessi="1" assist="1" parate="0" intercettiRiusciti="2" passaggiChiave="3" tiriTotali="1"/>
+            </disponibile>
+            <disponibile idGiocatore="11" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="2506" minutiGiocati="90" goal="0" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="9100" falliCommessi="2" assist="0" parate="0" intercettiRiusciti="4" passaggiChiave="1" tiriTotali="0"/>
+            </disponibile>
+            <disponibile idGiocatore="12" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="2507" minutiGiocati="90" goal="0" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="3900" falliCommessi="0" assist="0" parate="3" intercettiRiusciti="0" passaggiChiave="0" tiriTotali="0"/>
+            </disponibile>
+            <disponibile idGiocatore="15" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="2508" minutiGiocati="90" goal="0" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="9500" falliCommessi="1" assist="0" parate="0" intercettiRiusciti="3" passaggiChiave="2" tiriTotali="1"/>
+            </disponibile>
+            <disponibile idGiocatore="22" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="2509" minutiGiocati="90" goal="0" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="3500" falliCommessi="0" assist="0" parate="2" intercettiRiusciti="0" passaggiChiave="0" tiriTotali="0"/>
+            </disponibile>
+            <disponibile idGiocatore="29" presente="false">
+                <motivazione>Infortunio al quadricipite</motivazione>
+            </disponibile>
+        </disponibilita>
+    </evento>
 </eventi>
