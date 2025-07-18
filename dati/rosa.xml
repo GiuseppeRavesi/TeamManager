@@ -9,7 +9,7 @@
             <email>mario.rossi@example.com</email>
         </giocatore>
         <ruolo>ATTACCANTE</ruolo>
-        <status>TITOLARE</status>
+        <status>DISPONIBILE</status>
         <numeroMaglia>9</numeroMaglia>
         <dataEntrata>2023-01-10</dataEntrata>
     </giocatoreInRosa>
@@ -22,7 +22,7 @@
             <email>c.ronaldo@example.com</email>
         </giocatore>
         <ruolo>ATTACCANTE</ruolo>
-        <status>TITOLARE</status>
+        <status>DISPONIBILE</status>
         <numeroMaglia>7</numeroMaglia>
         <dataEntrata>2023-01-15</dataEntrata>
     </giocatoreInRosa>
@@ -35,7 +35,7 @@
             <email>l.messi@example.com</email>
         </giocatore>
         <ruolo>ATTACCANTE</ruolo>
-        <status>TITOLARE</status>
+        <status>DISPONIBILE</status>
         <numeroMaglia>10</numeroMaglia>
         <dataEntrata>2023-02-01</dataEntrata>
     </giocatoreInRosa>
@@ -48,7 +48,7 @@
             <email>k.mbappe@example.com</email>
         </giocatore>
         <ruolo>ATTACCANTE</ruolo>
-        <status>PANCHINA</status>
+        <status>DISPONIBILE</status>
         <numeroMaglia>11</numeroMaglia>
         <dataEntrata>2023-02-10</dataEntrata>
     </giocatoreInRosa>
@@ -74,7 +74,7 @@
             <email>k.debruyne@example.com</email>
         </giocatore>
         <ruolo>CENTROCAMPISTA</ruolo>
-        <status>TITOLARE</status>
+        <status>DISPONIBILE</status>
         <numeroMaglia>17</numeroMaglia>
         <dataEntrata>2023-01-05</dataEntrata>
     </giocatoreInRosa>
@@ -87,7 +87,7 @@
             <email>v.vandijk@example.com</email>
         </giocatore>
         <ruolo>DIFENSORE</ruolo>
-        <status>TITOLARE</status>
+        <status>DISPONIBILE</status>
         <numeroMaglia>4</numeroMaglia>
         <dataEntrata>2023-01-12</dataEntrata>
     </giocatoreInRosa>
@@ -100,7 +100,7 @@
             <email>m.neuer@example.com</email>
         </giocatore>
         <ruolo>PORTIERE</ruolo>
-        <status>TITOLARE</status>
+        <status>DISPONIBILE</status>
         <numeroMaglia>1</numeroMaglia>
         <dataEntrata>2023-01-08</dataEntrata>
     </giocatoreInRosa>
@@ -113,7 +113,7 @@
             <email>l.modric@example.com</email>
         </giocatore>
         <ruolo>CENTROCAMPISTA</ruolo>
-        <status>TITOLARE</status>
+        <status>DISPONIBILE</status>
         <numeroMaglia>10</numeroMaglia>
         <dataEntrata>2023-01-18</dataEntrata>
     </giocatoreInRosa>
@@ -126,7 +126,7 @@
             <email>g.buffon@example.com</email>
         </giocatore>
         <ruolo>PORTIERE</ruolo>
-        <status>PANCHINA</status>
+        <status>DISPONIBILE</status>
         <numeroMaglia>12</numeroMaglia>
         <dataEntrata>2023-02-05</dataEntrata>
     </giocatoreInRosa>
