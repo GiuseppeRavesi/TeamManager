@@ -5,16 +5,16 @@
 package view;
 
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
+import model.Giocatore;
+import model.Utente;
 
 /**
  *
  * @author enzov
  */
-
-
-
 public class LoginPanel extends javax.swing.JPanel {
 
     /**
@@ -160,18 +160,52 @@ public class LoginPanel extends javax.swing.JPanel {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
-        
-        //login senza logica
+        Utente myUser = null;
         String email = emailField.getText();
         String password = String.valueOf(passwordField.getPassword());
-        
-        parentFrame.cardLayout.show(parentFrame.getjPanel1(), "COACHPANEL");
-        //parentFrame.cardLayout.show(parentFrame.getjPanel1(), "PLAYERPANEL");
-        parentFrame.enableMenu();
-        
-        
+
+        for (Utente user : parentFrame.getTM().getListaUtenti()) {
+
+            System.out.println(user.getEmail() + user.getPassword());
+
+            if (email.equals(user.getEmail()) && password.equals(user.getPassword())) {
+                myUser = user;
+                break;
+            }
+        }
+
+        if (myUser == null) {
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Utente non esistente!",
+                    "Errore",
+                    JOptionPane.PLAIN_MESSAGE
+            );
+
+        } else {
+
+            parentFrame.getSession().login(myUser);
+
+            if (myUser.getRuolo().equals("GIOCATORE")) {
+
+                int id = parentFrame.getSession().getUtenteLoggato().getId();
+                for (Giocatore g : parentFrame.getTM().getListaGiocatori()) {
+                    if (g.getId() == id) {
+                        parentFrame.getPlayerPanel().getJLabel1Player().setText("Benvenuto "+g.getNome()+" "+g.getCognome()+"!");
+                    }
+                }
+
+                parentFrame.cardLayout.show(parentFrame.getjPanel1(), "PLAYERPANEL");
+
+            } else if (myUser.getRuolo().equals("ALLENATORE")) {
+                parentFrame.cardLayout.show(parentFrame.getjPanel1(), "COACHPANEL");
+            }
+
+        }
+
         //System.out.println(email + " " + password);
-        
+
     }//GEN-LAST:event_loginButtonActionPerformed
 
 

@@ -10,7 +10,7 @@
         </giocatore>
         <ruolo>ATTACCANTE</ruolo>
         <status>DISPONIBILE</status>
-        <numeroMaglia>9</numeroMaglia>
+        <numeroMaglia>19</numeroMaglia>
         <dataEntrata>2023-01-10</dataEntrata>
     </giocatoreInRosa>
     <giocatoreInRosa>
@@ -36,7 +36,7 @@
         </giocatore>
         <ruolo>ATTACCANTE</ruolo>
         <status>DISPONIBILE</status>
-        <numeroMaglia>10</numeroMaglia>
+        <numeroMaglia>90</numeroMaglia>
         <dataEntrata>2023-02-01</dataEntrata>
     </giocatoreInRosa>
     <giocatoreInRosa>

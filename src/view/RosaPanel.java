@@ -4,6 +4,8 @@
  */
 package view;
 
+import exception.NumeroMagliaDuplicatoException;
+import static java.lang.Integer.parseInt;
 import java.awt.Color;
 import java.awt.List;
 import java.awt.event.MouseAdapter;
@@ -14,10 +16,18 @@ import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import model.Giocatore;
+import model.GiocatoreInRosa;
+import model.enums.Ruolo;
+import static model.enums.Ruolo.ATTACCANTE;
+import static model.enums.Ruolo.CENTROCAMPISTA;
+import static model.enums.Ruolo.DIFENSORE;
+import static model.enums.Ruolo.PORTIERE;
+import model.enums.Status;
+import static model.enums.Status.DISPONIBILE;
+import static model.enums.Status.INFORTUNATO;
+import static model.enums.Status.SOSPESO;
 import view.TeamManagerGUI;
-
-
-
 
 /**
  *
@@ -27,9 +37,15 @@ public class RosaPanel extends javax.swing.JPanel {
 
     private TeamManagerGUI parentFrame;
 
+    //variabili di test
     private java.util.List<GiocatoreProva> squadra;
     private java.util.List<GiocatoreProva> listaGiocatori;
     private java.util.List<GiocatoreProva> listaFiltrata;
+
+    //variabili attuali
+    private java.util.List<GiocatoreInRosa> rosa;
+    private java.util.List<Giocatore> giocatori;
+    private java.util.List<Giocatore> listaFiltro;
 
     private DefaultListModel<String> model;
     private DefaultListModel<String> searchModel;
@@ -48,6 +64,15 @@ public class RosaPanel extends javax.swing.JPanel {
         listaGiocatori = new ArrayList<>();
         listaFiltrata = new ArrayList<>();
 
+        //inizializzazione liste utili
+        rosa = new ArrayList<>();
+        rosa = parentFrame.getTM().visualizzaRosa();
+
+        giocatori = new ArrayList<>();
+        giocatori = parentFrame.getTM().getListaGiocatori();
+
+        listaFiltro = new ArrayList<>();
+
         model = new DefaultListModel<String>();
         searchModel = new DefaultListModel<String>();
 
@@ -55,7 +80,7 @@ public class RosaPanel extends javax.swing.JPanel {
         setListaGiocatori();
 
         initializeList();
-        
+
         setMouseListenerJList1();
         setMouseListenerJList2();
     }
@@ -63,18 +88,18 @@ public class RosaPanel extends javax.swing.JPanel {
     private void initializeList() {
         indexListElement = -1;
         model.clear();
-        for (GiocatoreProva p : squadra) {
-            model.addElement(p.toString());
+        for (GiocatoreInRosa p : rosa) {
+            model.addElement(p.toString2());
         }
         jList1.setModel(model);
 
         // Imposta font monospaziato per allineare i campi
         jList1.setFont(new java.awt.Font("Monospaced", java.awt.Font.PLAIN, 13));
 
-        String numGiocatoriRosa = squadra.size() + " / " + 22;
+        String numGiocatoriRosa = rosa.size() + " / " + 22;
         numGiocatoriLabel.setText(numGiocatoriRosa);
 
-        if (squadra.size() < 22) {
+        if (rosa.size() < 22) {
             jLabel1.setText("Rosa Attuale - Incompleta");
             numGiocatoriLabel.setForeground(Color.red);
 
@@ -84,13 +109,13 @@ public class RosaPanel extends javax.swing.JPanel {
         }
 
     }
-    
-    public void logout(){
+
+    public void logout() {
         initializeList();
     }
 
     private void initialiteSearchList() {
-        indexJList2=-1;
+        indexJList2 = -1;
         searchModel.clear();
         listaFiltrata.addAll(listaGiocatori);
         searchPlayerField.setText("");
@@ -124,15 +149,12 @@ public class RosaPanel extends javax.swing.JPanel {
         
 
          */
-        for (GiocatoreProva p : listaGiocatori) {
-            if (p.getNome().contains(searchPlayerField.getText())) {
-                searchModel.addElement(p.toString());
-                listaFiltrata.add(p);
-            }
+        listaFiltro = parentFrame.getTM().cercaGiocatori(searchPlayerField.getText());
+        for (Giocatore p : listaFiltro) {
+            searchModel.addElement(p.toString());
         }
 
         jList2.setModel(searchModel);
-
     }
 
     private void setindexListElement(int value) {
@@ -189,41 +211,17 @@ public class RosaPanel extends javax.swing.JPanel {
             jComboBox2.setSelectedIndex(0);
             jComboBox6.setSelectedIndex(0);
 
-            GiocatoreProva giocatoreSel = squadra.get(indexListElement);
-            System.out.println(giocatoreSel.getNome());
-            playerName.setText(giocatoreSel.getNome());
-            playerSurname.setText(giocatoreSel.getCognome());
-            numberPlayer.setText(String.valueOf(giocatoreSel.getNumMaglia()));
-            playerRole.setText(giocatoreSel.getRuolo());
-            playerStatus.setText(giocatoreSel.getStatus());
-            
-            if(giocatoreSel.getRuolo().equals("Attaccante")){
-                jComboBox1.setSelectedIndex(1);
-            }else if(giocatoreSel.getRuolo().equals("Centrocampista")){
-                jComboBox1.setSelectedIndex(2);
-            }else if(giocatoreSel.getRuolo().equals("Difensore")){
-                jComboBox1.setSelectedIndex(3);
-            }else if(giocatoreSel.getRuolo().equals("Portiere")){
-                jComboBox1.setSelectedIndex(4);
-            }
-            
-            if(giocatoreSel.getStatus().equals("Attivo")){
-                jComboBox2.setSelectedIndex(1);
-            }else if(giocatoreSel.getStatus().equals("Infortunato")){
-                jComboBox2.setSelectedIndex(2);
-            }else if(giocatoreSel.getStatus().equals("Squalificato")){
-                jComboBox2.setSelectedIndex(3);
-            }
-            
-            //fare altri controlli
-            for(int i=1;i<=99;i++){
-                if(giocatoreSel.getNumMaglia() ==i){
-                    jComboBox6.setSelectedIndex(i);
+            Giocatore giocatoreSel = null;
+            for (Giocatore p : giocatori) {
+
+                if (p.getId() == rosa.get(indexListElement).getGiocatore().getId()) {
+                    giocatoreSel = p;
+                    modifyDialogForOperation(p);
                     break;
                 }
+
             }
 
-            dialogModifyPlayer.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(
                     null,
@@ -233,6 +231,57 @@ public class RosaPanel extends javax.swing.JPanel {
             );
 
         }
+    }
+
+    private void modifyDialogForOperation(Giocatore giocatoreSel) {
+        playerName.setText(giocatoreSel.getNome());
+        playerSurname.setText(giocatoreSel.getCognome());
+        numberPlayer.setText(String.valueOf(rosa.get(indexListElement).getNumMaglia()));
+        playerRole.setText(rosa.get(indexListElement).getRuolo().toString());
+        playerStatus.setText(rosa.get(indexListElement).getStatus().toString());
+
+        switch (rosa.get(indexListElement).getRuolo()) {
+
+            case ATTACCANTE:
+                jComboBox1.setSelectedIndex(1);
+                break;
+
+            case CENTROCAMPISTA:
+                jComboBox1.setSelectedIndex(2);
+                break;
+
+            case DIFENSORE:
+                jComboBox1.setSelectedIndex(3);
+                break;
+
+            case PORTIERE:
+                jComboBox1.setSelectedIndex(4);
+                break;
+        }
+
+        switch (rosa.get(indexListElement).getStatus()) {
+            case DISPONIBILE:
+                jComboBox2.setSelectedIndex(1);
+                break;
+
+            case INFORTUNATO:
+                jComboBox2.setSelectedIndex(2);
+                break;
+
+            case SOSPESO:
+                jComboBox2.setSelectedIndex(3);
+                break;
+
+        }
+        //fare altri controlli
+        for (int i = 1; i <= 99; i++) {
+            if (rosa.get(indexListElement).getNumMaglia() == i) {
+                jComboBox6.setSelectedIndex(i);
+                break;
+            }
+        }
+
+        dialogModifyPlayer.setVisible(true);
     }
 
     private void setUpRemoveDialog() {
@@ -414,7 +463,6 @@ public class RosaPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
 
         dialogModifyPlayer.setMinimumSize(new java.awt.Dimension(400, 400));
-        dialogModifyPlayer.setPreferredSize(new java.awt.Dimension(400, 400));
 
         jPanel1.setMinimumSize(new java.awt.Dimension(400, 400));
 
@@ -504,9 +552,9 @@ public class RosaPanel extends javax.swing.JPanel {
 
         labelStatus.setText("nuovo status:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleziona ruolo", "Attaccante", "Centrocampista", "Difensore", "Portiere" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleziona ruolo", "ATTACCANTE", "CENTROCAMPISTA", "DIFENSORE", "PORTIERE" }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleziona status", "Attivo", "Infortunato", "Squalificato" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleziona status", "DISPONIBILE", "INFORTUNATO", "SOSPESO" }));
 
         labelStatus1.setText("Nuovo #maglia:");
 
@@ -586,9 +634,7 @@ public class RosaPanel extends javax.swing.JPanel {
                             .addGroup(dialogModifyPlayerLayout.createSequentialGroup()
                                 .addGap(34, 34, 34)
                                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogModifyPlayerLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         dialogModifyPlayerLayout.setVerticalGroup(
@@ -1046,7 +1092,7 @@ public class RosaPanel extends javax.swing.JPanel {
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
-        
+
         setUpAddDialog();
     }//GEN-LAST:event_addButtonActionPerformed
 
@@ -1055,28 +1101,74 @@ public class RosaPanel extends javax.swing.JPanel {
         int flag = 0;
 
         if (jComboBox1.getSelectedIndex() > 0) {
-            squadra.get(indexListElement).setRuolo(jComboBox1.getItemAt(jComboBox1.getSelectedIndex()));
             flag++;
         }
 
         if (jComboBox2.getSelectedIndex() > 0) {
-            squadra.get(indexListElement).setStatus(jComboBox2.getItemAt(jComboBox2.getSelectedIndex()));
             flag++;
         }
 
-        if (flag == 2) {
-            initializeList();
-            dialogModifyPlayer.setVisible(false);
+        if (jComboBox6.getSelectedIndex() > 0) {
+            flag++;
         }
 
-        if (flag < 2) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    "Seleziona un nuovo ruolo e un nuovo status!",
-                    "Errore",
-                    JOptionPane.PLAIN_MESSAGE
-            );
-        }
+            try {
+
+                if (flag == 3) {
+                    Ruolo ruolo = null;
+                    Status status = null;
+                    int numMaglia;
+                    String message = "";
+
+                    //setto enum ruolo
+                    if ("ATTACCANTE".equals(jComboBox1.getSelectedItem().toString())) {
+                        ruolo = Ruolo.ATTACCANTE;
+                    } else if ("CENTROCAMPISTA".equals(jComboBox1.getSelectedItem().toString())) {
+                        ruolo = Ruolo.CENTROCAMPISTA;
+                    } else if ("DIFENSORE".equals(jComboBox1.getSelectedItem().toString())) {
+                        ruolo = Ruolo.DIFENSORE;
+                    } else if ("PORTIERE".equals(jComboBox1.getSelectedItem().toString())) {
+                        ruolo = Ruolo.PORTIERE;
+                    }
+
+                    //setto enum status
+                    if ("DISPONIBILE".equals(jComboBox2.getSelectedItem().toString())) {
+                        status = Status.DISPONIBILE;
+                    } else if ("INFORTUNATO".equals(jComboBox2.getSelectedItem().toString())) {
+                        status = Status.INFORTUNATO;
+                    } else if ("SOSPESO".equals(jComboBox2.getSelectedItem().toString())) {
+                        status = Status.SOSPESO;
+                    }
+
+                    //setto numMaglia
+                    String numMagliaString = jComboBox6.getSelectedItem().toString().replaceAll("\\s+", "");
+                    numMaglia = parseInt(numMagliaString);
+
+                    System.out.println(numMaglia);
+                    parentFrame.getTM().modificaGiocatore(rosa.get(indexListElement).getGiocatore(),
+                            ruolo, status, 99);
+
+                    initializeList();
+                    dialogModifyPlayer.setVisible(false);
+                    
+                } else if (flag < 3) {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Seleziona un nuovo ruolo e un nuovo status e un nuovo numero maglia!",
+                            "Errore",
+                            JOptionPane.PLAIN_MESSAGE
+                    );
+                }
+
+            } catch (NumeroMagliaDuplicatoException e) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        e.getMessage(),
+                        "Errore",
+                        JOptionPane.PLAIN_MESSAGE
+                );
+            }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -1088,7 +1180,7 @@ public class RosaPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int flag = 0;
         int maxSize = 0;
-        int noSet=1;
+        int noSet = 1;
         if (squadra.size() == 22) {
             JOptionPane.showMessageDialog(
                     null,
@@ -1116,7 +1208,7 @@ public class RosaPanel extends javax.swing.JPanel {
                 }
                 if (checkBox == 2) {
                     squadra.add(listaFiltrata.get(indexJList2));
-                    noSet=0;
+                    noSet = 0;
                 } else {
                     JOptionPane.showMessageDialog(
                             null,
@@ -1124,7 +1216,7 @@ public class RosaPanel extends javax.swing.JPanel {
                             "Errore",
                             JOptionPane.PLAIN_MESSAGE
                     );
-                    noSet=1;
+                    noSet = 1;
                 }
             }
 
@@ -1155,10 +1247,10 @@ public class RosaPanel extends javax.swing.JPanel {
                     "Errore",
                     JOptionPane.PLAIN_MESSAGE
             );
-        } else if (flag == 0 && indexJList2 != -1 && noSet==0) {
+        } else if (flag == 0 && indexJList2 != -1 && noSet == 0) {
             dialogAddPlayer.setVisible(false);
             initializeList();
-            
+
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -1270,4 +1362,5 @@ public class RosaPanel extends javax.swing.JPanel {
     private javax.swing.JLabel playerSurname1;
     private javax.swing.JTextField searchPlayerField;
     // End of variables declaration//GEN-END:variables
+
 }

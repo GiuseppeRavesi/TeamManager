@@ -4,6 +4,10 @@
  */
 package view;
 
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import model.Giocatore;
+
 /**
  *
  * @author enzov
@@ -20,7 +24,16 @@ public class PlayerPanel extends javax.swing.JPanel {
     public PlayerPanel(TeamManagerGUI parentFrame) {
         this.parentFrame=parentFrame;
         initComponents();
+        
+      
     }
+    
+    
+    public JLabel getJLabel1Player(){
+        return jLabel1;
+    }
+    
+ 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -88,14 +101,13 @@ public class PlayerPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(307, 307, 307)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(154, 154, 154)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(154, 154, 154)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(149, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(305, 305, 305))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

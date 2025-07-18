@@ -5,6 +5,7 @@
 package view;
 
 import controller.PersistenceHandler;
+import controller.Session;
 import controller.TeamManager;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -41,6 +42,10 @@ public class TeamManagerGUI extends javax.swing.JFrame {
     PlayerPanel playerPanel;
     PlayerRosaPanel playerRosaPanel;
     PlayerCalendarPanel playerCalendarPanel;
+    
+    //classe facade controllore
+    TeamManager tm;
+    Session session;
 
     public TeamManagerGUI() {
         super("TeamManager v1.0");
@@ -48,9 +53,15 @@ public class TeamManagerGUI extends javax.swing.JFrame {
         initComponents();
         setResizable(false);
         setLocationRelativeTo(null);
-        setCardsUIBuilder();
         options.setEnabled(false);
         setUpWindowCloseListener();
+        
+        initializePersistence();
+        
+        tm = TeamManager.getInstance();
+        session= Session.getInstance();
+        
+        setCardsUIBuilder();
     }
 
     public JPanel getjPanel1() {
@@ -159,6 +170,24 @@ public class TeamManagerGUI extends javax.swing.JFrame {
         });
 
     }
+    
+    private void initializePersistence(){
+          PersistenceHandler handler = new PersistenceHandler();
+        handler.loadAll();
+        TeamManager.getInstance().inizializzaDatiDaPersistence(handler);
+    }
+    
+    public TeamManager getTM(){
+        return tm;
+    }
+    
+    public Session getSession(){
+        return session;
+    }
+    
+    public PlayerPanel getPlayerPanel(){
+        return playerPanel;
+    }
 
     public void enableMenu() {
         options.setEnabled(true);
@@ -243,9 +272,7 @@ public class TeamManagerGUI extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        PersistenceHandler handler = new PersistenceHandler();
-        handler.loadAll();
-        TeamManager.getInstance().inizializzaDatiDaPersistence(handler);
+       
         
         new TeamManagerGUI().setVisible(true);
     }

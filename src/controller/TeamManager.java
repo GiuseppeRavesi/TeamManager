@@ -202,11 +202,11 @@ public class TeamManager {
         return c.confrontaGiocatori(g1, g2);
     }
 
-    public Rosa getR() {
+    protected Rosa getR() {
         return r;
     }
 
-    public Calendario getC() {
+    protected Calendario getC() {
         return c;
     }
 

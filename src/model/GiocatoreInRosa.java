@@ -80,4 +80,9 @@ public class GiocatoreInRosa {
         return giocatore.getNome() + " " + giocatore.getCognome()
                + " | " + ruolo.name() + " | " + status.name();
     }
+    
+    //metodo to string di enzov
+    public String toString2() {
+        return String.format("%-12s %-12s %-4s %-20s %-10s", giocatore.getNome(), giocatore.getCognome(), "#" + numMaglia, ruolo, status);
+    }
 }

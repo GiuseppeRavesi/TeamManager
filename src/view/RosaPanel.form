@@ -26,10 +26,7 @@
                                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                                   <Component id="jButton6" min="-2" pref="61" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButton1" min="-2" pref="95" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jButton1" alignment="1" min="-2" pref="95" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -287,10 +284,10 @@
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="5">
                     <StringItem index="0" value="Seleziona ruolo"/>
-                    <StringItem index="1" value="Attaccante"/>
-                    <StringItem index="2" value="Centrocampista"/>
-                    <StringItem index="3" value="Difensore"/>
-                    <StringItem index="4" value="Portiere"/>
+                    <StringItem index="1" value="ATTACCANTE"/>
+                    <StringItem index="2" value="CENTROCAMPISTA"/>
+                    <StringItem index="3" value="DIFENSORE"/>
+                    <StringItem index="4" value="PORTIERE"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -303,9 +300,9 @@
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="4">
                     <StringItem index="0" value="Seleziona status"/>
-                    <StringItem index="1" value="Attivo"/>
-                    <StringItem index="2" value="Infortunato"/>
-                    <StringItem index="3" value="Squalificato"/>
+                    <StringItem index="1" value="DISPONIBILE"/>
+                    <StringItem index="2" value="INFORTUNATO"/>
+                    <StringItem index="3" value="SOSPESO"/>
                   </StringArray>
                 </Property>
               </Properties>
