@@ -168,4 +168,216 @@
             </disponibile>
         </disponibilita>
     </evento>
+    
+    <evento id="11" tipo="allenamento">
+        <data>2023-07-19</data>
+        <orario>10:00:00</orario>
+        <durata>90</durata>
+        <luogo>Campo Principale</luogo>
+        <tipologia>Tattica</tipologia>
+        <note>Preparazione modulo 4-4-2</note>
+        <disponibilita>
+            <disponibile idGiocatore="4" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="1101" velocitaMax="29.2" velocitaMedia="16.8" valutazioneForzaFisica="8" valutazioneForzaTiro="9" frequenzaCardiacaMedia="142"/>
+            </disponibile>
+            <disponibile idGiocatore="5" presente="false">
+                <motivazione>Infortunio al polpaccio</motivazione>
+            </disponibile>
+            <disponibile idGiocatore="9" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="1102" velocitaMax="28.7" velocitaMedia="16.2" valutazioneForzaFisica="8" valutazioneForzaTiro="8" frequenzaCardiacaMedia="140"/>
+            </disponibile>
+        </disponibilita>
+    </evento>
+
+    <evento id="12" tipo="amichevole">
+        <data>2023-07-22</data>
+        <orario>18:30:00</orario>
+        <durata>90</durata>
+        <luogo>Stadio Comunale</luogo>
+        <squadraAvversaria>FC Provinciali</squadraAvversaria>
+        <disponibilita>
+            <disponibile idGiocatore="7" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="1201" minutiGiocati="90" goal="1" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="10200" falliCommessi="1" assist="2" parate="0" intercettiRiusciti="1" passaggiChiave="4" tiriTotali="5"/>
+            </disponibile>
+            <disponibile idGiocatore="11" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="1202" minutiGiocati="90" goal="0" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="8900" falliCommessi="2" assist="0" parate="0" intercettiRiusciti="3" passaggiChiave="1" tiriTotali="0"/>
+            </disponibile>
+            <disponibile idGiocatore="12" presente="false">
+                <motivazione>Precauzione per infortunio</motivazione>
+            </disponibile>
+        </disponibilita>
+    </evento>
+
+    <evento id="13" tipo="allenamento">
+        <data>2023-07-25</data>
+        <orario>09:30:00</orario>
+        <durata>120</durata>
+        <luogo>Campo Secondario</luogo>
+        <tipologia>Preparazione atletica</tipologia>
+        <note>Lavoro sulla resistenza</note>
+        <disponibilita>
+            <disponibile idGiocatore="29" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="1301" velocitaMax="30.5" velocitaMedia="17.5" valutazioneForzaFisica="9" valutazioneForzaTiro="7" frequenzaCardiacaMedia="145"/>
+            </disponibile>
+            <disponibile idGiocatore="30" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="1302" velocitaMax="29.8" velocitaMedia="17.0" valutazioneForzaFisica="8" valutazioneForzaTiro="8" frequenzaCardiacaMedia="143"/>
+            </disponibile>
+            <disponibile idGiocatore="39" presente="false">
+                <motivazione>Squadra giovanile</motivazione>
+            </disponibile>
+        </disponibilita>
+    </evento>
+
+    <evento id="14" tipo="amichevole">
+        <data>2023-07-29</data>
+        <orario>20:45:00</orario>
+        <durata>90</durata>
+        <luogo>Stadio Olimpico</luogo>
+        <squadraAvversaria>SC Rivali</squadraAvversaria>
+        <disponibilita>
+            <disponibile idGiocatore="36" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="1401" minutiGiocati="90" goal="2" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="9500" falliCommessi="0" assist="1" parate="0" intercettiRiusciti="0" passaggiChiave="3" tiriTotali="6"/>
+            </disponibile>
+            <disponibile idGiocatore="43" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="1402" minutiGiocati="90" goal="0" autogoal="0" cartelliniGialli="1" cartelliniRossi="0" distanzaTotalePercorsa="8800" falliCommessi="2" assist="0" parate="0" intercettiRiusciti="1" passaggiChiave="2" tiriTotali="3"/>
+            </disponibile>
+            <disponibile idGiocatore="46" presente="false">
+                <motivazione>Infortunio alla spalla</motivazione>
+            </disponibile>
+        </disponibilita>
+    </evento>
+
+    <evento id="15" tipo="allenamento">
+        <data>2023-08-02</data>
+        <orario>11:00:00</orario>
+        <durata>90</durata>
+        <luogo>Campo Principale</luogo>
+        <tipologia>Tecnica palla</tipologia>
+        <note>Esercizi di controllo e passaggio</note>
+        <disponibilita>
+            <disponibile idGiocatore="15" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="1501" velocitaMax="28.2" velocitaMedia="16.0" valutazioneForzaFisica="7" valutazioneForzaTiro="9" frequenzaCardiacaMedia="138"/>
+            </disponibile>
+            <disponibile idGiocatore="53" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="1502" velocitaMax="29.5" velocitaMedia="16.8" valutazioneForzaFisica="8" valutazioneForzaTiro="8" frequenzaCardiacaMedia="140"/>
+            </disponibile>
+        </disponibilita>
+    </evento>
+
+    <evento id="16" tipo="amichevole">
+        <data>2023-08-05</data>
+        <orario>17:00:00</orario>
+        <durata>90</durata>
+        <luogo>Stadio Amichevole</luogo>
+        <squadraAvversaria>AS Locali</squadraAvversaria>
+        <disponibilita>
+            <disponibile idGiocatore="1" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="1601" minutiGiocati="90" goal="0" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="8200" falliCommessi="1" assist="0" parate="0" intercettiRiusciti="2" passaggiChiave="1" tiriTotali="1"/>
+            </disponibile>
+            <disponibile idGiocatore="22" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="1602" minutiGiocati="90" goal="0" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="3200" falliCommessi="0" assist="0" parate="2" intercettiRiusciti="0" passaggiChiave="0" tiriTotali="0"/>
+            </disponibile>
+            <disponibile idGiocatore="49" presente="false">
+                <motivazione>Leggera indisposizione</motivazione>
+            </disponibile>
+        </disponibilita>
+    </evento>
+
+    <evento id="17" tipo="allenamento">
+        <data>2023-08-09</data>
+        <orario>10:30:00</orario>
+        <durata>105</durata>
+        <luogo>Campo Secondario</luogo>
+        <tipologia>Finalizzazione</tipologia>
+        <note>Allenamento specifico per attaccanti</note>
+        <disponibilita>
+            <disponibile idGiocatore="4" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="1701" velocitaMax="30.2" velocitaMedia="17.5" valutazioneForzaFisica="8" valutazioneForzaTiro="9" frequenzaCardiacaMedia="142"/>
+            </disponibile>
+            <disponibile idGiocatore="8" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="1702" velocitaMax="29.8" velocitaMedia="17.0" valutazioneForzaFisica="8" valutazioneForzaTiro="9" frequenzaCardiacaMedia="140"/>
+            </disponibile>
+            <disponibile idGiocatore="36" presente="false">
+                <motivazione>Riposo programmato</motivazione>
+            </disponibile>
+        </disponibilita>
+    </evento>
+
+    <evento id="18" tipo="amichevole">
+        <data>2023-08-12</data>
+        <orario>19:30:00</orario>
+        <durata>90</durata>
+        <luogo>Stadio Regionale</luogo>
+        <squadraAvversaria>FC Ospiti</squadraAvversaria>
+        <disponibilita>
+            <disponibile idGiocatore="5" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="1801" minutiGiocati="90" goal="1" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="9200" falliCommessi="0" assist="2" parate="0" intercettiRiusciti="0" passaggiChiave="5" tiriTotali="4"/>
+            </disponibile>
+            <disponibile idGiocatore="9" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="1802" minutiGiocati="90" goal="0" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="9800" falliCommessi="1" assist="1" parate="0" intercettiRiusciti="2" passaggiChiave="3" tiriTotali="2"/>
+            </disponibile>
+            <disponibile idGiocatore="58" presente="false">
+                <motivazione>Squalifica</motivazione>
+            </disponibile>
+        </disponibilita>
+    </evento>
+
+    <evento id="19" tipo="allenamento">
+        <data>2023-08-16</data>
+        <orario>09:00:00</orario>
+        <durata>120</durata>
+        <luogo>Campo Principale</luogo>
+        <tipologia>Tattica difensiva</tipologia>
+        <note>Marcatura a uomo e a zona</note>
+        <disponibilita>
+            <disponibile idGiocatore="11" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="1901" velocitaMax="28.5" velocitaMedia="16.2" valutazioneForzaFisica="8" valutazioneForzaTiro="7" frequenzaCardiacaMedia="136"/>
+            </disponibile>
+            <disponibile idGiocatore="32" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="1902" velocitaMax="29.0" velocitaMedia="16.5" valutazioneForzaFisica="8" valutazioneForzaTiro="6" frequenzaCardiacaMedia="138"/>
+            </disponibile>
+            <disponibile idGiocatore="41" presente="false">
+                <motivazione>Infortunio al ginocchio</motivazione>
+            </disponibile>
+        </disponibilita>
+    </evento>
+    
+    <evento id="20" tipo="amichevole">
+        <data>2023-08-19</data>
+        <orario>20:45:00</orario>
+        <durata>90</durata>
+        <luogo>Stadio Nazionale</luogo>
+        <squadraAvversaria>AC Finale</squadraAvversaria>
+        <disponibilita>
+            <disponibile idGiocatore="12" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="2001" minutiGiocati="90" goal="0" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="3600" falliCommessi="0" assist="0" parate="4" intercettiRiusciti="0" passaggiChiave="0" tiriTotali="0"/>
+            </disponibile>
+            <disponibile idGiocatore="30" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="2002" minutiGiocati="90" goal="0" autogoal="0" cartelliniGialli="0" cartelliniRossi="0" distanzaTotalePercorsa="10200" falliCommessi="1" assist="0" parate="0" intercettiRiusciti="3" passaggiChiave="2" tiriTotali="1"/>
+            </disponibile>
+            <disponibile idGiocatore="43" presente="false">
+                <motivazione>Leggera contrattura</motivazione>
+            </disponibile>
+        </disponibilita>
+    </evento>
 </eventi>
