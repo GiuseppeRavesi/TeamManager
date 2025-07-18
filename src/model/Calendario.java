@@ -92,6 +92,7 @@ public class Calendario {
     
     public void aggiungiDisponibilità(Evento eventoSelezionato, boolean presenza, String motivazione) {
         int idGiocatore = Session.getInstance().getUtenteLoggato().getId();
+        System.out.println("Aggiungi disp id user: "+idGiocatore);
 
         String motivazioneFinale = presenza ? null : motivazione;
 

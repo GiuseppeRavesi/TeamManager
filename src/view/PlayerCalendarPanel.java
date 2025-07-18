@@ -11,22 +11,23 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import model.Allenamento;
+import model.Amichevole;
+import model.Disponibilità;
+import model.Evento;
+import model.Utente;
 
 /**
  *
  * @author enzov
  */
-
-
-
-
 public class PlayerCalendarPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form PlayerCalendarPanel
      */
     private TeamManagerGUI parentFrame;
-    private java.util.List<EventoProva1> listaEventi;
+    private java.util.List<Evento> eventi;
 
     private DefaultTableModel tableModel;
     private DefaultTableCellRenderer rightRenderer;
@@ -40,26 +41,11 @@ public class PlayerCalendarPanel extends javax.swing.JPanel {
         tableModel = (DefaultTableModel) jTable1.getModel();
         rightRenderer = new DefaultTableCellRenderer();
 
-        listaEventi = new ArrayList<>();
-        setUpEventiProva();
+        eventi = parentFrame.getTM().visualizzaCalendario();
 
         initialiteCalendar();
         tableClickListener();
 
-    }
-
-    private void setUpEventiProva() {
-        listaEventi.add(new AllenamentoProva1(1, LocalDate.of(2025, 7, 1), LocalTime.of(17, 0), 90, "Campo A", false, "Tecnico", "Passaggi e movimenti"));
-        listaEventi.add(new AmichevoleProva1(2, LocalDate.of(2025, 7, 2), LocalTime.of(18, 30), 120, "Stadio B", false, "Squadra Blu"));
-        listaEventi.add(new AllenamentoProva1(3, LocalDate.of(2025, 7, 3), LocalTime.of(16, 0), 60, "Campo A", false, "Tattico", "Prove di schema"));
-        listaEventi.add(new AmichevoleProva1(4, LocalDate.of(2025, 7, 4), LocalTime.of(20, 0), 110, "Stadio C", false, "Squadra Rossa"));
-        listaEventi.add(new AllenamentoProva1(5, LocalDate.of(2025, 7, 5), LocalTime.of(15, 30), 75, "Campo B", false, "Fisico", "Circuito resistenza"));
-
-        listaEventi.add(new AmichevoleProva1(6, LocalDate.of(2025, 7, 6), LocalTime.of(17, 45), 90, "Stadio D", false, "Squadra Verde"));
-        listaEventi.add(new AllenamentoProva1(7, LocalDate.of(2025, 7, 7), LocalTime.of(16, 15), 90, "Campo C", false, "Misto", "Tattico + Fisico"));
-        listaEventi.add(new AmichevoleProva1(8, LocalDate.of(2025, 7, 8), LocalTime.of(19, 0), 100, "Stadio E", false, "Squadra Gialla"));
-        listaEventi.add(new AllenamentoProva1(9, LocalDate.of(2025, 7, 9), LocalTime.of(18, 0), 80, "Campo D", false, "Tecnico", "Controllo e tiro"));
-        listaEventi.add(new AllenamentoProva1(10, LocalDate.of(2025, 7, 10), LocalTime.of(17, 30), 60, "Campo A", false, "Fisico", "Corsa e scatti"));
     }
 
     private void putAtRightElement() {
@@ -80,12 +66,20 @@ public class PlayerCalendarPanel extends javax.swing.JPanel {
         showDetailsBtn.setVisible(false);
         disponibilitaButton.setVisible(false);
 
-        for (EventoProva1 e : listaEventi) {
+        for (Evento e : eventi) {
             String conferma = "";
-            if (e.isDisponibilita() == false) {
-                conferma = "Non fornita";
-            } else {
+            int countEvent = 0;
+
+            for (Disponibilità d : e.getDisponibilità()) {
+                if (d.getIdGiocatore() == parentFrame.getSession().getUtenteLoggato().getId()) {
+                    countEvent++;
+                }
+            }
+
+            if (countEvent > 0) {
                 conferma = "Fornita";
+            } else {
+                conferma = "Non fornita";
             }
 
             Object[] row = {e.getId(), e.getData(), e.getOrario(), e.getDurata(), e.getLuogo(), conferma};
@@ -115,29 +109,38 @@ public class PlayerCalendarPanel extends javax.swing.JPanel {
         detailsDialog.setModal(true);
 
         if (indexRow >= 0) {
-            dateText.setText(listaEventi.get(indexRow).getData().toString());
-            timeText.setText(listaEventi.get(indexRow).getOrario().toString());
-            durationText.setText(String.valueOf(listaEventi.get(indexRow).getDurata()) + " " + "min");
-            placeText.setText(listaEventi.get(indexRow).getLuogo());
-            String conferma;
-            if (listaEventi.get(indexRow).isDisponibilita() == false) {
-                conferma = "Non fornita";
-            } else {
-                conferma = "Fornita";
+            dateText.setText(eventi.get(indexRow).getData().toString());
+            timeText.setText(eventi.get(indexRow).getOrario().toString());
+            durationText.setText(String.valueOf(eventi.get(indexRow).getDurata()) + " " + "min");
+            placeText.setText(eventi.get(indexRow).getLuogo());
+            String conferma = "";
+            int countEvent = 0;
+
+            for (Disponibilità d : eventi.get(indexRow).getDisponibilità()) {
+                if (d.getIdGiocatore() == parentFrame.getSession().getUtenteLoggato().getId()) {
+                    countEvent++;
+                }
             }
+
+            if (countEvent > 0) {
+                conferma = "Fornita";
+            } else {
+                conferma = "Non fornita";
+            }
+
             dispText.setText(conferma);
 
-            if (listaEventi.get(indexRow) instanceof AllenamentoProva1) {
+            if (eventi.get(indexRow) instanceof Allenamento) {
                 jLabel3.setText("Allenamento");
                 typeOrTeamLabel.setText("tipologia:");
-                AllenamentoProva1 ap = (AllenamentoProva1) listaEventi.get(indexRow);
+                Allenamento ap = (Allenamento) eventi.get(indexRow);
                 noteText.setText(ap.getNote());
                 hybridText.setText(ap.getTipologia());
                 noteText.setVisible(true);
                 noteLabel.setVisible(true);
-            } else if (listaEventi.get(indexRow) instanceof AmichevoleProva1) {
+            } else if (eventi.get(indexRow) instanceof Amichevole) {
                 jLabel3.setText("Amichevole");
-                AmichevoleProva1 ap = (AmichevoleProva1) listaEventi.get(indexRow);
+                Amichevole ap = (Amichevole) eventi.get(indexRow);
                 typeOrTeamLabel.setText("Avversari:");
                 hybridText.setText(ap.getSquadraAvversaria());
                 noteText.setVisible(false);
@@ -150,10 +153,10 @@ public class PlayerCalendarPanel extends javax.swing.JPanel {
 
     private void setUpPresenzaDialog() {
 
-        if (listaEventi.get(indexRow) instanceof AllenamentoProva1) {
-            jLabel4.setText("Fornisci adesione allenamento" + " " + listaEventi.get(indexRow).getId());
-        } else if (listaEventi.get(indexRow) instanceof AmichevoleProva1) {
-            jLabel4.setText("Fornisci adesione amichevole" + " " + listaEventi.get(indexRow).getId());
+        if (eventi.get(indexRow) instanceof Allenamento) {
+            jLabel4.setText("Fornisci adesione allenamento" + " " + eventi.get(indexRow).getId());
+        } else if (eventi.get(indexRow) instanceof Amichevole) {
+            jLabel4.setText("Fornisci adesione amichevole" + " " + eventi.get(indexRow).getId());
         }
 
         adesioneDialog.setTitle("Fornisci presenza");
@@ -214,7 +217,6 @@ public class PlayerCalendarPanel extends javax.swing.JPanel {
         showDetailsBtn = new javax.swing.JButton();
 
         detailsDialog.setMinimumSize(new java.awt.Dimension(400, 400));
-        detailsDialog.setPreferredSize(new java.awt.Dimension(400, 400));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Dettagli");
@@ -380,7 +382,6 @@ public class PlayerCalendarPanel extends javax.swing.JPanel {
         );
 
         adesioneDialog.setMinimumSize(new java.awt.Dimension(400, 400));
-        adesioneDialog.setPreferredSize(new java.awt.Dimension(400, 400));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
         jLabel4.setText("Fornisci Presenza");
@@ -431,6 +432,11 @@ public class PlayerCalendarPanel extends javax.swing.JPanel {
         jButton2.setBackground(new java.awt.Color(248, 245, 245));
         jButton2.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jButton2.setText("Back");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -606,22 +612,31 @@ public class PlayerCalendarPanel extends javax.swing.JPanel {
 
     private void disponibilitaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disponibilitaButtonActionPerformed
         // TODO add your handling code here:
-        if (listaEventi.get(indexRow).isDisponibilita()) {
-             JOptionPane.showMessageDialog(
-                    null,
-                    "Disponibilità già fornita!",
-                    "Errore",
-                    JOptionPane.PLAIN_MESSAGE
-            );
-        } else {
-            adesioneDialog.setVisible(true);
-        }
+        
+          int countEvent = 0;
+
+            for (Disponibilità d : eventi.get(indexRow).getDisponibilità()) {
+                if (d.getIdGiocatore() == parentFrame.getSession().getUtenteLoggato().getId()) {
+                    countEvent++;
+                }
+            }
+
+            if (countEvent > 0) {
+                     JOptionPane.showMessageDialog(
+                        null,
+                        "Disponibilità già fornita!",
+                        "Errore",
+                        JOptionPane.PLAIN_MESSAGE
+                );
+            } else {
+                adesioneDialog.setVisible(true);
+            }
     }//GEN-LAST:event_disponibilitaButtonActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         //initialiteCalendar();
-        //parentFrame.cardLayout.show(parentFrame.getjPanel1(), "COACHPANEL");
+        parentFrame.cardLayout.show(parentFrame.getjPanel1(), "PLAYERPANEL");
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void showDetailsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showDetailsBtnActionPerformed
@@ -648,10 +663,32 @@ public class PlayerCalendarPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        listaEventi.get(indexRow).setDisponibilita(true);
-        adesioneDialog.setVisible(false);
-        initialiteCalendar();
+        if (presente.isSelected()) {
+            System.out.println("sono presente");
+            parentFrame.getTM().comunicaDisponibilita(eventi.get(indexRow), true, "");
+            adesioneDialog.setVisible(false);
+            initialiteCalendar();
+        } else if (assente.isSelected()) {
+            if (jTextArea1.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Fornisci una motivazione!",
+                        "Errore",
+                        JOptionPane.PLAIN_MESSAGE
+                );
+            } else {
+                parentFrame.getTM().comunicaDisponibilita(eventi.get(indexRow), false, jTextArea1.getText());
+                adesioneDialog.setVisible(false);
+                initialiteCalendar();
+            }
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        adesioneDialog.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

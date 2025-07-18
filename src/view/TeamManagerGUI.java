@@ -24,8 +24,6 @@ import javax.swing.JPanel;
  *
  * @author enzov
  */
-
-
 public class TeamManagerGUI extends javax.swing.JFrame {
 
     /**
@@ -42,7 +40,7 @@ public class TeamManagerGUI extends javax.swing.JFrame {
     PlayerPanel playerPanel;
     PlayerRosaPanel playerRosaPanel;
     PlayerCalendarPanel playerCalendarPanel;
-    
+
     //classe facade controllore
     TeamManager tm;
     Session session;
@@ -55,13 +53,21 @@ public class TeamManagerGUI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         options.setEnabled(false);
         setUpWindowCloseListener();
-        
+
         initializePersistence();
-        
+
         tm = TeamManager.getInstance();
-        session= Session.getInstance();
-        
-        setCardsUIBuilder();
+        session = Session.getInstance();
+
+        cardLayout = new CardLayout();
+        jPanel1.setLayout(cardLayout);
+
+        login = new LoginPanel(this);
+        jPanel1.add(login, "LOGIN");
+
+        cardLayout.show(jPanel1, "LOGIN");
+        add(jPanel1);
+
     }
 
     public JPanel getjPanel1() {
@@ -144,6 +150,44 @@ public class TeamManagerGUI extends javax.swing.JFrame {
 
     }
 
+    public void setCardsUIBuilder2() {
+
+        coachPanel = new CoachPanel(this);
+        jPanel1.add(coachPanel, "COACHPANEL");
+
+        rosaPanel = new RosaPanel(this);
+        jPanel1.add(rosaPanel, "ROSAPANEL");
+
+        createPanel = new CreatePlayerPanel(this);
+        jPanel1.add(createPanel, "CREATEPANEL");
+
+        calendarPanel = new CalendarPanel(this);
+        jPanel1.add(calendarPanel, "CALENDARPANEL");
+
+        playerPanel = new PlayerPanel(this);
+        jPanel1.add(playerPanel, "PLAYERPANEL");
+
+        playerRosaPanel = new PlayerRosaPanel(this);
+        jPanel1.add(playerRosaPanel, "PLAYERROSAPANEL");
+
+        playerCalendarPanel = new PlayerCalendarPanel(this);
+        jPanel1.add(playerCalendarPanel, "PLAYERCALENDARPANEL");
+
+        //logica di logout parziale
+        Logout.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+                options.setEnabled(false);
+                cardLayout.show(jPanel1, "LOGIN");
+
+                rosaPanel.logout();
+                calendarPanel.logout();
+                createPanel.logout();
+                System.out.println(session.getUtenteLoggato());
+            }
+        });
+
+    }
+
     private void setMenu() {
 
         jMenuBar1 = new JMenuBar();
@@ -170,22 +214,22 @@ public class TeamManagerGUI extends javax.swing.JFrame {
         });
 
     }
-    
-    private void initializePersistence(){
-          PersistenceHandler handler = new PersistenceHandler();
+
+    private void initializePersistence() {
+        PersistenceHandler handler = new PersistenceHandler();
         handler.loadAll();
         TeamManager.getInstance().inizializzaDatiDaPersistence(handler);
     }
-    
-    public TeamManager getTM(){
+
+    public TeamManager getTM() {
         return tm;
     }
-    
-    public Session getSession(){
+
+    public Session getSession() {
         return session;
     }
-    
-    public PlayerPanel getPlayerPanel(){
+
+    public PlayerPanel getPlayerPanel() {
         return playerPanel;
     }
 
@@ -272,8 +316,7 @@ public class TeamManagerGUI extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-       
-        
+
         new TeamManagerGUI().setVisible(true);
     }
 

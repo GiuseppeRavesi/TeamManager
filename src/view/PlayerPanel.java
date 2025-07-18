@@ -24,8 +24,6 @@ public class PlayerPanel extends javax.swing.JPanel {
     public PlayerPanel(TeamManagerGUI parentFrame) {
         this.parentFrame=parentFrame;
         initComponents();
-        
-      
     }
     
     
