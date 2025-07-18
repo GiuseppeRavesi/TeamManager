@@ -43,7 +43,9 @@ public class Rosa {
 
     public void modificaGiocatore(Giocatore giocatoreBase, Ruolo nuovoRuolo, Status nuovoStatus, int nuovoNumMaglia)
             throws NumeroMagliaDuplicatoException {
+        
         boolean giocatoreTrovato = false;
+        System.out.println("CIAO MODIFICA");
         for (GiocatoreInRosa g : giocatoriRosa) {
             if (g.getGiocatore().equals(giocatoreBase)) {
                 giocatoreTrovato = true;
@@ -56,8 +58,10 @@ public class Rosa {
         }
 
         for (GiocatoreInRosa g : giocatoriRosa) {
-            if (g.getNumMaglia() == nuovoNumMaglia) {
-                throw new NumeroMagliaDuplicatoException();
+            if (!g.getGiocatore().equals(giocatoreBase)) {
+                if (g.getNumMaglia() == nuovoNumMaglia) {
+                    throw new NumeroMagliaDuplicatoException();
+                }
             }
         }
 

@@ -65,13 +65,9 @@ public class RosaPanel extends javax.swing.JPanel {
         listaFiltrata = new ArrayList<>();
 
         //inizializzazione liste utili
-        rosa = new ArrayList<>();
         rosa = parentFrame.getTM().visualizzaRosa();
 
-        giocatori = new ArrayList<>();
         giocatori = parentFrame.getTM().getListaGiocatori();
-
-        listaFiltro = new ArrayList<>();
 
         model = new DefaultListModel<String>();
         searchModel = new DefaultListModel<String>();
@@ -1144,9 +1140,10 @@ public class RosaPanel extends javax.swing.JPanel {
                     String numMagliaString = jComboBox6.getSelectedItem().toString().replaceAll("\\s+", "");
                     numMaglia = parseInt(numMagliaString);
 
+                    System.out.println(rosa.get(indexListElement).getGiocatore());
                     System.out.println(numMaglia);
                     parentFrame.getTM().modificaGiocatore(rosa.get(indexListElement).getGiocatore(),
-                            ruolo, status, 99);
+                            ruolo, status, numMaglia);
 
                     initializeList();
                     dialogModifyPlayer.setVisible(false);
@@ -1160,7 +1157,7 @@ public class RosaPanel extends javax.swing.JPanel {
                     );
                 }
 
-            } catch (NumeroMagliaDuplicatoException e) {
+            } catch (NumeroMagliaDuplicatoException | IllegalArgumentException e) {
                 JOptionPane.showMessageDialog(
                         null,
                         e.getMessage(),
