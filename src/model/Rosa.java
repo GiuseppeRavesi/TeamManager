@@ -43,9 +43,20 @@ public class Rosa {
 
     public void modificaGiocatore(Giocatore giocatoreBase, Ruolo nuovoRuolo, Status nuovoStatus, int nuovoNumMaglia)
             throws NumeroMagliaDuplicatoException {
-        
+        boolean giocatoreTrovato = false;
         for (GiocatoreInRosa g : giocatoriRosa) {
-            if (g.getNumMaglia() == nuovoNumMaglia && !g.getGiocatore().equals(giocatoreBase)) {
+            if (g.getGiocatore().equals(giocatoreBase)) {
+                giocatoreTrovato = true;
+                break;
+            }
+        }
+
+        if (!giocatoreTrovato) {
+            throw new IllegalArgumentException("Giocatore non presente nella rosa!");
+        }
+
+        for (GiocatoreInRosa g : giocatoriRosa) {
+            if (g.getNumMaglia() == nuovoNumMaglia) {
                 throw new NumeroMagliaDuplicatoException();
             }
         }
@@ -55,7 +66,7 @@ public class Rosa {
                 g.setRuolo(nuovoRuolo);
                 g.setStatus(nuovoStatus);
                 g.setNumMaglia(nuovoNumMaglia);
-                break; 
+                break;
             }
         }
     }
