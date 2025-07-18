@@ -43,17 +43,21 @@ public class Rosa {
 
     public void modificaGiocatore(Giocatore giocatoreBase, Ruolo nuovoRuolo, Status nuovoStatus, int nuovoNumMaglia)
             throws NumeroMagliaDuplicatoException {
+        
         for (GiocatoreInRosa g : giocatoriRosa) {
-            if (g.getNumMaglia() != nuovoNumMaglia) {
-                if (g.getGiocatore().equals(giocatoreBase)) {
-                    g.setRuolo(nuovoRuolo);
-                    g.setStatus(nuovoStatus);
-                    g.setNumMaglia(nuovoNumMaglia);
-                }
-            }else{
+            if (g.getNumMaglia() == nuovoNumMaglia && !g.getGiocatore().equals(giocatoreBase)) {
                 throw new NumeroMagliaDuplicatoException();
             }
-        }   
+        }
+
+        for (GiocatoreInRosa g : giocatoriRosa) {
+            if (g.getGiocatore().equals(giocatoreBase)) {
+                g.setRuolo(nuovoRuolo);
+                g.setStatus(nuovoStatus);
+                g.setNumMaglia(nuovoNumMaglia);
+                break; 
+            }
+        }
     }
 
     public List<GiocatoreInRosa> cercaGiocatori(String filtro) {
