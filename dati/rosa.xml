@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rosa>
+    <giocatoreInRosa>
+        <giocatore id="1">
+            <nome>Mario</nome>
+            <cognome>Rossi</cognome>
+            <dataNascita>1990-05-15</dataNascita>
+            <nazionalita>Italiana</nazionalita>
+            <email>mario.rossi@example.com</email>
+        </giocatore>
+        <ruolo>ATTACCANTE</ruolo>
+        <status>TITOLARE</status>
+        <numeroMaglia>9</numeroMaglia>
+        <dataEntrata>2023-01-10</dataEntrata>
+    </giocatoreInRosa>
+    <giocatoreInRosa>
+        <giocatore id="4">
+            <nome>Cristiano</nome>
+            <cognome>Ronaldo</cognome>
+            <dataNascita>1985-02-05</dataNascita>
+            <nazionalita>Portoghese</nazionalita>
+            <email>c.ronaldo@example.com</email>
+        </giocatore>
+        <ruolo>ATTACCANTE</ruolo>
+        <status>TITOLARE</status>
+        <numeroMaglia>7</numeroMaglia>
+        <dataEntrata>2023-01-15</dataEntrata>
+    </giocatoreInRosa>
+    <giocatoreInRosa>
+        <giocatore id="5">
+            <nome>Lionel</nome>
+            <cognome>Messi</cognome>
+            <dataNascita>1987-06-24</dataNascita>
+            <nazionalita>Argentina</nazionalita>
+            <email>l.messi@example.com</email>
+        </giocatore>
+        <ruolo>ATTACCANTE</ruolo>
+        <status>TITOLARE</status>
+        <numeroMaglia>10</numeroMaglia>
+        <dataEntrata>2023-02-01</dataEntrata>
+    </giocatoreInRosa>
+    <giocatoreInRosa>
+        <giocatore id="7">
+            <nome>Kylian</nome>
+            <cognome>Mbappé</cognome>
+            <dataNascita>1998-12-20</dataNascita>
+            <nazionalita>Francese</nazionalita>
+            <email>k.mbappe@example.com</email>
+        </giocatore>
+        <ruolo>ATTACCANTE</ruolo>
+        <status>PANCHINA</status>
+        <numeroMaglia>11</numeroMaglia>
+        <dataEntrata>2023-02-10</dataEntrata>
+    </giocatoreInRosa>
+    <giocatoreInRosa>
+        <giocatore id="8">
+            <nome>Robert</nome>
+            <cognome>Lewandowski</cognome>
+            <dataNascita>1988-08-21</dataNascita>
+            <nazionalita>Polacca</nazionalita>
+            <email>r.lewandowski@example.com</email>
+        </giocatore>
+        <ruolo>ATTACCANTE</ruolo>
+        <status>INFORTUNATO</status>
+        <numeroMaglia>9</numeroMaglia>
+        <dataEntrata>2023-01-20</dataEntrata>
+    </giocatoreInRosa>
+    <giocatoreInRosa>
+        <giocatore id="9">
+            <nome>Kevin</nome>
+            <cognome>De Bruyne</cognome>
+            <dataNascita>1991-06-28</dataNascita>
+            <nazionalita>Belga</nazionalita>
+            <email>k.debruyne@example.com</email>
+        </giocatore>
+        <ruolo>CENTROCAMPISTA</ruolo>
+        <status>TITOLARE</status>
+        <numeroMaglia>17</numeroMaglia>
+        <dataEntrata>2023-01-05</dataEntrata>
+    </giocatoreInRosa>
+    <giocatoreInRosa>
+        <giocatore id="11">
+            <nome>Virgil</nome>
+            <cognome>van Dijk</cognome>
+            <dataNascita>1991-07-08</dataNascita>
+            <nazionalita>Olandese</nazionalita>
+            <email>v.vandijk@example.com</email>
+        </giocatore>
+        <ruolo>DIFENSORE</ruolo>
+        <status>TITOLARE</status>
+        <numeroMaglia>4</numeroMaglia>
+        <dataEntrata>2023-01-12</dataEntrata>
+    </giocatoreInRosa>
+    <giocatoreInRosa>
+        <giocatore id="12">
+            <nome>Manuel</nome>
+            <cognome>Neuer</cognome>
+            <dataNascita>1986-03-27</dataNascita>
+            <nazionalita>Tedesca</nazionalita>
+            <email>m.neuer@example.com</email>
+        </giocatore>
+        <ruolo>PORTIERE</ruolo>
+        <status>TITOLARE</status>
+        <numeroMaglia>1</numeroMaglia>
+        <dataEntrata>2023-01-08</dataEntrata>
+    </giocatoreInRosa>
+    <giocatoreInRosa>
+        <giocatore id="15">
+            <nome>Luka</nome>
+            <cognome>Modrić</cognome>
+            <dataNascita>1985-09-09</dataNascita>
+            <nazionalita>Croata</nazionalita>
+            <email>l.modric@example.com</email>
+        </giocatore>
+        <ruolo>CENTROCAMPISTA</ruolo>
+        <status>TITOLARE</status>
+        <numeroMaglia>10</numeroMaglia>
+        <dataEntrata>2023-01-18</dataEntrata>
+    </giocatoreInRosa>
+    <giocatoreInRosa>
+        <giocatore id="22">
+            <nome>Gianluigi</nome>
+            <cognome>Buffon</cognome>
+            <dataNascita>1978-01-28</dataNascita>
+            <nazionalita>Italiana</nazionalita>
+            <email>g.buffon@example.com</email>
+        </giocatore>
+        <ruolo>PORTIERE</ruolo>
+        <status>PANCHINA</status>
+        <numeroMaglia>12</numeroMaglia>
+        <dataEntrata>2023-02-05</dataEntrata>
+    </giocatoreInRosa>
+</rosa>

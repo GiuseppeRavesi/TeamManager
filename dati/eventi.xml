@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eventi>
+    <allenamento id="1">
+        <data>2023-04-05</data>
+        <orario>10:00:00</orario>
+        <durata>90</durata>
+        <luogo>Campo Principale</luogo>
+        <tipologia>Ripresa atletica</tipologia>
+        <note>Recupero post-partita</note>
+        <disponibilità>
+            <disponibile idGiocatore="4" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="101" velocitaMax="28.5" velocitaMedia="16.2" valutazioneForzaFisica="7.5" valutazioneForzaTiro="8.0" frequenzaCardiacaMedia="135"/>
+            </disponibile>
+            <disponibile idGiocatore="5" presente="false">
+                <motivazione>Infortunato</motivazione>
+            </disponibile>
+        </disponibilità>
+    </allenamento>
+
+    <amichevole id="2">
+        <data>2023-04-12</data>
+        <orario>15:30:00</orario>
+        <durata>90</durata>
+        <luogo>Stadio Comunale</luogo>
+        <squadraAvversaria>FC Locali</squadraAvversaria>
+        <disponibilità>
+            <disponibile idGiocatore="7" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="201" minutiGiocati="90" goal="1" assist="2" distanzaTotalePercorsa="10200"/>
+            </disponibile>
+            <disponibile idGiocatore="9" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="202" minutiGiocati="90" goal="0" assist="1" distanzaTotalePercorsa="9800"/>
+            </disponibile>
+        </disponibilità>
+    </amichevole>
+
+    <allenamento id="3">
+        <data>2023-04-19</data>
+        <orario>09:30:00</orario>
+        <durata>120</durata>
+        <luogo>Campo Secondario</luogo>
+        <tipologia>Tattica</tipologia>
+        <note>Preparazione modulo 4-3-3</note>
+        <disponibilità>
+            <disponibile idGiocatore="11" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="301" velocitaMax="30.2" velocitaMedia="17.8" valutazioneForzaFisica="8.2" valutazioneForzaTiro="7.5" frequenzaCardiacaMedia="140"/>
+            </disponibile>
+        </disponibilità>
+    </allenamento>
+
+    <amichevole id="4">
+        <data>2023-05-03</data>
+        <orario>20:45:00</orario>
+        <durata>90</durata>
+        <luogo>Stadio Olimpico</luogo>
+        <squadraAvversaria>AC Rivali</squadraAvversaria>
+        <disponibilità>
+            <disponibile idGiocatore="12" presente="true">
+                <motivazione></motivazione>
+                <statisticaAmichevole id="401" minutiGiocati="90" parate="4" distanzaTotalePercorsa="3500"/>
+            </disponibile>
+            <disponibile idGiocatore="15" presente="false">
+                <motivazione>Squalifica</motivazione>
+            </disponibile>
+        </disponibilità>
+    </amichevole>
+
+    <allenamento id="5">
+        <data>2023-05-10</data>
+        <orario>11:00:00</orario>
+        <durata>90</durata>
+        <luogo>Campo Principale</luogo>
+        <tipologia>Tecnica palla</tipologia>
+        <note>Allenamento specifico per attaccanti</note>
+        <disponibilità>
+            <disponibile idGiocatore="4" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="501" velocitaMax="31.0" velocitaMedia="18.5" valutazioneForzaFisica="8.0" valutazioneForzaTiro="9.2" frequenzaCardiacaMedia="142"/>
+            </disponibile>
+            <disponibile idGiocatore="5" presente="true">
+                <motivazione></motivazione>
+                <statisticaAllenamento id="502" velocitaMax="29.8" velocitaMedia="17.2" valutazioneForzaFisica="8.5" valutazioneForzaTiro="9.5" frequenzaCardiacaMedia="138"/>
+            </disponibile>
+        </disponibilità>
+    </allenamento>
+
+    <amichevole id="6">
+        <data>2023-06-07</data>
+        <orario>18:00:00</orario>
+        <durata>90</durata>
+        <luogo>Stadio Amichevole</luogo>
+        <squadraAvversaria>SC Visitatori</squadraAvversaria>
+        <disponibilità>
+            <disponibile idGiocatore="7" presente="true">
+                <motivazione></motivazione>
+            </disponibile>
+            <disponibile idGiocatore="22" presente="false">
+                <motivazione>Infortunio</motivazione>
+            </disponibile>
+        </disponibilità>
+    </amichevole>
+
+    <allenamento id="7">
+        <data>2023-06-14</data>
+        <orario>10:30:00</orario>
+        <durata>105</durata>
+        <luogo>Campo Principale</luogo>
+        <tipologia>Preparazione atletica</tipologia>
+        <note>Test fisici pre-campionato</note>
+        <disponibilità>
+            <disponibile idGiocatore="9" presente="true">
+                <motivazione></motivazione>
+            </disponibile>
+            <disponibile idGiocatore="11" presente="true">
+                <motivazione></motivazione>
+            </disponibile>
+        </disponibilità>
+    </allenamento>
+
+    <amichevole id="8">
+        <data>2023-06-21</data>
+        <orario>19:00:00</orario>
+        <durata>90</durata>
+        <luogo>Stadio Comunale</luogo>
+        <squadraAvversaria>FC Ospiti</squadraAvversaria>
+        <disponibilità>
+            <disponibile idGiocatore="12" presente="true">
+                <motivazione></motivazione>
+            </disponibile>
+            <disponibile idGiocatore="15" presente="false">
+                <motivazione>Impegni familiari</motivazione>
+            </disponibile>
+        </disponibilità>
+    </amichevole>
+
+    <allenamento id="9">
+        <data>2023-07-05</data>
+        <orario>09:00:00</orario>
+        <durata>120</durata>
+        <luogo>Campo Secondario</luogo>
+        <tipologia>Tattica</tipologia>
+        <note>Preparazione nuova strategia</note>
+        <disponibilità>
+            <disponibile idGiocatore="4" presente="true">
+                <motivazione></motivazione>
+            </disponibile>
+            <disponibile idGiocatore="5" presente="true">
+                <motivazione></motivazione>
+            </disponibile>
+        </disponibilità>
+    </allenamento>
+
+    <amichevole id="10">
+        <data>2023-07-12</data>
+        <orario>17:30:00</orario>
+        <durata>90</durata>
+        <luogo>Stadio Estivo</luogo>
+        <squadraAvversaria>AS Amici</squadraAvversaria>
+        <disponibilità>
+            <disponibile idGiocatore="7" presente="true">
+                <motivazione></motivazione>
+            </disponibile>
+            <disponibile idGiocatore="9" presente="false">
+                <motivazione>Vacanza</motivazione>
+            </disponibile>
+        </disponibilità>
+    </amichevole>
+</eventi>

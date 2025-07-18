@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<giocatori>
+    <giocatore id="1">
+        <nome>Mario</nome>
+        <cognome>Rossi</cognome>
+        <dataNascita>1990-05-15</dataNascita>
+        <nazionalita>Italiana</nazionalita>
+        <email>mario.rossi@example.com</email>
+    </giocatore>
+    <giocatore id="2">
+        <nome>Luca</nome>
+        <cognome>Bianchi</cognome>
+        <dataNascita>1992-08-22</dataNascita>
+        <nazionalita>Italiana</nazionalita>
+        <email>luca.bianchi@example.com</email>
+    </giocatore>
+    <giocatore id="3">
+        <nome>Anna</nome>
+        <cognome>Verdi</cognome>
+        <dataNascita>1988-11-30</dataNascita>
+        <nazionalita>Italiana</nazionalita>
+        <email>anna.verdi@example.com</email>
+    </giocatore>
+    <giocatore id="4">
+        <nome>Cristiano</nome>
+        <cognome>Ronaldo</cognome>
+        <dataNascita>1985-02-05</dataNascita>
+        <nazionalita>Portoghese</nazionalita>
+        <email>c.ronaldo@example.com</email>
+    </giocatore>
+    <giocatore id="5">
+        <nome>Lionel</nome>
+        <cognome>Messi</cognome>
+        <dataNascita>1987-06-24</dataNascita>
+        <nazionalita>Argentina</nazionalita>
+        <email>l.messi@example.com</email>
+    </giocatore>
+    <giocatore id="6">
+        <nome>Neymar</nome>
+        <cognome>Jr</cognome>
+        <dataNascita>1992-02-05</dataNascita>
+        <nazionalita>Brasiliana</nazionalita>
+        <email>neymar.jr@example.com</email>
+    </giocatore>
+    <giocatore id="7">
+        <nome>Kylian</nome>
+        <cognome>Mbappé</cognome>
+        <dataNascita>1998-12-20</dataNascita>
+        <nazionalita>Francese</nazionalita>
+        <email>k.mbappe@example.com</email>
+    </giocatore>
+    <giocatore id="8">
+        <nome>Robert</nome>
+        <cognome>Lewandowski</cognome>
+        <dataNascita>1988-08-21</dataNascita>
+        <nazionalita>Polacca</nazionalita>
+        <email>r.lewandowski@example.com</email>
+    </giocatore>
+    <giocatore id="9">
+        <nome>Kevin</nome>
+        <cognome>De Bruyne</cognome>
+        <dataNascita>1991-06-28</dataNascita>
+        <nazionalita>Belga</nazionalita>
+        <email>k.debruyne@example.com</email>
+    </giocatore>
+    <giocatore id="10">
+        <nome>Mohamed</nome>
+        <cognome>Salah</cognome>
+        <dataNascita>1992-06-15</dataNascita>
+        <nazionalita>Egiziana</nazionalita>
+        <email>m.salah@example.com</email>
+    </giocatore>
+    <giocatore id="11">
+        <nome>Virgil</nome>
+        <cognome>van Dijk</cognome>
+        <dataNascita>1991-07-08</dataNascita>
+        <nazionalita>Olandese</nazionalita>
+        <email>v.vandijk@example.com</email>
+    </giocatore>
+    <giocatore id="12">
+        <nome>Manuel</nome>
+        <cognome>Neuer</cognome>
+        <dataNascita>1986-03-27</dataNascita>
+        <nazionalita>Tedesca</nazionalita>
+        <email>m.neuer@example.com</email>
+    </giocatore>
+    <giocatore id="13">
+        <nome>Harry</nome>
+        <cognome>Kane</cognome>
+        <dataNascita>1993-07-28</dataNascita>
+        <nazionalita>Inglese</nazionalita>
+        <email>h.kane@example.com</email>
+    </giocatore>
+    <giocatore id="14">
+        <nome>Karim</nome>
+        <cognome>Benzema</cognome>
+        <dataNascita>1987-12-19</dataNascita>
+        <nazionalita>Francese</nazionalita>
+        <email>k.benzema@example.com</email>
+    </giocatore>
+    <giocatore id="15">
+        <nome>Luka</nome>
+        <cognome>Modrić</cognome>
+        <dataNascita>1985-09-09</dataNascita>
+        <nazionalita>Croata</nazionalita>
+        <email>l.modric@example.com</email>
+    </giocatore>
+    <giocatore id="16">
+        <nome>Toni</nome>
+        <cognome>Kroos</cognome>
+        <dataNascita>1990-01-04</dataNascita>
+        <nazionalita>Tedesca</nazionalita>
+        <email>t.kroos@example.com</email>
+    </giocatore>
+    <giocatore id="17">
+        <nome>Sergio</nome>
+        <cognome>Agüero</cognome>
+        <dataNascita>1988-06-02</dataNascita>
+        <nazionalita>Argentina</nazionalita>
+        <email>s.aguero@example.com</email>
+    </giocatore>
+    <giocatore id="18">
+        <nome>Paul</nome>
+        <cognome>Pogba</cognome>
+        <dataNascita>1993-03-15</dataNascita>
+        <nazionalita>Francese</nazionalita>
+        <email>p.pogba@example.com</email>
+    </giocatore>
+    <giocatore id="19">
+        <nome>Antoine</nome>
+        <cognome>Griezmann</cognome>
+        <dataNascita>1991-03-21</dataNascita>
+        <nazionalita>Francese</nazionalita>
+        <email>a.griezmann@example.com</email>
+    </giocatore>
+    <giocatore id="20">
+        <nome>Raheem</nome>
+        <cognome>Sterling</cognome>
+        <dataNascita>1994-12-08</dataNascita>
+        <nazionalita>Inglese</nazionalita>
+        <email>r.sterling@example.com</email>
+    </giocatore>
+    <giocatore id="21">
+        <nome>Edinson</nome>
+        <cognome>Cavani</cognome>
+        <dataNascita>1987-02-14</dataNascita>
+        <nazionalita>Uruguayana</nazionalita>
+        <email>e.cavani@example.com</email>
+    </giocatore>
+    <giocatore id="22">
+        <nome>Gianluigi</nome>
+        <cognome>Buffon</cognome>
+        <dataNascita>1978-01-28</dataNascita>
+        <nazionalita>Italiana</nazionalita>
+        <email>g.buffon@example.com</email>
+    </giocatore>
+    <giocatore id="23">
+        <nome>Thiago</nome>
+        <cognome>Silva</cognome>
+        <dataNascita>1984-09-22</dataNascita>
+        <nazionalita>Brasiliana</nazionalita>
+        <email>t.silva@example.com</email>
+    </giocatore>
+    <giocatore id="24">
+        <nome>Marco</nome>
+        <cognome>Reus</cognome>
+        <dataNascita>1989-05-31</dataNascita>
+        <nazionalita>Tedesca</nazionalita>
+        <email>m.reus@example.com</email>
+    </giocatore>
+    <giocatore id="25">
+        <nome>David</nome>
+        <cognome>Alaba</cognome>
+        <dataNascita>1992-06-24</dataNascita>
+        <nazionalita>Austriaca</nazionalita>
+        <email>d.alaba@example.com</email>
+    </giocatore>
+    <giocatore id="26">
+        <nome>Romelu</nome>
+        <cognome>Lukaku</cognome>
+        <dataNascita>1993-05-13</dataNascita>
+        <nazionalita>Belga</nazionalita>
+        <email>r.lukaku@example.com</email>
+    </giocatore>
+    <giocatore id="27">
+        <nome>Jadon</nome>
+        <cognome>Sancho</cognome>
+        <dataNascita>2000-03-25</dataNascita>
+        <nazionalita>Inglese</nazionalita>
+        <email>j.sancho@example.com</email>
+    </giocatore>
+    <giocatore id="28">
+        <nome>Erling</nome>
+        <cognome>Haaland</cognome>
+        <dataNascita>2000-07-21</dataNascita>
+        <nazionalita>Norvegese</nazionalita>
+        <email>e.haaland@example.com</email>
+    </giocatore>
+</giocatori>
