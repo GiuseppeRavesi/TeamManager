@@ -130,4 +130,147 @@
         <numeroMaglia>12</numeroMaglia>
         <dataEntrata>2023-02-05</dataEntrata>
     </giocatoreInRosa>
+    <giocatoreInRosa>
+        <giocatore id="29">
+            <nome>Frenkie</nome>
+            <cognome>de Jong</cognome>
+            <dataNascita>1997-05-12</dataNascita>
+            <nazionalita>Olandese</nazionalita>
+            <email>f.dejong@example.com</email>
+        </giocatore>
+        <ruolo>CENTROCAMPISTA</ruolo>
+        <status>DISPONIBILE</status>
+        <numeroMaglia>21</numeroMaglia>
+        <dataEntrata>2023-06-15</dataEntrata>
+    </giocatoreInRosa>
+    <giocatoreInRosa>
+        <giocatore id="30">
+            <nome>Joshua</nome>
+            <cognome>Kimmich</cognome>
+            <dataNascita>1995-02-08</dataNascita>
+            <nazionalita>Tedesca</nazionalita>
+            <email>j.kimmich@example.com</email>
+        </giocatore>
+        <ruolo>CENTROCAMPISTA</ruolo>
+        <status>DISPONIBILE</status>
+        <numeroMaglia>6</numeroMaglia>
+        <dataEntrata>2023-06-18</dataEntrata>
+    </giocatoreInRosa>
+    <giocatoreInRosa>
+        <giocatore id="32">
+            <nome>Ruben</nome>
+            <cognome>Dias</cognome>
+            <dataNascita>1997-05-14</dataNascita>
+            <nazionalita>Portoghese</nazionalita>
+            <email>r.dias@example.com</email>
+        </giocatore>
+        <ruolo>DIFENSORE</ruolo>
+        <status>DISPONIBILE</status>
+        <numeroMaglia>3</numeroMaglia>
+        <dataEntrata>2023-07-01</dataEntrata>
+    </giocatoreInRosa>
+    <giocatoreInRosa>
+        <giocatore id="36">
+            <nome>Vinicius</nome>
+            <cognome>Junior</cognome>
+            <dataNascita>2000-07-12</dataNascita>
+            <nazionalita>Brasiliana</nazionalita>
+            <email>v.junior@example.com</email>
+        </giocatore>
+        <ruolo>ATTACCANTE</ruolo>
+        <status>DISPONIBILE</status>
+        <numeroMaglia>20</numeroMaglia>
+        <dataEntrata>2023-06-25</dataEntrata>
+    </giocatoreInRosa>
+    <giocatoreInRosa>
+        <giocatore id="39">
+            <nome>Jude</nome>
+            <cognome>Bellingham</cognome>
+            <dataNascita>2003-06-29</dataNascita>
+            <nazionalita>Inglese</nazionalita>
+            <email>j.bellingham@example.com</email>
+        </giocatore>
+        <ruolo>CENTROCAMPISTA</ruolo>
+        <status>INFORTUNATO</status>
+        <numeroMaglia>22</numeroMaglia>
+        <dataEntrata>2023-07-05</dataEntrata>
+    </giocatoreInRosa>
+    <giocatoreInRosa>
+        <giocatore id="41">
+            <nome>Alphonso</nome>
+            <cognome>Davies</cognome>
+            <dataNascita>2000-11-02</dataNascita>
+            <nazionalita>Canadese</nazionalita>
+            <email>a.davies@example.com</email>
+        </giocatore>
+        <ruolo>DIFENSORE</ruolo>
+        <status>DISPONIBILE</status>
+        <numeroMaglia>19</numeroMaglia>
+        <dataEntrata>2023-06-20</dataEntrata>
+    </giocatoreInRosa>
+    <giocatoreInRosa>
+        <giocatore id="43">
+            <nome>Lautaro</nome>
+            <cognome>Martínez</cognome>
+            <dataNascita>1997-08-22</dataNascita>
+            <nazionalita>Argentina</nazionalita>
+            <email>l.martinez@example.com</email>
+        </giocatore>
+        <ruolo>ATTACCANTE</ruolo>
+        <status>DISPONIBILE</status>
+        <numeroMaglia>23</numeroMaglia>
+        <dataEntrata>2023-06-30</dataEntrata>
+    </giocatoreInRosa>
+    <giocatoreInRosa>
+        <giocatore id="46">
+            <nome>Mike</nome>
+            <cognome>Maignan</cognome>
+            <dataNascita>1995-07-03</dataNascita>
+            <nazionalita>Francese</nazionalita>
+            <email>m.maignan@example.com</email>
+        </giocatore>
+        <ruolo>PORTIERE</ruolo>
+        <status>DISPONIBILE</status>
+        <numeroMaglia>16</numeroMaglia>
+        <dataEntrata>2023-07-10</dataEntrata>
+    </giocatoreInRosa>
+    <giocatoreInRosa>
+        <giocatore id="49">
+            <nome>Victor</nome>
+            <cognome>Osimhen</cognome>
+            <dataNascita>1998-12-29</dataNascita>
+            <nazionalita>Nigeriana</nazionalita>
+            <email>v.osimhen@example.com</email>
+        </giocatore>
+        <ruolo>ATTACCANTE</ruolo>
+        <status>DISPONIBILE</status>
+        <numeroMaglia>18</numeroMaglia>
+        <dataEntrata>2023-07-15</dataEntrata>
+    </giocatoreInRosa>
+    <giocatoreInRosa>
+        <giocatore id="53">
+            <nome>Bukayo</nome>
+            <cognome>Saka</cognome>
+            <dataNascita>2001-09-05</dataNascita>
+            <nazionalita>Inglese</nazionalita>
+            <email>b.saka@example.com</email>
+        </giocatore>
+        <ruolo>ATTACCANTE</ruolo>
+        <status>DISPONIBILE</status>
+        <numeroMaglia>7</numeroMaglia>
+        <dataEntrata>2023-07-12</dataEntrata>
+    </giocatoreInRosa>
+    <giocatoreInRosa>
+        <giocatore id="58">
+            <nome>Joško</nome>
+            <cognome>Gvardiol</cognome>
+            <dataNascita>2002-01-23</dataNascita>
+            <nazionalita>Croata</nazionalita>
+            <email>j.gvardiol@example.com</email>
+        </giocatore>
+        <ruolo>DIFENSORE</ruolo>
+        <status>DISPONIBILE</status>
+        <numeroMaglia>24</numeroMaglia>
+        <dataEntrata>2023-07-20</dataEntrata>
+    </giocatoreInRosa>
 </rosa>
