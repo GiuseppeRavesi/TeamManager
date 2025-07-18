@@ -4,6 +4,7 @@
  */
 package view;
 
+import exception.SovrapposizioneEventoException;
 import java.awt.Font;
 import static java.lang.Integer.parseInt;
 import java.time.Instant;
@@ -12,17 +13,17 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import model.Allenamento;
+import model.Amichevole;
+import model.Evento;
 import view.TeamManagerGUI;
-
-
-
-
-
 
 /**
  *
@@ -37,7 +38,7 @@ public class CalendarPanel extends javax.swing.JPanel {
     private DefaultTableModel tableModel;
     private DefaultTableCellRenderer rightRenderer;
 
-    private java.util.List<EventoProva> listaEventi;
+    private java.util.List<Evento> eventi;
 
     private int indexRow;
 
@@ -50,13 +51,10 @@ public class CalendarPanel extends javax.swing.JPanel {
         tableModel = (DefaultTableModel) jTable1.getModel();
         rightRenderer = new DefaultTableCellRenderer();
 
-        listaEventi = new ArrayList<>();
-        setUpEventiProva();
+        eventi = parentFrame.getTM().visualizzaCalendario();
 
         initialiteCalendar();
         tableClickListener();
-
-        idCalendarLatest = 20;
 
     }
 
@@ -69,33 +67,6 @@ public class CalendarPanel extends javax.swing.JPanel {
         }
     }
 
-    private void setUpEventiProva() {
-        listaEventi.add(new AllenamentoProva(1, LocalDate.of(2025, 7, 1), LocalTime.of(17, 0), 90, "Campo A", "Tecnico", "Passaggi e movimenti"));
-        listaEventi.add(new AmichevoleProva(2, LocalDate.of(2025, 7, 2), LocalTime.of(18, 30), 120, "Stadio B", "Squadra Blu"));
-        listaEventi.add(new AllenamentoProva(3, LocalDate.of(2025, 7, 3), LocalTime.of(16, 0), 60, "Campo A", "Tattico", "Prove di schema"));
-        listaEventi.add(new AmichevoleProva(4, LocalDate.of(2025, 7, 4), LocalTime.of(20, 0), 110, "Stadio C", "Squadra Rossa"));
-        listaEventi.add(new AllenamentoProva(5, LocalDate.of(2025, 7, 5), LocalTime.of(15, 30), 75, "Campo B", "Fisico", "Circuito resistenza"));
-
-        listaEventi.add(new AmichevoleProva(6, LocalDate.of(2025, 7, 6), LocalTime.of(17, 45), 90, "Stadio D", "Squadra Verde"));
-        listaEventi.add(new AllenamentoProva(7, LocalDate.of(2025, 7, 7), LocalTime.of(16, 15), 90, "Campo C", "Misto", "Tattico + Fisico"));
-        listaEventi.add(new AmichevoleProva(8, LocalDate.of(2025, 7, 8), LocalTime.of(19, 0), 100, "Stadio E", "Squadra Gialla"));
-        listaEventi.add(new AllenamentoProva(9, LocalDate.of(2025, 7, 9), LocalTime.of(18, 0), 80, "Campo D", "Tecnico", "Controllo e tiro"));
-        listaEventi.add(new AllenamentoProva(10, LocalDate.of(2025, 7, 10), LocalTime.of(17, 30), 60, "Campo A", "Fisico", "Corsa e scatti"));
-
-        listaEventi.add(new AmichevoleProva(11, LocalDate.of(2025, 7, 11), LocalTime.of(20, 0), 120, "Stadio F", "Squadra Nera"));
-        listaEventi.add(new AllenamentoProva(12, LocalDate.of(2025, 7, 12), LocalTime.of(17, 0), 90, "Campo B", "Tattico", "Partita a tema"));
-        listaEventi.add(new AmichevoleProva(13, LocalDate.of(2025, 7, 13), LocalTime.of(18, 15), 110, "Stadio G", "Squadra Bianca"));
-        listaEventi.add(new AllenamentoProva(14, LocalDate.of(2025, 7, 14), LocalTime.of(16, 45), 75, "Campo A", "Tecnico", "Palleggi e dribbling"));
-        listaEventi.add(new AllenamentoProva(15, LocalDate.of(2025, 7, 15), LocalTime.of(16, 0), 60, "Campo C", "Misto", "Ripasso generale"));
-
-        listaEventi.add(new AmichevoleProva(16, LocalDate.of(2025, 7, 16), LocalTime.of(19, 30), 95, "Stadio H", "Squadra Viola"));
-        listaEventi.add(new AllenamentoProva(17, LocalDate.of(2025, 7, 17), LocalTime.of(17, 0), 90, "Campo D", "Tattico", "Moduli difensivi"));
-        listaEventi.add(new AmichevoleProva(18, LocalDate.of(2025, 7, 18), LocalTime.of(20, 0), 105, "Stadio I", "Squadra Arancione"));
-        listaEventi.add(new AllenamentoProva(19, LocalDate.of(2025, 7, 19), LocalTime.of(16, 30), 70, "Campo B", "Fisico", "Agilità e equilibrio"));
-        listaEventi.add(new AmichevoleProva(20, LocalDate.of(2025, 7, 20), LocalTime.of(18, 45), 115, "Stadio L", "Squadra Marrone"));
-
-    }
-
     private void initialiteCalendar() {
         indexRow = -1;
         putAtRightElement();
@@ -104,14 +75,14 @@ public class CalendarPanel extends javax.swing.JPanel {
         jTable1.getTableHeader().setFont(new Font("SansSerif", Font.ITALIC, 14));
         showDetailsBtn.setVisible(false);
 
-        for (EventoProva e : listaEventi) {
+        for (Evento e : eventi) {
             Object[] row = {e.getId(), e.getData(), e.getOrario(), e.getDurata(), e.getLuogo()};
             tableModel.addRow(row);
         }
 
     }
-    
-    public void logout(){
+
+    public void logout() {
         initialiteCalendar();
     }
 
@@ -134,22 +105,22 @@ public class CalendarPanel extends javax.swing.JPanel {
         detailsDialog.setModal(true);
 
         if (indexRow >= 0) {
-            dateText.setText(listaEventi.get(indexRow).getData().toString());
-            timeText.setText(listaEventi.get(indexRow).getOrario().toString());
-            durationText.setText(String.valueOf(listaEventi.get(indexRow).getDurata()) + " " + "min");
-            placeText.setText(listaEventi.get(indexRow).getLuogo());
+            dateText.setText(eventi.get(indexRow).getData().toString());
+            timeText.setText(eventi.get(indexRow).getOrario().toString());
+            durationText.setText(String.valueOf(eventi.get(indexRow).getDurata()) + " " + "min");
+            placeText.setText(eventi.get(indexRow).getLuogo());
 
-            if (listaEventi.get(indexRow) instanceof AllenamentoProva) {
+            if (eventi.get(indexRow) instanceof Allenamento) {
                 jLabel3.setText("Allenamento");
                 typeOrTeamLabel.setText("tipologia:");
-                AllenamentoProva ap = (AllenamentoProva) listaEventi.get(indexRow);
+                Allenamento ap = (Allenamento) eventi.get(indexRow);
                 noteText.setText(ap.getNote());
                 hybridText.setText(ap.getTipologia());
                 noteText.setVisible(true);
                 noteLabel.setVisible(true);
-            } else if (listaEventi.get(indexRow) instanceof AmichevoleProva) {
+            } else if (eventi.get(indexRow) instanceof Amichevole) {
                 jLabel3.setText("Amichevole");
-                AmichevoleProva ap = (AmichevoleProva) listaEventi.get(indexRow);
+                Amichevole ap = (Amichevole) eventi.get(indexRow);
                 typeOrTeamLabel.setText("Avversari:");
                 hybridText.setText(ap.getSquadraAvversaria());
                 noteText.setVisible(false);
@@ -167,33 +138,33 @@ public class CalendarPanel extends javax.swing.JPanel {
         removeEventDialog.setModal(true);
 
         if (indexRow >= 0) {
-            dateText1.setText(listaEventi.get(indexRow).getData().toString());
-            timeText1.setText(listaEventi.get(indexRow).getOrario().toString());
-            durationText1.setText(String.valueOf(listaEventi.get(indexRow).getDurata()) + " " + "min");
-            placeText1.setText(listaEventi.get(indexRow).getLuogo());
+            dateText1.setText(eventi.get(indexRow).getData().toString());
+            timeText1.setText(eventi.get(indexRow).getOrario().toString());
+            durationText1.setText(String.valueOf(eventi.get(indexRow).getDurata()) + " " + "min");
+            placeText1.setText(eventi.get(indexRow).getLuogo());
 
-            if (listaEventi.get(indexRow) instanceof AllenamentoProva) {
+            if (eventi.get(indexRow) instanceof Allenamento) {
                 jLabel10.setText("Sei sicuro di voler eliminare questo allenamento?");
                 typeOrTeamLabel1.setText("tipologia:");
-                AllenamentoProva ap = (AllenamentoProva) listaEventi.get(indexRow);
+                Allenamento ap = (Allenamento) eventi.get(indexRow);
                 noteText1.setText(ap.getNote());
                 hybridText1.setText(ap.getTipologia());
                 noteText1.setVisible(true);
                 noteLabel3.setVisible(true);
-            } else if (listaEventi.get(indexRow) instanceof AmichevoleProva) {
+            } else if (eventi.get(indexRow) instanceof Amichevole) {
                 jLabel10.setText("Sei sicuro di voler eliminare questo amichevole?");
-                AmichevoleProva ap = (AmichevoleProva) listaEventi.get(indexRow);
+                Amichevole ap = (Amichevole) eventi.get(indexRow);
                 typeOrTeamLabel1.setText("Avversari:");
                 hybridText1.setText(ap.getSquadraAvversaria());
                 noteText1.setVisible(false);
                 noteLabel3.setVisible(false);
 
             }
-            
+
             removeEventDialog.setVisible(true);
 
-        }else{
-             JOptionPane.showMessageDialog(
+        } else {
+            JOptionPane.showMessageDialog(
                     null,
                     "Seleziona un evento!",
                     "Errore",
@@ -232,40 +203,40 @@ public class CalendarPanel extends javax.swing.JPanel {
             noteLabel2.setVisible(false);
             jScrollPane3.setVisible(false);
 
-            jDateChooser2.setDate(localDateToDate(listaEventi.get(indexRow).getData()));
+            jDateChooser2.setDate(localDateToDate(eventi.get(indexRow).getData()));
 
             for (int i = 1; i <= 24; i++) {
-                if (listaEventi.get(indexRow).getOrario().getHour() == i - 1) {
+                if (eventi.get(indexRow).getOrario().getHour() == i - 1) {
                     jComboBox4.setSelectedIndex(i);
                 }
             }
 
             for (int i = 1; i <= 60; i++) {
-                if (listaEventi.get(indexRow).getOrario().getMinute() == i - 1) {
+                if (eventi.get(indexRow).getOrario().getMinute() == i - 1) {
                     jComboBox5.setSelectedIndex(i);
                 }
             }
 
             for (int i = 30; i <= 299; i++) {
-                if (listaEventi.get(indexRow).getDurata() == i) {
+                if (eventi.get(indexRow).getDurata() == i) {
                     jComboBox6.setSelectedIndex(i - 29);
                 }
             }
 
-            jTextField3.setText(listaEventi.get(indexRow).getLuogo());
+            jTextField3.setText(eventi.get(indexRow).getLuogo());
 
-            if (listaEventi.get(indexRow) instanceof AllenamentoProva) {
+            if (eventi.get(indexRow) instanceof Allenamento) {
                 modifyEventDialog.setTitle("Modifica allenamento");
-                jTextField4.setText(((AllenamentoProva) listaEventi.get(indexRow)).getTipologia());
+                jTextField4.setText(((Allenamento) eventi.get(indexRow)).getTipologia());
                 noteLabel2.setVisible(true);
                 jScrollPane3.setVisible(true);
-                jTextArea2.setText(((AllenamentoProva) listaEventi.get(indexRow)).getNote());
+                jTextArea2.setText(((Allenamento) eventi.get(indexRow)).getNote());
                 jLabel11.setText("Modifica allenamento");
                 hybridLabel1.setText("Tipologia:");
 
-            } else if (listaEventi.get(indexRow) instanceof AmichevoleProva) {
+            } else if (eventi.get(indexRow) instanceof Amichevole) {
                 modifyEventDialog.setTitle("Modifica amichevole");
-                jTextField4.setText(((AmichevoleProva) listaEventi.get(indexRow)).getSquadraAvversaria());
+                jTextField4.setText(((Amichevole) eventi.get(indexRow)).getSquadraAvversaria());
                 jLabel11.setText("Modifica amichevole");
                 hybridLabel1.setText("Avversari:");
             }
@@ -1280,16 +1251,35 @@ public class CalendarPanel extends javax.swing.JPanel {
 
             if (allenamentoRadio.isSelected()) {
 
-                listaEventi.add(new AllenamentoProva(idCalendarLatest, dateToLocalDate(data),
-                        LocalTime.of(ora, min), durata, luogo, ibrido, note));
+                try {
+                    parentFrame.getTM().pianificaAllenamento(dateToLocalDate(data), LocalTime.of(ora, min), durata, luogo, ibrido, note);
+                    initialiteCalendar();
+                    createEventDialog.setVisible(false);
+                } catch (SovrapposizioneEventoException e) {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            e.getMessage(),
+                            "Errore",
+                            JOptionPane.PLAIN_MESSAGE
+                    );
+                }
 
             } else if (amichevoleRadio.isSelected()) {
-                listaEventi.add(new AmichevoleProva(idCalendarLatest, dateToLocalDate(data),
-                        LocalTime.of(ora, min), durata, luogo, ibrido));
+
+                try {
+                    parentFrame.getTM().pianificaAmichevole(dateToLocalDate(data), LocalTime.of(ora, min), durata, luogo, ibrido);
+                    initialiteCalendar();
+                    createEventDialog.setVisible(false);
+                } catch (SovrapposizioneEventoException e) {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            e.getMessage(),
+                            "Errore",
+                            JOptionPane.PLAIN_MESSAGE
+                    );
+                }
             }
 
-            initialiteCalendar();
-            createEventDialog.setVisible(false);
         }
 
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -1358,22 +1348,25 @@ public class CalendarPanel extends javax.swing.JPanel {
             String ibrido = jTextField4.getText();
             String note = jTextArea2.getText();
 
-            listaEventi.get(indexRow).setData(dateToLocalDate(data));
-            listaEventi.get(indexRow).setOrario(LocalTime.of(ora, min));
-            listaEventi.get(indexRow).setDurata(durata);
-            listaEventi.get(indexRow).setLuogo(luogo);
+            Map<String, String> campiSpecifici = new HashMap<>();
+            campiSpecifici.put("squadraAvversaria", ibrido);
+            campiSpecifici.put("tipologia", ibrido);
+            campiSpecifici.put("note", note);
 
-            if (listaEventi.get(indexRow) instanceof AllenamentoProva) {
-                AllenamentoProva ap = (AllenamentoProva) listaEventi.get(indexRow);
-                ap.setTipologia(ibrido);
-                ap.setNote(note);
-            } else if (listaEventi.get(indexRow) instanceof AmichevoleProva) {
-                AmichevoleProva ap = (AmichevoleProva) listaEventi.get(indexRow);
-                ap.setSquadraAvversaria(ibrido);
+            try {
+                parentFrame.getTM().aggiornaEvento(eventi.get(indexRow), dateToLocalDate(data), LocalTime.of(ora, min),
+                        durata, luogo, campiSpecifici);
+
+                initialiteCalendar();
+                modifyEventDialog.setVisible(false);
+            } catch (SovrapposizioneEventoException e) {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            e.getMessage(),
+                            "Errore",
+                            JOptionPane.PLAIN_MESSAGE
+                    );
             }
-
-            initialiteCalendar();
-            modifyEventDialog.setVisible(false);
         }
 
 
@@ -1386,7 +1379,7 @@ public class CalendarPanel extends javax.swing.JPanel {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
-        listaEventi.remove(listaEventi.get(indexRow));
+        parentFrame.getTM().rimuoviEvento(eventi.get(indexRow));
         initialiteCalendar();
         removeEventDialog.setVisible(false);
     }//GEN-LAST:event_jButton10ActionPerformed
