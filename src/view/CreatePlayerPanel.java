@@ -14,11 +14,6 @@ import javax.swing.JOptionPane;
  *
  * @author enzov
  */
-
-
-
-
-
 public class CreatePlayerPanel extends javax.swing.JPanel {
 
     /**
@@ -36,16 +31,16 @@ public class CreatePlayerPanel extends javax.swing.JPanel {
         LocalDate localDate = instant.atZone(ZoneId.systemDefault()).toLocalDate();
         return localDate;
     }
-    
-    private void setEmptyField(){
+
+    private void setEmptyField() {
         jTextField1.setText("");
         jTextField2.setText("");
-        jDateChooser1.setDate(null) ;
+        jDateChooser1.setDate(null);
         jTextField5.setText("");
         jTextField6.setText("");
     }
-    
-    public void logout(){
+
+    public void logout() {
         setEmptyField();
     }
 
@@ -268,24 +263,36 @@ public class CreatePlayerPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if(jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty()  || 
-                jDateChooser1.getDate() == null || jTextField5.getText().isEmpty() || jTextField6.getText().isEmpty()){
-            
+        if (jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty()
+                || jDateChooser1.getDate() == null || jTextField5.getText().isEmpty() || jTextField6.getText().isEmpty()) {
+
             JOptionPane.showMessageDialog(
-            null,
-            "Riempire tutti i campi!",
-            "Errore",
-            JOptionPane.PLAIN_MESSAGE
-        );
-        }else{
+                    null,
+                    "Riempire tutti i campi!",
+                    "Errore",
+                    JOptionPane.PLAIN_MESSAGE
+            );
+        } else {
             //per passare la data calendario, chiamare il metodo dateToLocalDate()
-            JOptionPane.showMessageDialog(
-            null,
-            "Tutto ok!",
-            "Errore",
-            JOptionPane.PLAIN_MESSAGE
-        );
+            boolean result = parentFrame.getTM().creaGiocatore(jTextField1.getText(), jTextField2.getText(), dateToLocalDate(jDateChooser1.getDate()),
+                    jTextField6.getText(), jTextField5.getText());
             
+            if(result){
+                  JOptionPane.showMessageDialog(
+                    null,
+                    "Inserimento andato a buon fine!",
+                    "Errore",
+                    JOptionPane.PLAIN_MESSAGE
+            );
+            }else{
+                  JOptionPane.showMessageDialog(
+                    null,
+                    "giocatore già esistente!",
+                    "Errore",
+                    JOptionPane.PLAIN_MESSAGE
+            );
+            }
+
             System.out.println(dateToLocalDate(jDateChooser1.getDate()));
         }
     }//GEN-LAST:event_jButton1ActionPerformed
