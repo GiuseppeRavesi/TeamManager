@@ -111,6 +111,7 @@ public class PlayerRosaPanel extends javax.swing.JPanel {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jList1.setMaximumSize(new java.awt.Dimension(90, 90));
         jScrollPane1.setViewportView(jList1);
 

@@ -40,6 +40,7 @@ public class TeamManagerGUI extends javax.swing.JFrame {
     PlayerPanel playerPanel;
     PlayerRosaPanel playerRosaPanel;
     PlayerCalendarPanel playerCalendarPanel;
+    ProgressPanel progressPanel;
 
     //classe facade controllore
     TeamManager tm;
@@ -174,6 +175,11 @@ public class TeamManagerGUI extends javax.swing.JFrame {
 
         playerCalendarPanel = new PlayerCalendarPanel(this);
         jPanel1.add(playerCalendarPanel, "PLAYERCALENDARPANEL");
+        
+        progressPanel= new ProgressPanel(this);
+        jPanel1.add(progressPanel,"PROGRESSPANEL");
+        
+        
 
         //logica di logout parziale
         Logout.addActionListener(new ActionListener() {

@@ -82,6 +82,11 @@ public class CoachPanel extends javax.swing.JPanel {
         archivioGiocatori.setBackground(new java.awt.Color(204, 204, 204));
         archivioGiocatori.setFont(new java.awt.Font("Rockwell", 0, 17)); // NOI18N
         archivioGiocatori.setText("Gestisci Progressi");
+        archivioGiocatori.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                archivioGiocatoriActionPerformed(evt);
+            }
+        });
 
         suggerisciFormazione.setBackground(new java.awt.Color(204, 204, 204));
         suggerisciFormazione.setFont(new java.awt.Font("Rockwell", 0, 17)); // NOI18N
@@ -173,6 +178,11 @@ public class CoachPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         parentFrame.cardLayout.show(parentFrame.getjPanel1(),"CREATEPANEL");
     }//GEN-LAST:event_creaGiocatoreActionPerformed
+
+    private void archivioGiocatoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_archivioGiocatoriActionPerformed
+        // TODO add your handling code here:
+        parentFrame.cardLayout.show(parentFrame.getjPanel1(),"PROGRESSPANEL");
+    }//GEN-LAST:event_archivioGiocatoriActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

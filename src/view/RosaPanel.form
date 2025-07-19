@@ -605,6 +605,7 @@
                         <StringItem index="4" value="Item 5"/>
                       </StringArray>
                     </Property>
+                    <Property name="selectionMode" type="int" value="0"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -1113,8 +1114,9 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="0" pref="54" max="32767" attributes="0"/>
+              <EmptySpace pref="48" max="32767" attributes="0"/>
               <Component id="jPanel2" min="-2" pref="546" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -1143,14 +1145,17 @@
                       </Group>
                       <Component id="jScrollPane1" min="-2" pref="560" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="modifyButton" min="-2" pref="104" max="-2" attributes="0"/>
-                          <Component id="addButton" min="-2" pref="104" max="-2" attributes="0"/>
-                          <Component id="deleteButton" alignment="0" min="-2" pref="104" max="-2" attributes="0"/>
+                  <EmptySpace min="35" pref="35" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="modifyButton" min="-2" pref="104" max="-2" attributes="0"/>
+                              <Component id="addButton" min="-2" pref="104" max="-2" attributes="0"/>
+                              <Component id="deleteButton" alignment="0" min="-2" pref="104" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="backButton" min="-2" pref="80" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="backButton" min="-2" pref="80" max="-2" attributes="0"/>
+                      <Component id="jButton7" alignment="1" min="-2" pref="104" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="75" max="32767" attributes="0"/>
               </Group>
@@ -1172,6 +1177,8 @@
                           <Component id="modifyButton" min="-2" pref="51" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="deleteButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="jButton7" min="-2" pref="54" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="backButton" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -1222,6 +1229,7 @@
                     <StringItem index="4" value="Item 5"/>
                   </StringArray>
                 </Property>
+                <Property name="selectionMode" type="int" value="0"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[90, 90]"/>
                 </Property>
@@ -1294,6 +1302,17 @@
               <Font name="Segoe UI" size="18" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Rosa Attuale"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton7">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="f1" green="e9" red="f3" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="2"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;Andamento&lt;br&gt;Rosa&lt;/html&gt;"/>
           </Properties>
         </Component>
       </SubComponents>

@@ -100,6 +100,7 @@ public class TeamManager {
     }
 
     public List<Disponibilità> visualizzaDisponibilitàGiocatore(int idGiocatoreRosa) {
+        System.out.println("Sono visualizza disp di TM");
         return c.visualizzaDisponibilitàGiocatore(idGiocatoreRosa);
     }
 
@@ -133,11 +134,14 @@ public class TeamManager {
     //UC6 - Gestisci Progressi Giocatore
     public void aggiungiStatisticaAllenamento(int idGiocatore, int idEvento,
             Map<String, String> campiSpecifici) throws IllegalArgumentException {
+        
+        System.out.println("Statistica allenamento TM");
         c.aggiungiStatisticaAllenamento(idGiocatore, idEvento, campiSpecifici);
     }
 
     public void aggiungiStatisticaAmichevole(int idGiocatore, int idEvento,
             Map<String, String> campiSpecifici) throws IllegalArgumentException {
+        System.out.println("Statistica allenamento TM v2");
         c.aggiungiStatisticaAmichevole(idGiocatore, idEvento, campiSpecifici);
     }
 

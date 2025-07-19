@@ -166,6 +166,8 @@ public class Calendario {
                 Integer.parseInt(campiSpecifici.get("frequenzaCardiacaMedia"))
         );
 
+        
+        System.out.println("Statistica allenamento aggiunta");
         disponibilitàTrovata.setStatistica(sa);
     }
 
@@ -202,7 +204,7 @@ public class Calendario {
                 Integer.parseInt(campiSpecifici.get("autogoal")),
                 Integer.parseInt(campiSpecifici.get("cartelliniGialli")),
                 Integer.parseInt(campiSpecifici.get("cartelliniRossi")),
-                Integer.parseInt(campiSpecifici.get("distanzaTotalePercorsa")),
+                Float.parseFloat(campiSpecifici.get("distanzaTotalePercorsa")),
                 Integer.parseInt(campiSpecifici.get("falliCommessi")),
                 Integer.parseInt(campiSpecifici.get("assist")),
                 Integer.parseInt(campiSpecifici.get("parate")),
@@ -211,6 +213,7 @@ public class Calendario {
                 Integer.parseInt(campiSpecifici.get("tiriTotali"))
         );
 
+        System.out.println("Inserimento statistiche amichevole riuscito");
         disponibilitàTrovata.setStatistica(sa);
     }
 
@@ -259,7 +262,9 @@ public class Calendario {
         disp = new ArrayList<>();
         for (Evento e : listaEventi) {
             for (Disponibilità d : e.getDisponibilità()) {
-                if (d.getIdGiocatore() == idGiocatoreRosa) {
+                if (d.getIdGiocatore() == idGiocatoreRosa && d.isPresenza()) {
+                    
+                    System.out.println("Sono visualizza disp di calendario");
                     disp.add(d);
                 }
             }
