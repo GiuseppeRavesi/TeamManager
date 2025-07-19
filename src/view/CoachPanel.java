@@ -99,6 +99,11 @@ public class CoachPanel extends javax.swing.JPanel {
         analisiPerformance.setBackground(new java.awt.Color(204, 204, 204));
         analisiPerformance.setFont(new java.awt.Font("Rockwell", 0, 17)); // NOI18N
         analisiPerformance.setText("Confronta Giocatore");
+        analisiPerformance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                analisiPerformanceActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -183,6 +188,11 @@ public class CoachPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         parentFrame.cardLayout.show(parentFrame.getjPanel1(),"PROGRESSPANEL");
     }//GEN-LAST:event_archivioGiocatoriActionPerformed
+
+    private void analisiPerformanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analisiPerformanceActionPerformed
+        // TODO add your handling code here:
+        parentFrame.cardLayout.show(parentFrame.getjPanel1(), "COMPAREPANEL");
+    }//GEN-LAST:event_analisiPerformanceActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
