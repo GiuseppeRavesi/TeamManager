@@ -168,6 +168,11 @@ public class PlayerCalendarPanel extends javax.swing.JPanel {
         presente.setSelected(true);
 
     }
+    
+    public void logout(){
+        parentFrame.getSession().logout();
+        initialiteCalendar();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

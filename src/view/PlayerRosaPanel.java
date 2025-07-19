@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import model.GiocatoreInRosa;
 
 /**
  *
@@ -23,8 +24,7 @@ public class PlayerRosaPanel extends javax.swing.JPanel {
      */
     private TeamManagerGUI parentFrame;
 
-    private java.util.List<GiocatoreProva> squadra;
-    private java.util.List<GiocatoreProva> listaGiocatori;
+    private java.util.List<GiocatoreInRosa> rosa;
 
     private DefaultListModel<String> model;
 
@@ -33,31 +33,28 @@ public class PlayerRosaPanel extends javax.swing.JPanel {
         this.parentFrame = parentFrame;
         initComponents();
 
-        squadra = new ArrayList<>();
-        listaGiocatori = new ArrayList<>();
+        rosa=parentFrame.getTM().visualizzaRosa();
         
          model = new DefaultListModel<String>();
-
-        setSquadra();
-        setListaGiocatori();
 
         initializeList();
     }
 
-    private void initializeList() {
+  private void initializeList() {
         model.clear();
-        for (GiocatoreProva p : squadra) {
+        for (GiocatoreInRosa p : rosa) {
             model.addElement(p.toString());
         }
+        
         jList1.setModel(model);
 
         // Imposta font monospaziato per allineare i campi
         jList1.setFont(new java.awt.Font("Monospaced", java.awt.Font.PLAIN, 13));
 
-        String numGiocatoriRosa = squadra.size() + " / " + 22;
+        String numGiocatoriRosa = rosa.size() + " / " + 22;
         numGiocatoriLabel.setText(numGiocatoriRosa);
 
-        if (squadra.size() < 22) {
+        if (rosa.size() < 22) {
             jLabel1.setText("Rosa Attuale - Incompleta");
             numGiocatoriLabel.setForeground(Color.red);
 
@@ -65,79 +62,30 @@ public class PlayerRosaPanel extends javax.swing.JPanel {
             jLabel1.setText("Rosa Attuale");
             numGiocatoriLabel.setForeground(Color.GREEN);
         }
+        
+        
+        int indexList =0;
+        
+ 
+        
+        for(GiocatoreInRosa g: rosa) {
+            if(g.getGiocatore().getId() != parentFrame.getSession().getUtenteLoggato().getId()){
+                indexList++;
+            }else{
+                break;
+            }
+        }
+        
+        
+        jList1.setCellRenderer(new MyListRenderer(indexList));
+        
+       
 
     }
 
     public void logout() {
+        parentFrame.getSession().logout();
         initializeList();
-    }
-    
-    private void setSquadra() {
-        squadra.add(new GiocatoreProva(1, "Luca", "Rossi", "luca.rossi@email.com", LocalDate.of(1995, 3, 12), 10, "Attivo", "Attaccante"));
-        squadra.add(new GiocatoreProva(2, "Marco", "Bianchi", "marco.bianchi@email.com", LocalDate.of(1993, 6, 22), 1, "Attivo", "Portiere"));
-        squadra.add(new GiocatoreProva(3, "Alessandro", "Verdi", "alessandro.verdi@email.com", LocalDate.of(1996, 1, 9), 4, "Attivo", "Difensore"));
-        squadra.add(new GiocatoreProva(4, "Giovanni", "Neri", "giovanni.neri@email.com", LocalDate.of(1998, 4, 18), 8, "Attivo", "Centrocampista"));
-        squadra.add(new GiocatoreProva(5, "Davide", "Ferrari", "davide.ferrari@email.com", LocalDate.of(1994, 12, 5), 5, "Infortunato", "Difensore"));
-        squadra.add(new GiocatoreProva(6, "Matteo", "Esposito", "matteo.esposito@email.com", LocalDate.of(1997, 2, 14), 7, "Attivo", "Centrocampista"));
-        squadra.add(new GiocatoreProva(7, "Simone", "Gallo", "simone.gallo@email.com", LocalDate.of(1999, 7, 3), 11, "Attivo", "Attaccante"));
-        squadra.add(new GiocatoreProva(8, "Andrea", "Fontana", "andrea.fontana@email.com", LocalDate.of(1992, 9, 26), 6, "Attivo", "Difensore"));
-        squadra.add(new GiocatoreProva(9, "Francesco", "Marino", "francesco.marino@email.com", LocalDate.of(1991, 11, 8), 2, "Squalificato", "Difensore"));
-        squadra.add(new GiocatoreProva(10, "Riccardo", "Conti", "riccardo.conti@email.com", LocalDate.of(1995, 5, 19), 3, "Attivo", "Difensore"));
-        squadra.add(new GiocatoreProva(11, "Stefano", "Pellegrini", "stefano.pellegrini@email.com", LocalDate.of(2000, 8, 30), 9, "Attivo", "Attaccante"));
-        squadra.add(new GiocatoreProva(12, "Fabio", "De Luca", "fabio.deluca@email.com", LocalDate.of(1996, 10, 21), 13, "Attivo", "Centrocampista"));
-        squadra.add(new GiocatoreProva(13, "Giorgio", "Rinaldi", "giorgio.rinaldi@email.com", LocalDate.of(1997, 1, 15), 14, "Attivo", "Difensore"));
-        squadra.add(new GiocatoreProva(14, "Emanuele", "Costa", "emanuele.costa@email.com", LocalDate.of(1993, 3, 3), 15, "Infortunato", "Attaccante"));
-        squadra.add(new GiocatoreProva(15, "Federico", "Barbieri", "federico.barbieri@email.com", LocalDate.of(1994, 6, 11), 16, "Attivo", "Portiere"));
-        squadra.add(new GiocatoreProva(16, "Daniele", "Sala", "daniele.sala@email.com", LocalDate.of(1992, 8, 17), 17, "Attivo", "Centrocampista"));
-        squadra.add(new GiocatoreProva(17, "Lorenzo", "Martini", "lorenzo.martini@email.com", LocalDate.of(1990, 12, 25), 18, "Attivo", "Difensore"));
-        squadra.add(new GiocatoreProva(18, "Nicola", "Bianco", "nicola.bianco@email.com", LocalDate.of(1998, 7, 13), 19, "Squalificato", "Attaccante"));
-        squadra.add(new GiocatoreProva(19, "Pietro", "Fabbri", "pietro.fabbri@email.com", LocalDate.of(1996, 5, 20), 20, "Attivo", "Difensore"));
-        squadra.add(new GiocatoreProva(20, "Valerio", "Grassi", "valerio.grassi@email.com", LocalDate.of(1995, 9, 4), 21, "Attivo", "Centrocampista"));
-        squadra.add(new GiocatoreProva(21, "Massimo", "Gentile", "massimo.gentile@email.com", LocalDate.of(1997, 11, 2), 22, "Attivo", "Attaccante"));
-        //squadra.add(new GiocatoreProva(22, "Enrico", "Longo", "enrico.longo@email.com", LocalDate.of(1999, 2, 28), 23, "Attivo", "Difensore"));
-    }
-    
-    private void setListaGiocatori() {
-        listaGiocatori.add(new GiocatoreProva(1, "Luca", "Rossi", "luca.rossi@email.com", LocalDate.of(1995, 3, 12), 10, "Attivo", "Attaccante"));
-        listaGiocatori.add(new GiocatoreProva(2, "Marco", "Bianchi", "marco.bianchi@email.com", LocalDate.of(1993, 6, 22), 1, "Attivo", "Portiere"));
-        listaGiocatori.add(new GiocatoreProva(3, "Alessandro", "Verdi", "alessandro.verdi@email.com", LocalDate.of(1996, 1, 9), 4, "Attivo", "Difensore"));
-        listaGiocatori.add(new GiocatoreProva(4, "Giovanni", "Neri", "giovanni.neri@email.com", LocalDate.of(1998, 4, 18), 8, "Attivo", "Centrocampista"));
-        listaGiocatori.add(new GiocatoreProva(5, "Davide", "Ferrari", "davide.ferrari@email.com", LocalDate.of(1994, 12, 5), 5, "Infortunato", "Difensore"));
-        listaGiocatori.add(new GiocatoreProva(6, "Matteo", "Esposito", "matteo.esposito@email.com", LocalDate.of(1997, 2, 14), 7, "Attivo", "Centrocampista"));
-        listaGiocatori.add(new GiocatoreProva(7, "Simone", "Gallo", "simone.gallo@email.com", LocalDate.of(1999, 7, 3), 11, "Attivo", "Attaccante"));
-        listaGiocatori.add(new GiocatoreProva(8, "Andrea", "Fontana", "andrea.fontana@email.com", LocalDate.of(1992, 9, 26), 6, "Attivo", "Difensore"));
-        listaGiocatori.add(new GiocatoreProva(9, "Francesco", "Marino", "francesco.marino@email.com", LocalDate.of(1991, 11, 8), 2, "Squalificato", "Difensore"));
-        listaGiocatori.add(new GiocatoreProva(10, "Riccardo", "Conti", "riccardo.conti@email.com", LocalDate.of(1995, 5, 19), 3, "Attivo", "Difensore"));
-        listaGiocatori.add(new GiocatoreProva(11, "Stefano", "Pellegrini", "stefano.pellegrini@email.com", LocalDate.of(2000, 8, 30), 9, "Attivo", "Attaccante"));
-        listaGiocatori.add(new GiocatoreProva(12, "Fabio", "De Luca", "fabio.deluca@email.com", LocalDate.of(1996, 10, 21), 13, "Attivo", "Centrocampista"));
-        listaGiocatori.add(new GiocatoreProva(13, "Giorgio", "Rinaldi", "giorgio.rinaldi@email.com", LocalDate.of(1997, 1, 15), 14, "Attivo", "Difensore"));
-        listaGiocatori.add(new GiocatoreProva(14, "Emanuele", "Costa", "emanuele.costa@email.com", LocalDate.of(1993, 3, 3), 15, "Infortunato", "Attaccante"));
-        listaGiocatori.add(new GiocatoreProva(15, "Federico", "Barbieri", "federico.barbieri@email.com", LocalDate.of(1994, 6, 11), 16, "Attivo", "Portiere"));
-        listaGiocatori.add(new GiocatoreProva(16, "Daniele", "Sala", "daniele.sala@email.com", LocalDate.of(1992, 8, 17), 17, "Attivo", "Centrocampista"));
-        listaGiocatori.add(new GiocatoreProva(17, "Lorenzo", "Martini", "lorenzo.martini@email.com", LocalDate.of(1990, 12, 25), 18, "Attivo", "Difensore"));
-        listaGiocatori.add(new GiocatoreProva(18, "Nicola", "Bianco", "nicola.bianco@email.com", LocalDate.of(1998, 7, 13), 19, "Squalificato", "Attaccante"));
-        listaGiocatori.add(new GiocatoreProva(19, "Pietro", "Fabbri", "pietro.fabbri@email.com", LocalDate.of(1996, 5, 20), 20, "Attivo", "Difensore"));
-        listaGiocatori.add(new GiocatoreProva(20, "Valerio", "Grassi", "valerio.grassi@email.com", LocalDate.of(1995, 9, 4), 21, "Attivo", "Centrocampista"));
-        listaGiocatori.add(new GiocatoreProva(21, "Massimo", "Gentile", "massimo.gentile@email.com", LocalDate.of(1997, 11, 2), 22, "Attivo", "Attaccante"));
-        listaGiocatori.add(new GiocatoreProva(22, "Enrico", "Longo", "enrico.longo@email.com", LocalDate.of(1999, 2, 28), 23, "Attivo", "Difensore"));
-        listaGiocatori.add(new GiocatoreProva(23, "Tommaso", "Caruso", "tommaso.caruso@email.com", LocalDate.of(1993, 5, 2), 24, "Attivo", "Difensore"));
-        listaGiocatori.add(new GiocatoreProva(24, "Leonardo", "Moretti", "leonardo.moretti@email.com", LocalDate.of(1996, 8, 11), 25, "Attivo", "Attaccante"));
-        listaGiocatori.add(new GiocatoreProva(25, "Gabriele", "Mancini", "gabriele.mancini@email.com", LocalDate.of(1995, 3, 7), 26, "Attivo", "Centrocampista"));
-        listaGiocatori.add(new GiocatoreProva(26, "Samuel", "Silvestri", "samuel.silvestri@email.com", LocalDate.of(1997, 9, 30), 27, "Attivo", "Difensore"));
-        listaGiocatori.add(new GiocatoreProva(27, "Michele", "Testa", "michele.testa@email.com", LocalDate.of(1992, 1, 19), 28, "Infortunato", "Portiere"));
-        listaGiocatori.add(new GiocatoreProva(28, "Alberto", "Basile", "alberto.basile@email.com", LocalDate.of(1994, 12, 8), 29, "Attivo", "Difensore"));
-        listaGiocatori.add(new GiocatoreProva(29, "Carlo", "Santoro", "carlo.santoro@email.com", LocalDate.of(1993, 6, 14), 30, "Attivo", "Centrocampista"));
-        listaGiocatori.add(new GiocatoreProva(30, "Christian", "Palmieri", "christian.palmieri@email.com", LocalDate.of(1998, 4, 16), 31, "Attivo", "Attaccante"));
-        listaGiocatori.add(new GiocatoreProva(31, "Vincenzo", "Parisi", "vincenzo.parisi@email.com", LocalDate.of(1999, 11, 5), 32, "Squalificato", "Difensore"));
-        listaGiocatori.add(new GiocatoreProva(32, "Salvatore", "Monti", "salvatore.monti@email.com", LocalDate.of(1996, 2, 23), 33, "Attivo", "Centrocampista"));
-        listaGiocatori.add(new GiocatoreProva(33, "Diego", "Martino", "diego.martino@email.com", LocalDate.of(1995, 10, 3), 34, "Attivo", "Difensore"));
-        listaGiocatori.add(new GiocatoreProva(34, "Fabian", "De Santis", "fabian.desantis@email.com", LocalDate.of(1991, 5, 28), 35, "Attivo", "Attaccante"));
-        listaGiocatori.add(new GiocatoreProva(35, "Antonio", "Bellini", "antonio.bellini@email.com", LocalDate.of(1994, 7, 12), 36, "Attivo", "Portiere"));
-        listaGiocatori.add(new GiocatoreProva(36, "Giulio", "Ruggieri", "giulio.ruggieri@email.com", LocalDate.of(1997, 12, 1), 37, "Attivo", "Centrocampista"));
-        listaGiocatori.add(new GiocatoreProva(37, "Raffaele", "Ferretti", "raffaele.ferretti@email.com", LocalDate.of(1990, 3, 15), 38, "Attivo", "Difensore"));
-        listaGiocatori.add(new GiocatoreProva(38, "Sebastiano", "Vitale", "sebastiano.vitale@email.com", LocalDate.of(1998, 6, 9), 39, "Infortunato", "Attaccante"));
-        listaGiocatori.add(new GiocatoreProva(39, "Claudio", "Negri", "claudio.negri@email.com", LocalDate.of(1993, 9, 21), 40, "Attivo", "Difensore"));
-
     }
 
     /**
