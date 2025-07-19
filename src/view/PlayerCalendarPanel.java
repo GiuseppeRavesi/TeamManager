@@ -87,6 +87,10 @@ public class PlayerCalendarPanel extends javax.swing.JPanel {
         }
 
     }
+    
+    public void initCard(){
+        initialiteCalendar();
+    }
 
     private void tableClickListener() {
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -171,7 +175,6 @@ public class PlayerCalendarPanel extends javax.swing.JPanel {
     
     public void logout(){
         parentFrame.getSession().logout();
-        initialiteCalendar();
     }
 
     /**

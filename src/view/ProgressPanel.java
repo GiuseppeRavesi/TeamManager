@@ -98,7 +98,6 @@ public class ProgressPanel extends javax.swing.JPanel {
 
     public void logout() {
         parentFrame.getSession().logout();
-        initializeList();
     }
 
     private void setMouseListenerJList1() {

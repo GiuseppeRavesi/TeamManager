@@ -14,9 +14,6 @@ import model.GiocatoreInRosa;
  *
  * @author enzov
  */
-
-
-
 public class PlayerRosaPanel extends javax.swing.JPanel {
 
     /**
@@ -28,24 +25,23 @@ public class PlayerRosaPanel extends javax.swing.JPanel {
 
     private DefaultListModel<String> model;
 
-
     public PlayerRosaPanel(TeamManagerGUI parentFrame) {
         this.parentFrame = parentFrame;
         initComponents();
 
-        rosa=parentFrame.getTM().visualizzaRosa();
-        
-         model = new DefaultListModel<String>();
+        rosa = parentFrame.getTM().visualizzaRosa();
+
+        model = new DefaultListModel<String>();
 
         initializeList();
     }
 
-  private void initializeList() {
+    private void initializeList() {
         model.clear();
         for (GiocatoreInRosa p : rosa) {
             model.addElement(p.toString());
         }
-        
+
         jList1.setModel(model);
 
         // Imposta font monospaziato per allineare i campi
@@ -62,30 +58,28 @@ public class PlayerRosaPanel extends javax.swing.JPanel {
             jLabel1.setText("Rosa Attuale");
             numGiocatoriLabel.setForeground(Color.GREEN);
         }
-        
-        
-        int indexList =0;
-        
- 
-        
-        for(GiocatoreInRosa g: rosa) {
-            if(g.getGiocatore().getId() != parentFrame.getSession().getUtenteLoggato().getId()){
+
+        int indexList = 0;
+
+        for (GiocatoreInRosa g : rosa) {
+            if (g.getGiocatore().getId() != parentFrame.getSession().getUtenteLoggato().getId()) {
                 indexList++;
-            }else{
+            } else {
                 break;
             }
         }
-        
-        
-        jList1.setCellRenderer(new MyListRenderer(indexList));
-        
-       
 
+        jList1.setCellRenderer(new MyListRenderer(indexList));
+
+    }
+
+    public void initCard() {
+        initializeList();
     }
 
     public void logout() {
         parentFrame.getSession().logout();
-        initializeList();
+        
     }
 
     /**

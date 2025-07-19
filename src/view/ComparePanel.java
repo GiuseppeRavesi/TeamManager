@@ -64,7 +64,6 @@ public class ComparePanel extends javax.swing.JPanel {
     
     public void logout(){
         parentFrame.getSession().logout();
-        initializeList();
     }
 
     private void setUpCompareDialog() {

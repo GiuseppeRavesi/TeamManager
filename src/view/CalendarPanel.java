@@ -88,7 +88,6 @@ public class CalendarPanel extends javax.swing.JPanel {
 
     public void logout() {
         parentFrame.getSession().logout();
-        initialiteCalendar();
     }
 
     private void tableClickListener() {

@@ -120,12 +120,14 @@ public class PlayerPanel extends javax.swing.JPanel {
 
     private void rosaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rosaButtonActionPerformed
         // TODO add your handling code here:
+        parentFrame.playerRosaPanel.initCard();
         parentFrame.cardLayout.show(parentFrame.getjPanel1(), "PLAYERROSAPANEL");
         
     }//GEN-LAST:event_rosaButtonActionPerformed
 
     private void presenceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_presenceButtonActionPerformed
         // TODO add your handling code here:
+        parentFrame.playerCalendarPanel.initCard();
         parentFrame.cardLayout.show(parentFrame.getjPanel1(), "PLAYERCALENDARPANEL");
     }//GEN-LAST:event_presenceButtonActionPerformed
 

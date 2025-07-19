@@ -197,6 +197,11 @@ public class TeamManagerGUI extends javax.swing.JFrame {
                 calendarPanel.logout();
                 createPanel.logout();
                 progressPanel.logout();
+                comparePanel.logout();
+                
+                playerCalendarPanel.logout();
+                playerRosaPanel.logout();
+                
                 System.out.println(session.getUtenteLoggato());
             }
         });
