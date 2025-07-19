@@ -12,6 +12,7 @@ import static java.lang.Integer.parseInt;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -141,8 +142,8 @@ public class ProgressPanel extends javax.swing.JPanel {
 
         statAllenamento.setVisible(true);
     }
-    
-      private void setUpStatAmichevole(Evento ev) {
+
+    private void setUpStatAmichevole(Evento ev) {
         statAmichevole.setLocationRelativeTo(null);
         statAmichevole.setTitle("Statistiche amichevole");
         statAmichevole.setResizable(false);
@@ -292,7 +293,9 @@ public class ProgressPanel extends javax.swing.JPanel {
         jList1 = new javax.swing.JList<>();
         jButton1 = new javax.swing.JButton();
 
+        dispDialog.setMaximumSize(new java.awt.Dimension(500, 500));
         dispDialog.setMinimumSize(new java.awt.Dimension(500, 500));
+        dispDialog.setPreferredSize(new java.awt.Dimension(500, 500));
 
         jPanel1.setBackground(new java.awt.Color(248, 251, 252));
         jPanel1.setMaximumSize(new java.awt.Dimension(500, 405));
@@ -528,6 +531,11 @@ public class ProgressPanel extends javax.swing.JPanel {
         jButton4.setBackground(new java.awt.Color(252, 246, 246));
         jButton4.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jButton4.setText("Back");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton6.setBackground(new java.awt.Color(239, 246, 248));
         jButton6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -766,6 +774,11 @@ public class ProgressPanel extends javax.swing.JPanel {
         jButton7.setBackground(new java.awt.Color(252, 246, 246));
         jButton7.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jButton7.setText("Back");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton8.setBackground(new java.awt.Color(239, 246, 248));
         jButton8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -879,9 +892,8 @@ public class ProgressPanel extends javax.swing.JPanel {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-
-        //initializeList();
-        //parentFrame.cardLayout.show(parentFrame.getjPanel1(), "PLAYERPANEL");
+        initializeList();
+        parentFrame.cardLayout.show(parentFrame.getjPanel1(), "COACHPANEL");
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -922,11 +934,74 @@ public class ProgressPanel extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        String[] options = {"  Si  ", "  No  "};
+
+        if (indexRow >= 0) {
+            
+            if(listaDisponibilita.get(indexRow).getStatistica()!=null){
+                
+            
+
+            int id = listaDisponibilita.get(indexRow).getIdEvento();
+            Evento e = null;
+
+            for (Evento ev : eventi) {
+                if (ev.getId() == id) {
+                    e = ev;
+                    break;
+                }
+            }
+
+            int result = JOptionPane.showOptionDialog(
+                    dispDialog,
+                    "Vuoi eliminare la statistica di Evento id: " + e.getId() + "?",
+                    "Esci",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.PLAIN_MESSAGE, // no icona
+                    null,
+                    options, //bottoni customizzati
+                    options[0] //default btn
+            );
+
+            if (result == JOptionPane.YES_OPTION) {
+                //aggiungere logica persistenza (salvataggio)
+                try {
+                    parentFrame.getTM().rimuoviStatistica(rosa.get(indexListElement).getGiocatore().getId(), e.getId());
+                    dispDialog.setVisible(false);
+                    initializeList();
+                } catch (IllegalArgumentException exception) {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            exception.getMessage(),
+                            "Errore",
+                            JOptionPane.PLAIN_MESSAGE
+                    );
+                }
+            }
+            
+            }else{
+                  JOptionPane.showMessageDialog(
+                            null,
+                            "Nessuna statistica da eliminare!",
+                            "Errore",
+                            JOptionPane.PLAIN_MESSAGE
+                    );
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Seleziona evento con statistica da eliminare!",
+                    "Errore",
+                    JOptionPane.PLAIN_MESSAGE
+            );
+        }
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        dispDialog.setVisible(false);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -941,19 +1016,19 @@ public class ProgressPanel extends javax.swing.JPanel {
             int forzaFisica = parseInt(jComboBox5.getSelectedItem().toString().replaceAll("\\s+", ""));
             int forzaTiro = parseInt(jComboBox6.getSelectedItem().toString().replaceAll("\\s+", ""));
             int freq = parseInt(jComboBox7.getSelectedItem().toString().replaceAll("\\s+", ""));
-            
-            Map<String,String> campiSpecifici = new HashMap<>();
+
+            Map<String, String> campiSpecifici = new HashMap<>();
             campiSpecifici.put("velocitàMax", String.valueOf(velMax));
             campiSpecifici.put("velocitàMedia", String.valueOf(velMedia));
             campiSpecifici.put("valutazioneForzaFisica", String.valueOf(forzaFisica));
             campiSpecifici.put("valutazioneForzaTiro", String.valueOf(forzaTiro));
             campiSpecifici.put("frequenzaCardiacaMedia", String.valueOf(freq));
-            
+
             int idPlayer = rosa.get(indexListElement).getGiocatore().getId();
             int idEvento = parseInt(idAllenamento.getText());
-            
+
             parentFrame.getTM().aggiungiStatisticaAllenamento(idPlayer, idEvento, campiSpecifici);
-      
+
             dispDialog.setVisible(false);
             statAllenamento.setVisible(false);
             initializeList();
@@ -970,15 +1045,15 @@ public class ProgressPanel extends javax.swing.JPanel {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
-          try {
+        try {
             int minGiocati = parseInt(jComboBox8.getSelectedItem().toString().replaceAll("\\s+", ""));
             int goal = parseInt(jComboBox9.getSelectedItem().toString().replaceAll("\\s+", ""));
             int autoGoal = parseInt(jComboBox10.getSelectedItem().toString().replaceAll("\\s+", ""));
             int gialli = parseInt(jComboBox11.getSelectedItem().toString().replaceAll("\\s+", ""));
             int rossi = parseInt(jComboBox17.getSelectedItem().toString().replaceAll("\\s+", ""));
-            
+
             int d1 = parseInt(jComboBox12.getSelectedItem().toString().replaceAll("\\s+", ""));
-            float dist = Float.parseFloat(d1 + "."+ jComboBox13.getSelectedItem().toString().replaceAll("\\s+", ""));
+            float dist = Float.parseFloat(d1 + "." + jComboBox13.getSelectedItem().toString().replaceAll("\\s+", ""));
 
             int falli = parseInt(jComboBox14.getSelectedItem().toString().replaceAll("\\s+", ""));
             int assist = parseInt(jComboBox15.getSelectedItem().toString().replaceAll("\\s+", ""));
@@ -986,9 +1061,9 @@ public class ProgressPanel extends javax.swing.JPanel {
             int intercetti = parseInt(jComboBox16.getSelectedItem().toString().replaceAll("\\s+", ""));
             int passaggi = parseInt(jComboBox19.getSelectedItem().toString().replaceAll("\\s+", ""));
             int tiri = parseInt(jComboBox20.getSelectedItem().toString().replaceAll("\\s+", ""));
-            
-            Map<String,String> campiSpecifici = new HashMap<>();
-            
+
+            Map<String, String> campiSpecifici = new HashMap<>();
+
             campiSpecifici.put("minutiGiocati", String.valueOf(minGiocati));
             campiSpecifici.put("goal", String.valueOf(goal));
             campiSpecifici.put("autogoal", String.valueOf(autoGoal));
@@ -1001,12 +1076,12 @@ public class ProgressPanel extends javax.swing.JPanel {
             campiSpecifici.put("intercettiRiusciti", String.valueOf(intercetti));
             campiSpecifici.put("passaggiChiave", String.valueOf(passaggi));
             campiSpecifici.put("tiriTotali", String.valueOf(gialli));
-            
+
             int idPlayer = rosa.get(indexListElement).getGiocatore().getId();
             int idEvento = parseInt(idAmichevole.getText());
-            
+
             parentFrame.getTM().aggiungiStatisticaAmichevole(idPlayer, idEvento, campiSpecifici);
-      
+
             dispDialog.setVisible(false);
             statAmichevole.setVisible(false);
             initializeList();
@@ -1024,6 +1099,16 @@ public class ProgressPanel extends javax.swing.JPanel {
     private void jComboBox15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox15ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox15ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        statAllenamento.setVisible(false);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        statAmichevole.setVisible(false);
+    }//GEN-LAST:event_jButton7ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
