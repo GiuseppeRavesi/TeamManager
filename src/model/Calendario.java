@@ -1,6 +1,7 @@
 package model;
 
 import controller.Session;
+import exception.DisponibilitaEventoPassatoException;
 import exception.SovrapposizioneEventoException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -90,7 +91,12 @@ public class Calendario {
         this.listaEventi = listaEventi;
     }
     
-    public void aggiungiDisponibilità(Evento eventoSelezionato, boolean presenza, String motivazione) {
+    public void aggiungiDisponibilità(Evento eventoSelezionato, boolean presenza, String motivazione) throws DisponibilitaEventoPassatoException {
+        
+        if(eventoSelezionato.getData().isBefore(LocalDate.now())){
+            throw new DisponibilitaEventoPassatoException();
+        }
+        
         int idGiocatore = Session.getInstance().getUtenteLoggato().getId();
         System.out.println("Aggiungi disp id user: "+idGiocatore);
 

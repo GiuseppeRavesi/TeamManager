@@ -94,7 +94,7 @@ public class TeamManager {
     }
 
     //UC3: Gestisci Disponibilità
-    public void comunicaDisponibilita(Evento eventoSelezionato, boolean presenza, String motivazione) {
+    public void comunicaDisponibilita(Evento eventoSelezionato, boolean presenza, String motivazione) throws DisponibilitaEventoPassatoException{
         System.out.println("sono comunica disponilita");
         c.aggiungiDisponibilità(eventoSelezionato, presenza, motivazione);
     }

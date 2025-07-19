@@ -4,6 +4,7 @@
  */
 package view;
 
+import exception.DisponibilitaEventoPassatoException;
 import java.awt.Font;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -87,8 +88,8 @@ public class PlayerCalendarPanel extends javax.swing.JPanel {
         }
 
     }
-    
-    public void initCard(){
+
+    public void initCard() {
         initialiteCalendar();
     }
 
@@ -172,8 +173,8 @@ public class PlayerCalendarPanel extends javax.swing.JPanel {
         presente.setSelected(true);
 
     }
-    
-    public void logout(){
+
+    public void logout() {
         parentFrame.getSession().logout();
     }
 
@@ -620,25 +621,25 @@ public class PlayerCalendarPanel extends javax.swing.JPanel {
 
     private void disponibilitaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disponibilitaButtonActionPerformed
         // TODO add your handling code here:
-        
-          int countEvent = 0;
 
-            for (Disponibilità d : eventi.get(indexRow).getDisponibilità()) {
-                if (d.getIdGiocatore() == parentFrame.getSession().getUtenteLoggato().getId()) {
-                    countEvent++;
-                }
-            }
+        int countEvent = 0;
 
-            if (countEvent > 0) {
-                     JOptionPane.showMessageDialog(
-                        null,
-                        "Disponibilità già fornita!",
-                        "Errore",
-                        JOptionPane.PLAIN_MESSAGE
-                );
-            } else {
-                adesioneDialog.setVisible(true);
+        for (Disponibilità d : eventi.get(indexRow).getDisponibilità()) {
+            if (d.getIdGiocatore() == parentFrame.getSession().getUtenteLoggato().getId()) {
+                countEvent++;
             }
+        }
+
+        if (countEvent > 0) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Disponibilità già fornita!",
+                    "Errore",
+                    JOptionPane.PLAIN_MESSAGE
+            );
+        } else {
+            adesioneDialog.setVisible(true);
+        }
     }//GEN-LAST:event_disponibilitaButtonActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -673,9 +674,22 @@ public class PlayerCalendarPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (presente.isSelected()) {
             System.out.println("sono presente");
-            parentFrame.getTM().comunicaDisponibilita(eventi.get(indexRow), true, "");
-            adesioneDialog.setVisible(false);
-            initialiteCalendar();
+
+            try {
+                parentFrame.getTM().comunicaDisponibilita(eventi.get(indexRow), true, "");
+
+                adesioneDialog.setVisible(false);
+                initialiteCalendar();
+
+            } catch (DisponibilitaEventoPassatoException e) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        e.getMessage(),
+                        "Errore",
+                        JOptionPane.PLAIN_MESSAGE
+                );
+            }
+
         } else if (assente.isSelected()) {
             if (jTextArea1.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(
@@ -685,9 +699,20 @@ public class PlayerCalendarPanel extends javax.swing.JPanel {
                         JOptionPane.PLAIN_MESSAGE
                 );
             } else {
-                parentFrame.getTM().comunicaDisponibilita(eventi.get(indexRow), false, jTextArea1.getText());
-                adesioneDialog.setVisible(false);
-                initialiteCalendar();
+                try {
+                    parentFrame.getTM().comunicaDisponibilita(eventi.get(indexRow), false, jTextArea1.getText());
+
+                    adesioneDialog.setVisible(false);
+                    initialiteCalendar();
+
+                } catch (DisponibilitaEventoPassatoException e) {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            e.getMessage(),
+                            "Errore",
+                            JOptionPane.PLAIN_MESSAGE
+                    );
+                }
             }
         }
 
