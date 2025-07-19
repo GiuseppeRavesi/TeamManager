@@ -384,10 +384,7 @@ public class ProgressPanel extends javax.swing.JPanel {
         jLabel49 = new javax.swing.JLabel();
         jLabel50 = new javax.swing.JLabel();
         jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
         detailsAllenamento = new javax.swing.JDialog();
-        jButton12 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
         jLabel51 = new javax.swing.JLabel();
@@ -400,6 +397,7 @@ public class ProgressPanel extends javax.swing.JPanel {
         jLabel60 = new javax.swing.JLabel();
         jLabel61 = new javax.swing.JLabel();
         jLabel62 = new javax.swing.JLabel();
+        jButton12 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         numGiocatoriLabel = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
@@ -895,6 +893,11 @@ public class ProgressPanel extends javax.swing.JPanel {
         jButton7.setBackground(new java.awt.Color(252, 246, 246));
         jButton7.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jButton7.setText("Back");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton8.setBackground(new java.awt.Color(239, 246, 248));
         jButton8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -1115,14 +1118,9 @@ public class ProgressPanel extends javax.swing.JPanel {
         jButton9.setBackground(new java.awt.Color(252, 246, 246));
         jButton9.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jButton9.setText("Back");
-
-        jButton10.setBackground(new java.awt.Color(239, 246, 248));
-        jButton10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton10.setForeground(new java.awt.Color(0, 204, 204));
-        jButton10.setText("OK");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                jButton9ActionPerformed(evt);
             }
         });
 
@@ -1134,46 +1132,20 @@ public class ProgressPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(detailsAmichevoleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton9))
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         detailsAmichevoleLayout.setVerticalGroup(
             detailsAmichevoleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(detailsAmichevoleLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(detailsAmichevoleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(detailsAmichevoleLayout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(jButton9))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, detailsAmichevoleLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(detailsAmichevoleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(104, Short.MAX_VALUE))
         );
 
         detailsAllenamento.setMinimumSize(new java.awt.Dimension(500, 500));
-
-        jButton12.setBackground(new java.awt.Color(252, 246, 246));
-        jButton12.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        jButton12.setText("Back");
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
-            }
-        });
-
-        jButton13.setBackground(new java.awt.Color(239, 246, 248));
-        jButton13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton13.setForeground(new java.awt.Color(0, 204, 204));
-        jButton13.setText("OK");
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
-            }
-        });
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1182,16 +1154,16 @@ public class ProgressPanel extends javax.swing.JPanel {
         jLabel31.setText("velocità Max (kmh):");
 
         jLabel51.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel51.setText("velocità Media(kmh):");
+        jLabel51.setText("velocità Media (kmh):");
 
         jLabel52.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel52.setText("forza Fisica:");
+        jLabel52.setText("forza Fisica (0 a 10):");
 
         jLabel53.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel53.setText("forza Tiro:");
+        jLabel53.setText("forza Tiro (0 a 10):");
 
         jLabel54.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel54.setText("frequenza Cardiaca(bpm):");
+        jLabel54.setText("frequenza Cardiaca (bpm):");
 
         jLabel55.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel55.setText("Statistica Allenamento");
@@ -1210,6 +1182,15 @@ public class ProgressPanel extends javax.swing.JPanel {
 
         jLabel62.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel62.setText("velocità Max (kmh):");
+
+        jButton12.setBackground(new java.awt.Color(252, 246, 246));
+        jButton12.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jButton12.setText("Back");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -1234,8 +1215,11 @@ public class ProgressPanel extends javax.swing.JPanel {
                             .addComponent(jLabel62, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(129, 129, 129)
-                        .addComponent(jLabel55)))
-                .addContainerGap(60, Short.MAX_VALUE))
+                        .addComponent(jLabel55))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton12)))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1262,7 +1246,9 @@ public class ProgressPanel extends javax.swing.JPanel {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel54)
                     .addComponent(jLabel61))
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout detailsAllenamentoLayout = new javax.swing.GroupLayout(detailsAllenamento.getContentPane());
@@ -1271,12 +1257,7 @@ public class ProgressPanel extends javax.swing.JPanel {
             detailsAllenamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(detailsAllenamentoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(detailsAllenamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(detailsAllenamentoLayout.createSequentialGroup()
-                        .addComponent(jButton12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton13)))
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         detailsAllenamentoLayout.setVerticalGroup(
@@ -1284,11 +1265,7 @@ public class ProgressPanel extends javax.swing.JPanel {
             .addGroup(detailsAllenamentoLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(detailsAllenamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                    .addComponent(jButton13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
 
         setMinimumSize(new java.awt.Dimension(800, 600));
@@ -1514,6 +1491,29 @@ public class ProgressPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void jComboBox15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox15ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox15ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+         statAllenamento.setVisible(false);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here:
+        if (listaDisponibilita.get(indexRow).getStatistica() instanceof StatisticaAmichevole) {
+            detailsAmichevole.setVisible(true);
+        } else if (listaDisponibilita.get(indexRow).getStatistica() instanceof StatisticaAllenamento) {
+            detailsAllenamento.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        // TODO add your handling code here:
+        detailsAllenamento.setVisible(false);
+    }//GEN-LAST:event_jButton12ActionPerformed
+
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
         try {
@@ -1559,42 +1559,23 @@ public class ProgressPanel extends javax.swing.JPanel {
 
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(
-                    null,
-                    e,
-                    "Errore",
-                    JOptionPane.PLAIN_MESSAGE
+                null,
+                e,
+                "Errore",
+                JOptionPane.PLAIN_MESSAGE
             );
         }
     }//GEN-LAST:event_jButton8ActionPerformed
 
-    private void jComboBox15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox15ActionPerformed
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox15ActionPerformed
+        statAmichevole.setVisible(false);
+    }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton10ActionPerformed
-
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        // TODO add your handling code here:
-        if (listaDisponibilita.get(indexRow).getStatistica() instanceof StatisticaAmichevole) {
-            detailsAmichevole.setVisible(true);
-        } else if (listaDisponibilita.get(indexRow).getStatistica() instanceof StatisticaAllenamento) {
-            detailsAllenamento.setVisible(true);
-        }
-    }//GEN-LAST:event_jButton11ActionPerformed
-
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton12ActionPerformed
-
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton13ActionPerformed
+        detailsAmichevole.setVisible(false);
+    }//GEN-LAST:event_jButton9ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1605,10 +1586,8 @@ public class ProgressPanel extends javax.swing.JPanel {
     private javax.swing.JLabel idAllenamento;
     private javax.swing.JLabel idAmichevole;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

@@ -323,6 +323,11 @@ public class ComparePanel extends javax.swing.JPanel {
         jButton1.setBackground(new java.awt.Color(239, 248, 249));
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         goal1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         goal1.setText("assist:");
@@ -657,6 +662,11 @@ public class ComparePanel extends javax.swing.JPanel {
         initializeList();
         parentFrame.cardLayout.show(parentFrame.getjPanel1(), "COACHPANEL");
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        comparePlayerDialog.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
