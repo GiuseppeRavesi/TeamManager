@@ -106,6 +106,10 @@ public class RosaPanel extends javax.swing.JPanel {
         }
 
     }
+    
+    public void initCard(){
+        initializeList();
+    }
 
     public void logout() {
         parentFrame.getSession().logout();

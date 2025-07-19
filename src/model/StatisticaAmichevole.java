@@ -50,6 +50,7 @@ public class StatisticaAmichevole extends Statistica {
         this.falliCommessi = falliCommessi;
         this.assist = assist;
         this.parate = parate;
+        this.passaggiChiave=passaggiChiave;
         this.intercettiRiusciti = intercettiRiusciti;
         this.tiriTotali = tiriTotali;
     }

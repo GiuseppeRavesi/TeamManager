@@ -81,6 +81,10 @@ public class CalendarPanel extends javax.swing.JPanel {
         }
 
     }
+    
+    public void initCard(){
+        initialiteCalendar();
+    }
 
     public void logout() {
         parentFrame.getSession().logout();

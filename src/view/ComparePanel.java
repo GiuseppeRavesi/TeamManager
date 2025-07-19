@@ -57,6 +57,15 @@ public class ComparePanel extends javax.swing.JPanel {
 
         jList1.setSelectionModel(new MySelectionModel(jList1, 2));
     }
+    
+    public void initCard(){
+        initializeList();
+    }
+    
+    public void logout(){
+        parentFrame.getSession().logout();
+        initializeList();
+    }
 
     private void setUpCompareDialog() {
         comparePlayerDialog.setLocationRelativeTo(null);

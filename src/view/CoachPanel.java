@@ -171,11 +171,13 @@ public class CoachPanel extends javax.swing.JPanel {
 
     private void calendarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calendarioActionPerformed
         // TODO add your handling code here:
+        parentFrame.calendarPanel.initCard();
         parentFrame.cardLayout.show(parentFrame.getjPanel1(),"CALENDARPANEL");
     }//GEN-LAST:event_calendarioActionPerformed
 
     private void rosaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rosaActionPerformed
         // TODO add your handling code here:
+        parentFrame.rosaPanel.initCard();
         parentFrame.cardLayout.show(parentFrame.getjPanel1(),"ROSAPANEL");
     }//GEN-LAST:event_rosaActionPerformed
 
@@ -186,11 +188,13 @@ public class CoachPanel extends javax.swing.JPanel {
 
     private void archivioGiocatoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_archivioGiocatoriActionPerformed
         // TODO add your handling code here:
+        parentFrame.progressPanel.initCard();
         parentFrame.cardLayout.show(parentFrame.getjPanel1(),"PROGRESSPANEL");
     }//GEN-LAST:event_archivioGiocatoriActionPerformed
 
     private void analisiPerformanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analisiPerformanceActionPerformed
         // TODO add your handling code here:
+        parentFrame.comparePanel.initCard();
         parentFrame.cardLayout.show(parentFrame.getjPanel1(), "COMPAREPANEL");
     }//GEN-LAST:event_analisiPerformanceActionPerformed
 
