@@ -93,7 +93,7 @@ public class ComparePanel extends javax.swing.JPanel {
             Double val1 = (Double) list1.get(i).doubleValue();
             Double val2 = (Double) list2.get(i).doubleValue();
 
-            if (i == 4 || i == 5 || i == 6) {
+            if (i== 3 || i == 4 || i == 5 || i == 6) {
                 if (val1 > val2) {
                     playerLabel1.get(i).setForeground(Color.RED);
                     playerLabel2.get(i).setForeground(Color.GREEN);
