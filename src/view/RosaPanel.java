@@ -41,12 +41,7 @@ import view.TeamManagerGUI;
 public class RosaPanel extends javax.swing.JPanel {
 
     private TeamManagerGUI parentFrame;
-
-    //variabili di test
-    private java.util.List<GiocatoreProva> squadra;
-    private java.util.List<GiocatoreProva> listaGiocatori;
-    private java.util.List<GiocatoreProva> listaFiltrata;
-
+    
     //variabili attuali
     private java.util.List<GiocatoreInRosa> rosa;
     private java.util.List<Giocatore> giocatori;
@@ -65,9 +60,7 @@ public class RosaPanel extends javax.swing.JPanel {
         this.parentFrame = parentFrame;
         initComponents();
 
-        squadra = new ArrayList<>();
-        listaGiocatori = new ArrayList<>();
-        listaFiltrata = new ArrayList<>();
+       
 
         //inizializzazione liste utili
         rosa = parentFrame.getTM().visualizzaRosa();
