@@ -1,6 +1,7 @@
 package model;
 
 import controller.Session;
+import exception.DisponibilitaEventoPassatoException;
 import exception.SovrapposizioneEventoException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -265,10 +266,12 @@ public class CalendarioTest {
      * Test of aggiungiDisponibilità method, of class Calendario.
      */
     @Test
-    public void testAggiungiDisponibilità() {
+    public void testAggiungiDisponibilità() throws DisponibilitaEventoPassatoException {
         //essendo necessario una sessione, si prsegue a testare con un utente loggato fittizio
         u1 = new Utente("ringhiog@mail.com", "1234", "Giocatore,", gr1.getGiocatore().getId());
         sessione.login(u1);
+        
+        Allenamento a1 = new Allenamento(LocalDate.now(), LocalTime.now(), 90, "Manhattan", "ciao", "ciao");
 
         //per un evento presente in calendario, aggiungo una disponibilita
         c.aggiungiDisponibilità(a1, true, null);
@@ -315,11 +318,11 @@ public class CalendarioTest {
         // 1. Verifico struttura base
         assertNotNull(risultato);
         assertEquals(2, risultato.size());
-        assertTrue(risultato.containsKey("Ringhio Gattuso"));
-        assertTrue(risultato.containsKey("Gigi Buffon"));
+        assertTrue(risultato.containsKey("Ringhio Gattuso 10"));
+        assertTrue(risultato.containsKey("Gigi Buffon 1"));
 
-        Map<String, Number> statsG1 = risultato.get("Ringhio Gattuso");
-        Map<String, Number> statsG2 = risultato.get("Gigi Buffon");
+        Map<String, Number> statsG1 = risultato.get("Ringhio Gattuso 10");
+        Map<String, Number> statsG2 = risultato.get("Gigi Buffon 1");
 
         // 2. Verifico tutti i campi per giocatore1 (somme attese)
         assertEquals(3, statsG1.get("goal").intValue());           // 2 + 1
@@ -360,7 +363,7 @@ public class CalendarioTest {
 
     @Test
 
-    public void testAggiungiStatisticaAllenamento() {
+    public void testAggiungiStatisticaAllenamento() throws DisponibilitaEventoPassatoException {
 
         Map<String, String> campiSpecifici2 = new HashMap<>();
         campiSpecifici2.put("velocitàMax", "20.5");
@@ -422,7 +425,7 @@ public class CalendarioTest {
 
     @Test
 
-    public void testAggiungiStatisticaAmichevole() {
+    public void testAggiungiStatisticaAmichevole() throws DisponibilitaEventoPassatoException {
 
         Map<String, String> campiSpecifici3 = new HashMap<>();
         campiSpecifici3.put("minutiGiocati", "60");
@@ -489,7 +492,7 @@ public class CalendarioTest {
     }
 
     @Test
-    public void testRimuoviStatistica() {
+    public void testRimuoviStatistica() throws DisponibilitaEventoPassatoException {
 
         Map<String, String> campiSpecifici3 = new HashMap<>();
         campiSpecifici3.put("minutiGiocati", "60");
@@ -562,7 +565,7 @@ public class CalendarioTest {
     }
 
     @Test
-    public void testVisualizzaStorico() {
+    public void testVisualizzaStorico() throws DisponibilitaEventoPassatoException {
 
         Map<String, String> campiSpecifici3 = new HashMap<>();
         campiSpecifici3.put("minutiGiocati", "60");
@@ -724,6 +727,7 @@ public class CalendarioTest {
         rosa.add(new GiocatoreInRosa(new Giocatore("Riccardo", "Pellegrini", LocalDate.of(1996, 2, 6), "Italia", "riccardo.pellegrini@email.com"), Ruolo.DIFENSORE, Status.DISPONIBILE, 20, LocalDate.of(2024, 8, 1)));
         rosa.add(new GiocatoreInRosa(new Giocatore("Christian", "Conti", LocalDate.of(1997, 8, 15), "Italia", "christian.conti@email.com"), Ruolo.DIFENSORE, Status.DISPONIBILE, 21, LocalDate.of(2024, 8, 1)));
         rosa.add(new GiocatoreInRosa(new Giocatore("Antonio", "Greco", LocalDate.of(2000, 12, 1), "Italia", "antonio.greco@email.com"), Ruolo.ATTACCANTE, Status.DISPONIBILE, 22, LocalDate.of(2024, 8, 1)));
+        rosa.add(new GiocatoreInRosa(new Giocatore("Antonio", "Greco", LocalDate.of(2000, 12, 1), "Italia", "antonio.gr@email.com"), Ruolo.ATTACCANTE, Status.DISPONIBILE, 22, LocalDate.of(2024, 8, 1)));
 
 // Allenamenti
         Allenamento a1 = new Allenamento(LocalDate.of(2024, 9, 2), LocalTime.of(17, 0), 90, "Campo A", "Tattico", "Prove di pressing alto");
