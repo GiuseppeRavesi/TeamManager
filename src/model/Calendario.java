@@ -370,7 +370,7 @@ public class Calendario {
         Map<String, Boolean> suggerimenti = new HashMap<>();
 
         if (count == 0) {
-            throw new IllegalArgumentException("Impossibile suggerire una sessione per questo giocatore");
+            throw new IllegalArgumentException("Il giocatore non possiede statistiche.\nImpossibile suggerire una sessione mirata");
         }
 
         float mediaVelocitaMax = sommaVelocitaMax / count;
@@ -394,6 +394,10 @@ public class Calendario {
         int numCen = Integer.parseInt(numeri[1]);
         int numAtt = Integer.parseInt(numeri[2]);
         int numPor = 1;
+        
+        if(rosa.size() < 22){
+            throw new IllegalArgumentException("Rosa Incompleta, impossibile suggerire formazione");
+        }
 
         List<GiocatoreInRosa> suggeriti = new ArrayList<>();
 
