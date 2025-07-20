@@ -121,7 +121,6 @@ You are free to use, share, and modify it for any purpose, including commercial 
 
 - Evita di aprire i file XML vuoti: se assenti o malformati, l'app mostra un messaggio ma non va in crash
 - Lavora sulle stesse istanze caricate da `PersistenceHandler` tramite `TeamManager.inizializzaDatiDaPersistence(handler)`
-- Puoi estendere il sistema per introdurre la registrazione, il salvataggio dinamico, notifiche o analisi avanzate
 
 ---
 
