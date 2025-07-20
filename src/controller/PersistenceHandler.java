@@ -74,12 +74,6 @@ public class PersistenceHandler {
         loadUtenti();
     }
 
-    public void saveAll() {
-        saveGiocatori();
-        saveRosa();
-        saveEventi();
-    }
-
     private void loadGiocatori() {
         try {
             File file = new File("dati/giocatori.xml");
@@ -111,61 +105,7 @@ public class PersistenceHandler {
             e.printStackTrace();
         }
     }
-
-    private void saveGiocatori() {
-        try {
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document doc = builder.newDocument();
-
-            Element root = doc.createElement("giocatori");
-            doc.appendChild(root);
-
-            for (Giocatore g : listaGiocatori) {
-                Element giocatoreElem = doc.createElement("giocatore");
-                giocatoreElem.setAttribute("id", String.valueOf(g.getId()));
-
-                Element nome = doc.createElement("nome");
-                nome.setTextContent(g.getNome());
-                giocatoreElem.appendChild(nome);
-
-                Element cognome = doc.createElement("cognome");
-                cognome.setTextContent(g.getCognome());
-                giocatoreElem.appendChild(cognome);
-
-                Element dataNascita = doc.createElement("dataNascita");
-                dataNascita.setTextContent(g.getDataNascita().toString());
-                giocatoreElem.appendChild(dataNascita);
-
-                Element nazionalita = doc.createElement("nazionalita");
-                nazionalita.setTextContent(g.getNazionalita());
-                giocatoreElem.appendChild(nazionalita);
-
-                Element email = doc.createElement("email");
-                email.setTextContent(g.getEmail());
-                giocatoreElem.appendChild(email);
-
-                root.appendChild(giocatoreElem);
-            }
-
-            File file = new File("dati/giocatori.xml");
-            file.getParentFile().mkdirs();
-
-            Transformer transformer = TransformerFactory.newInstance().newTransformer();
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
-
-            DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(file);
-
-            transformer.transform(source, result);
-
-            System.out.println("Giocatori salvati con successo.");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
+    
     private void loadRosa() {
         try {
             File file = new File("dati/rosa.xml");
@@ -207,78 +147,6 @@ public class PersistenceHandler {
             }
 
             System.out.println("Caricamento rosa completato. Giocatori in rosa: " + rosa.size());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void saveRosa() {
-        try {
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document doc = builder.newDocument();
-
-            Element root = doc.createElement("rosa");
-            doc.appendChild(root);
-
-            for (GiocatoreInRosa g : rosa) {
-                Element giocatoreInRosaElem = doc.createElement("giocatoreInRosa");
-
-                // Giocatore interno
-                Element giocatoreElem = doc.createElement("giocatore");
-
-                giocatoreElem.setAttribute("id", String.valueOf(g.getGiocatore().getId()));
-
-                Element nome = doc.createElement("nome");
-                nome.setTextContent(g.getGiocatore().getNome());
-                giocatoreElem.appendChild(nome);
-
-                Element cognome = doc.createElement("cognome");
-                cognome.setTextContent(g.getGiocatore().getCognome());
-                giocatoreElem.appendChild(cognome);
-
-                Element nascita = doc.createElement("dataNascita");
-                nascita.setTextContent(g.getGiocatore().getDataNascita().toString());
-                giocatoreElem.appendChild(nascita);
-
-                Element nazionalita = doc.createElement("nazionalita");
-                nazionalita.setTextContent(g.getGiocatore().getNazionalita());
-                giocatoreElem.appendChild(nazionalita);
-
-                Element email = doc.createElement("email");
-                email.setTextContent(g.getGiocatore().getEmail());
-                giocatoreElem.appendChild(email);
-
-                giocatoreInRosaElem.appendChild(giocatoreElem);
-
-                // Dati specifici del GiocatoreInRosa
-                Element ruolo = doc.createElement("ruolo");
-                ruolo.setTextContent(g.getRuolo().name());
-                giocatoreInRosaElem.appendChild(ruolo);
-
-                Element status = doc.createElement("status");
-                status.setTextContent(g.getStatus().name());
-                giocatoreInRosaElem.appendChild(status);
-
-                Element numeroMaglia = doc.createElement("numeroMaglia");
-                numeroMaglia.setTextContent(String.valueOf(g.getNumMaglia()));
-                giocatoreInRosaElem.appendChild(numeroMaglia);
-
-                Element dataEntrata = doc.createElement("dataEntrata");
-                dataEntrata.setTextContent(g.getDataInserimento().toString());
-                giocatoreInRosaElem.appendChild(dataEntrata);
-
-                root.appendChild(giocatoreInRosaElem);
-            }
-
-            Transformer transformer = TransformerFactory.newInstance().newTransformer();
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            DOMSource source = new DOMSource(doc);
-
-            StreamResult result = new StreamResult(new File("dati/" + ROSA_FILE));
-            transformer.transform(source, result);
-
-            System.out.println("Rosa salvata correttamente in " + ROSA_FILE);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -372,115 +240,7 @@ public class PersistenceHandler {
             e.printStackTrace();
         }
     }
-
-    private void saveEventi() {
-        try {
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document doc = builder.newDocument();
-
-            Element root = doc.createElement("eventi");
-            doc.appendChild(root);
-
-            for (Evento evento : listaEventi) {
-                Element eventoElem;
-                if (evento instanceof Amichevole a) {
-                    eventoElem = doc.createElement("amichevole");
-                    Element avv = doc.createElement("squadraAvversaria");
-                    avv.setTextContent(a.getSquadraAvversaria());
-                    eventoElem.appendChild(avv);
-                } else if (evento instanceof Allenamento a) {
-                    eventoElem = doc.createElement("allenamento");
-                    Element tipo = doc.createElement("tipologia");
-                    tipo.setTextContent(a.getTipologia());
-                    Element note = doc.createElement("note");
-                    note.setTextContent(a.getNote());
-                    eventoElem.appendChild(tipo);
-                    eventoElem.appendChild(note);
-                } else {
-                    continue;
-                }
-
-                eventoElem.setAttribute("id", String.valueOf(evento.getId()));
-
-                Element data = doc.createElement("data");
-                data.setTextContent(evento.getData().toString());
-                eventoElem.appendChild(data);
-
-                Element orario = doc.createElement("orario");
-                orario.setTextContent(evento.getOrario().toString());
-                eventoElem.appendChild(orario);
-
-                Element durata = doc.createElement("durata");
-                durata.setTextContent(String.valueOf(evento.getDurata()));
-                eventoElem.appendChild(durata);
-
-                Element luogo = doc.createElement("luogo");
-                luogo.setTextContent(evento.getLuogo());
-                eventoElem.appendChild(luogo);
-
-                Element disponibilitaElem = doc.createElement("disponibilità");
-
-                for (Disponibilità d : evento.getDisponibilità()) {
-                    Element dispElem = doc.createElement("disponibile");
-                    dispElem.setAttribute("idGiocatore", String.valueOf(d.getIdGiocatore()));
-                    dispElem.setAttribute("presente", String.valueOf(d.isPresenza()));
-
-                    Element motiv = doc.createElement("motivazione");
-                    motiv.setTextContent(d.getMotivazione());
-                    dispElem.appendChild(motiv);
-
-                    Statistica stat = d.getStatistica();
-                    if (stat != null) {
-                        Element statElem;
-                        if (stat instanceof StatisticaAllenamento sa) {
-                            statElem = doc.createElement("statisticaAllenamento");
-                            statElem.setAttribute("id", String.valueOf(sa.getId()));
-                            statElem.setAttribute("velocitaMax", String.valueOf(sa.getVelocitàMax()));
-                            statElem.setAttribute("velocitaMedia", String.valueOf(sa.getVelocitàMedia()));
-                            statElem.setAttribute("valutazioneForzaFisica", String.valueOf(sa.getValutazioneForzaFisica()));
-                            statElem.setAttribute("valutazioneForzaTiro", String.valueOf(sa.getValutazioneForzaTiro()));
-                            statElem.setAttribute("frequenzaCardiacaMedia", String.valueOf(sa.getFrequenzaCardiacaMedia()));
-                        } else if (stat instanceof StatisticaAmichevole sa) {
-                            statElem = doc.createElement("statisticaAmichevole");
-                            statElem.setAttribute("id", String.valueOf(sa.getId()));
-                            statElem.setAttribute("minutiGiocati", String.valueOf(sa.getMinutiGiocati()));
-                            statElem.setAttribute("goal", String.valueOf(sa.getGoal()));
-                            statElem.setAttribute("autogoal", String.valueOf(sa.getAutogoal()));
-                            statElem.setAttribute("cartelliniGialli", String.valueOf(sa.getCartelliniGialli()));
-                            statElem.setAttribute("cartelliniRossi", String.valueOf(sa.getCartelliniRossi()));
-                            statElem.setAttribute("distanzaTotalePercorsa", String.valueOf(sa.getDistanzaTotalePercorsa()));
-                            statElem.setAttribute("falliCommessi", String.valueOf(sa.getFalliCommessi()));
-                            statElem.setAttribute("assist", String.valueOf(sa.getAssist()));
-                            statElem.setAttribute("parate", String.valueOf(sa.getParate()));
-                            statElem.setAttribute("intercettiRiusciti", String.valueOf(sa.getIntercettiRiusciti()));
-                            statElem.setAttribute("passaggiChiave", String.valueOf(sa.getPassaggiChiave()));
-                            statElem.setAttribute("tiriTotali", String.valueOf(sa.getTiriTotali()));
-                        } else {
-                            continue;
-                        }
-                        dispElem.appendChild(statElem);
-                    }
-
-                    disponibilitaElem.appendChild(dispElem);
-                }
-
-                eventoElem.appendChild(disponibilitaElem);
-                root.appendChild(eventoElem);
-            }
-
-            Transformer transformer = TransformerFactory.newInstance().newTransformer();
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
-            DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(new File("dati/eventi.xml"));
-            transformer.transform(source, result);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
+    
     private void loadUtenti() {
         File file = new File("dati/utenti.xml");
         if (!file.exists()) {
