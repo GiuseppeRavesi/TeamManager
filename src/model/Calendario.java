@@ -388,7 +388,7 @@ public class Calendario {
         return suggerimenti;
     }
 
-    public List<GiocatoreInRosa> suggerisciFormazione(String modulo, List<GiocatoreInRosa> rosa) {
+    public List<GiocatoreInRosa> suggerisciFormazione(String modulo, List<GiocatoreInRosa> rosa) throws IllegalArgumentException{
         String[] numeri = modulo.split("-");
         int numDif = Integer.parseInt(numeri[0]);
         int numCen = Integer.parseInt(numeri[1]);
