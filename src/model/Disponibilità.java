@@ -69,6 +69,6 @@ public class Disponibilità {
     
     @Override
     public String toString() {
-        return String.format("%-10s %10s %-10s","ID: "+ idGiocatore,"Disponibile: " +presenza,"Motivazione: "+motivazione);
+        return String.format("%-8s %-20s %-25s","ID: "+ idGiocatore,"Disponibile: " +presenza,"Motivazione: "+motivazione);
     }
 }

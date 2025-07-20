@@ -100,6 +100,11 @@ public class CoachPanel extends javax.swing.JPanel {
         sessioneMirata.setBackground(new java.awt.Color(204, 204, 204));
         sessioneMirata.setFont(new java.awt.Font("Rockwell", 0, 17)); // NOI18N
         sessioneMirata.setText("Sessione Mirata");
+        sessioneMirata.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sessioneMirataActionPerformed(evt);
+            }
+        });
 
         analisiPerformance.setBackground(new java.awt.Color(204, 204, 204));
         analisiPerformance.setFont(new java.awt.Font("Rockwell", 0, 17)); // NOI18N
@@ -207,6 +212,12 @@ public class CoachPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         parentFrame.cardLayout.show(parentFrame.getjPanel1(), "MODULOPANEL");
     }//GEN-LAST:event_suggerisciFormazioneActionPerformed
+
+    private void sessioneMirataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessioneMirataActionPerformed
+        // TODO add your handling code here:
+        parentFrame.sessioneMirataPanel.initCard();
+        parentFrame.cardLayout.show(parentFrame.getjPanel1(), "SESSIONEMIRATAPANEL");
+    }//GEN-LAST:event_sessioneMirataActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

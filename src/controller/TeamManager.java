@@ -198,7 +198,7 @@ public class TeamManager {
     
     //UC9: Suggerisci Sessione Mirata
 
-    public Map<String, Boolean> suggerisciSessioneMirata(int idGiocatore) {
+    public Map<String, Boolean> suggerisciSessioneMirata(int idGiocatore) throws IllegalArgumentException{
         return c.suggerisciSessioneMirata(idGiocatore);
     }
 

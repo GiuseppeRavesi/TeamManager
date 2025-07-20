@@ -341,7 +341,7 @@ public class Calendario {
         return aggregati;
     }
 
-    public Map<String, Boolean> suggerisciSessioneMirata(int idGiocatore) {
+    public Map<String, Boolean> suggerisciSessioneMirata(int idGiocatore) throws IllegalArgumentException{
         float sommaVelocitaMax = 0;
         float sommaFrequenzaCardiaca = 0;
         float sommaForzaTiro = 0;
