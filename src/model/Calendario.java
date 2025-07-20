@@ -396,6 +396,8 @@ public class Calendario {
         int numAtt = Integer.parseInt(numeri[2]);
         int numPor = 1;
         
+        System.out.println("Sono suggerisciFormazione");
+        
         if(rosa.size() < 22){
             throw new IllegalArgumentException("Rosa Incompleta, impossibile suggerire formazione");
         }

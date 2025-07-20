@@ -194,6 +194,7 @@ public class TeamManager {
     
     //UC8: Suggerisci Formazione
     public List<GiocatoreInRosa> suggerisciFormazione (String modulo) throws IllegalArgumentException{
+        System.out.println("Sono suggerisciFormazione");
         return c.suggerisciFormazione(modulo, r.getGiocatori());
     }
     
