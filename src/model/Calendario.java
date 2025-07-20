@@ -5,6 +5,7 @@ import exception.DisponibilitaEventoPassatoException;
 import exception.SovrapposizioneEventoException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -469,6 +470,7 @@ public class Calendario {
 
     public Map<String, Double> calcolaMediaPresenzeAssenzeMeseCorrente() {
         LocalDate oggi = LocalDate.now();
+        //LocalDate oggi =LocalDate.of(2023, Month.APRIL, 12);
         int meseCorrente = oggi.getMonthValue();
         int annoCorrente = oggi.getYear();
 

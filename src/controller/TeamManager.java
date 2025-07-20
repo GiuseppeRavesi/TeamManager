@@ -111,6 +111,7 @@ public class TeamManager {
     }
     
     public Map<String, Double> calcolaMediaPresenzeAssenzeMeseCorrente(){
+        System.out.println("Sono tm calcola presenze e assenze");
         return c.calcolaMediaPresenzeAssenzeMeseCorrente();
     }
     
