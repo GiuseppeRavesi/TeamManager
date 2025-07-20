@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -22,7 +23,9 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import model.Allenamento;
 import model.Amichevole;
+import model.Disponibilità;
 import model.Evento;
+import model.GiocatoreInRosa;
 import view.TeamManagerGUI;
 
 /**
@@ -44,6 +47,8 @@ public class CalendarPanel extends javax.swing.JPanel {
 
     private int idCalendarLatest;
 
+    private DefaultListModel<String> model;
+
     public CalendarPanel(TeamManagerGUI parentFrame) {
         this.parentFrame = parentFrame;
         initComponents();
@@ -55,6 +60,8 @@ public class CalendarPanel extends javax.swing.JPanel {
 
         initialiteCalendar();
         tableClickListener();
+
+        model = new DefaultListModel<String>();
 
     }
 
@@ -81,8 +88,8 @@ public class CalendarPanel extends javax.swing.JPanel {
         }
 
     }
-    
-    public void initCard(){
+
+    public void initCard() {
         initialiteCalendar();
     }
 
@@ -258,6 +265,29 @@ public class CalendarPanel extends javax.swing.JPanel {
 
     }
 
+    private void setUpAdesioniDialog() {
+
+        dialogAdesioni.setLocationRelativeTo(null);
+        dialogAdesioni.setResizable(false);
+        dialogAdesioni.setModal(true);
+        dialogAdesioni.setTitle("Adesione giocatori");
+        initList();
+        dialogAdesioni.setVisible(true);
+
+    }
+
+    private void initList() {
+        model.clear();
+        for (Disponibilità d: eventi.get(indexRow).getDisponibilità()) {
+            model.addElement(d.toString());
+        }
+        jList1.setModel(model);
+
+        // Imposta font monospaziato per allineare i campi
+        jList1.setFont(new java.awt.Font("Monospaced", java.awt.Font.PLAIN, 13));
+
+    }
+
     private LocalDate dateToLocalDate(Date d) {
         Instant instant = d.toInstant();
         LocalDate localDate = instant.atZone(ZoneId.systemDefault()).toLocalDate();
@@ -294,6 +324,7 @@ public class CalendarPanel extends javax.swing.JPanel {
         noteLabel = new javax.swing.JLabel();
         noteText = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
         createEventDialog = new javax.swing.JDialog();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -355,6 +386,11 @@ public class CalendarPanel extends javax.swing.JPanel {
         noteText1 = new javax.swing.JLabel();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
+        dialogAdesioni = new javax.swing.JDialog();
+        jLabel16 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jButton13 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
@@ -420,14 +456,23 @@ public class CalendarPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton12.setBackground(new java.awt.Color(248, 247, 239));
+        jButton12.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        jButton12.setText("Adesione giocatori");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(timeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(dateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -449,16 +494,16 @@ public class CalendarPanel extends javax.swing.JPanel {
                                 .addComponent(placeText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(dateText, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)))
                         .addGap(61, 61, 61))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton5))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(noteLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(noteText, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(24, 24, 24))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(noteLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(noteText, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -487,8 +532,10 @@ public class CalendarPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(noteLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(noteText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
-                .addComponent(jButton5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton5)
+                    .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -497,15 +544,14 @@ public class CalendarPanel extends javax.swing.JPanel {
         detailsDialogLayout.setHorizontalGroup(
             detailsDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(detailsDialogLayout.createSequentialGroup()
-                .addGroup(detailsDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(18, 18, 18)
+                .addGroup(detailsDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(detailsDialogLayout.createSequentialGroup()
-                        .addGap(99, 99, 99)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel3))
-                    .addGroup(detailsDialogLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addGap(131, 131, 131))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         detailsDialogLayout.setVerticalGroup(
@@ -1075,6 +1121,59 @@ public class CalendarPanel extends javax.swing.JPanel {
                 .addContainerGap(54, Short.MAX_VALUE))
         );
 
+        dialogAdesioni.setMinimumSize(new java.awt.Dimension(500, 500));
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel16.setText("Adesione Giocatori");
+
+        jList1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Nome Item 2 Data", " ", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jList1.setMaximumSize(new java.awt.Dimension(90, 90));
+        jScrollPane4.setViewportView(jList1);
+
+        jButton13.setBackground(new java.awt.Color(241, 233, 233));
+        jButton13.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jButton13.setText("Back");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout dialogAdesioniLayout = new javax.swing.GroupLayout(dialogAdesioni.getContentPane());
+        dialogAdesioni.getContentPane().setLayout(dialogAdesioniLayout);
+        dialogAdesioniLayout.setHorizontalGroup(
+            dialogAdesioniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogAdesioniLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(9, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogAdesioniLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(138, 138, 138))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogAdesioniLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton13)
+                .addGap(188, 188, 188))
+        );
+        dialogAdesioniLayout.setVerticalGroup(
+            dialogAdesioniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogAdesioniLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(73, Short.MAX_VALUE))
+        );
+
         setBackground(new java.awt.Color(248, 251, 252));
         setMinimumSize(new java.awt.Dimension(800, 600));
 
@@ -1364,12 +1463,12 @@ public class CalendarPanel extends javax.swing.JPanel {
                 initialiteCalendar();
                 modifyEventDialog.setVisible(false);
             } catch (SovrapposizioneEventoException e) {
-                    JOptionPane.showMessageDialog(
-                            null,
-                            e.getMessage(),
-                            "Errore",
-                            JOptionPane.PLAIN_MESSAGE
-                    );
+                JOptionPane.showMessageDialog(
+                        null,
+                        e.getMessage(),
+                        "Errore",
+                        JOptionPane.PLAIN_MESSAGE
+                );
             }
         }
 
@@ -1404,6 +1503,16 @@ public class CalendarPanel extends javax.swing.JPanel {
         removeEventDialog.setVisible(false);
     }//GEN-LAST:event_jButton11ActionPerformed
 
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        // TODO add your handling code here:
+        setUpAdesioniDialog();
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        // TODO add your handling code here:
+        dialogAdesioni.setVisible(false);
+    }//GEN-LAST:event_jButton13ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton allenamentoRadio;
@@ -1415,6 +1524,7 @@ public class CalendarPanel extends javax.swing.JPanel {
     private javax.swing.JLabel dateText;
     private javax.swing.JLabel dateText1;
     private javax.swing.JDialog detailsDialog;
+    private javax.swing.JDialog dialogAdesioni;
     private javax.swing.JLabel dots;
     private javax.swing.JLabel dots1;
     private javax.swing.JLabel durationLabel;
@@ -1428,6 +1538,8 @@ public class CalendarPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1451,6 +1563,7 @@ public class CalendarPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1459,6 +1572,7 @@ public class CalendarPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1466,6 +1580,7 @@ public class CalendarPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;

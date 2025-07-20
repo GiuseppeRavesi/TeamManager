@@ -69,11 +69,6 @@ public class Disponibilità {
     
     @Override
     public String toString() {
-        return "Disponibilità{"
-                + "idGiocatore=" + idGiocatore
-                + ", idEvento=" + idEvento
-                + ", presenza=" + presenza
-                + ", motivazione='" + motivazione + '\''
-                + '}';
+        return String.format("%-10s %10s %-10s","ID: "+ idGiocatore,"Disponibile: " +presenza,"Motivazione: "+motivazione);
     }
 }
