@@ -1,4 +1,4 @@
-!Logo TeamManager("logo.png")
+![Logo del mio progetto](logo.png)
 
 # ⚽ TeamManager
 
