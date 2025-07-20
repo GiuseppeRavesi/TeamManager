@@ -264,6 +264,7 @@ public class TeamManagerGUI extends javax.swing.JFrame {
         options.setEnabled(true);
     }
 
+    //listener chiusura app
     private void setUpWindowCloseListener() {
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new WindowAdapter() {
@@ -284,6 +285,7 @@ public class TeamManagerGUI extends javax.swing.JFrame {
 
                 if (result == JOptionPane.YES_OPTION) {
                     //aggiungere logica persistenza (salvataggio)
+                    //istanza TeamManager -> getTM()
                     System.out.println("EXIT SUCCESS");
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 }
