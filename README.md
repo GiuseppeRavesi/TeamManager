@@ -1,4 +1,4 @@
-!Logo TeamManager(logo.png)
+!Logo TeamManager("logo.png")
 
 # ⚽ TeamManager
 
