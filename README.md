@@ -1,4 +1,4 @@
-![Logo del mio progetto](logo.png)
+<img src="logo.png" alt="logo" width="300" height="200"/>
 
 # ⚽ TeamManager
 
