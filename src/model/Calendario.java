@@ -410,6 +410,11 @@ public class Calendario {
         ))
                 .limit(numPor)
                 .toList();
+        
+        if(portieri.size()<numPor){
+            throw new IllegalArgumentException("Numero portieri insufficiente");
+        }
+        
         suggeriti.addAll(portieri);
 
         List<GiocatoreInRosa> difensori = rosa.stream()
@@ -420,6 +425,11 @@ public class Calendario {
         ))
                 .limit(numDif)
                 .toList();
+        
+        if(difensori.size()<numDif){
+            throw new IllegalArgumentException("Numero difensori insufficiente");
+        }
+        
         suggeriti.addAll(difensori);
 
         List<GiocatoreInRosa> centrocampisti = rosa.stream()
@@ -430,6 +440,11 @@ public class Calendario {
         ))
                 .limit(numCen)
                 .toList();
+        
+        if(centrocampisti.size()<numCen){
+            throw new IllegalArgumentException("Numero centrocampisti insufficiente");
+        }
+        
         suggeriti.addAll(centrocampisti);
 
         List<GiocatoreInRosa> attaccanti = rosa.stream()
@@ -440,6 +455,11 @@ public class Calendario {
         ))
                 .limit(numAtt)
                 .toList();
+        
+        if(attaccanti.size()<numAtt){
+            throw new IllegalArgumentException("Numero attaccanti insufficiente");
+        }
+        
         suggeriti.addAll(attaccanti);
 
         return suggeriti;
