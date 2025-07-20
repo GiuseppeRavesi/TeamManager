@@ -1,3 +1,5 @@
+!Logo TeamManager(logo.png)
+
 # ⚽ TeamManager
 
 **TeamManager** è un'applicazione desktop Java per la gestione completa di una squadra di calcio, pensata per allenatori e staff tecnico. Consente di gestire giocatori, rosa, eventi (allenamenti e amichevoli), statistiche, disponibilità e utenti.
