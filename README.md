@@ -1,4 +1,4 @@
-<img src="logo.png" alt="logo" width="300" height="200"/>
+<img src="logo.png" alt="logo" width="300" height="300"/>
 
 # ⚽ TeamManager
 
