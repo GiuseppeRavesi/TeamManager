@@ -7,11 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import model.Allenamento;
 import model.Amichevole;
 import model.Disponibilità;
@@ -33,11 +28,6 @@ import org.w3c.dom.NodeList;
  * @author Giuseppe Ravesi
  */
 public class PersistenceHandler {
-
-    private static final String GIOCATORI_FILE = "giocatori.xml";
-    private static final String ROSA_FILE = "rosa.xml";
-    private static final String EVENTI_FILE = "eventi.xml";
-    private static final String UTENTI_FILE = "utenti.xml";
 
     private List<Giocatore> listaGiocatori;
     private List<GiocatoreInRosa> rosa;
