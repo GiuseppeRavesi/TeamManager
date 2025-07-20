@@ -42,6 +42,7 @@ public class TeamManagerGUI extends javax.swing.JFrame {
     PlayerCalendarPanel playerCalendarPanel;
     ProgressPanel progressPanel;
     ComparePanel comparePanel;
+    ModuloPanel moduloPanel;
 
     //classe facade controllore
     TeamManager tm;
@@ -182,6 +183,9 @@ public class TeamManagerGUI extends javax.swing.JFrame {
         
         comparePanel = new ComparePanel(this);
         jPanel1.add(comparePanel,"COMPAREPANEL");
+        
+        moduloPanel = new ModuloPanel(this);
+        jPanel1.add(moduloPanel,"MODULOPANEL");
         
         
         

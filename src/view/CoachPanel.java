@@ -91,6 +91,11 @@ public class CoachPanel extends javax.swing.JPanel {
         suggerisciFormazione.setBackground(new java.awt.Color(204, 204, 204));
         suggerisciFormazione.setFont(new java.awt.Font("Rockwell", 0, 17)); // NOI18N
         suggerisciFormazione.setText("Suggerisci Formazione");
+        suggerisciFormazione.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                suggerisciFormazioneActionPerformed(evt);
+            }
+        });
 
         sessioneMirata.setBackground(new java.awt.Color(204, 204, 204));
         sessioneMirata.setFont(new java.awt.Font("Rockwell", 0, 17)); // NOI18N
@@ -197,6 +202,11 @@ public class CoachPanel extends javax.swing.JPanel {
         parentFrame.comparePanel.initCard();
         parentFrame.cardLayout.show(parentFrame.getjPanel1(), "COMPAREPANEL");
     }//GEN-LAST:event_analisiPerformanceActionPerformed
+
+    private void suggerisciFormazioneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suggerisciFormazioneActionPerformed
+        // TODO add your handling code here:
+        parentFrame.cardLayout.show(parentFrame.getjPanel1(), "MODULOPANEL");
+    }//GEN-LAST:event_suggerisciFormazioneActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

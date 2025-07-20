@@ -186,6 +186,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Suggerisci Formazione"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="suggerisciFormazioneActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="sessioneMirata">
           <Properties>
