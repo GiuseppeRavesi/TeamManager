@@ -1,0 +1,12 @@
+===================================================
+ISTRUZIONI PER L'AVVIO DI TEAM MANAGER
+===================================================
+1. Scaricare TeamManager.jar insieme alle dir. dati, lib e il file logo.png;
+2. Il sistema propone un form di login;
+3. Per accedere come allenatore usare le seguenti credenziali di prova: 
+	email = allenatore@team.com
+	password = admin
+4. Per accedere come giocatore usare le seguenti credenziali di prova:
+	email = k.debruyne@example.com
+	password = debruyne17
+	
