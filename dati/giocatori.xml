@@ -14,13 +14,6 @@
         <nazionalita>Italiana</nazionalita>
         <email>luca.bianchi@example.com</email>
     </giocatore>
-    <giocatore id="3">
-        <nome>Anna</nome>
-        <cognome>Verdi</cognome>
-        <dataNascita>1988-11-30</dataNascita>
-        <nazionalita>Italiana</nazionalita>
-        <email>anna.verdi@example.com</email>
-    </giocatore>
     <giocatore id="4">
         <nome>Cristiano</nome>
         <cognome>Ronaldo</cognome>
