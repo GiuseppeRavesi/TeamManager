@@ -7,7 +7,6 @@
         <ruolo>ALLENATORE</ruolo>
     </utente>
 
-    <!-- Giocatori (stessi ID e email del file giocatori.xml) -->
     <utente id="1">
         <email>mario.rossi@example.com</email>
         <password>mario123</password>
