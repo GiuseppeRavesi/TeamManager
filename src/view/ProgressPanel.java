@@ -1379,7 +1379,7 @@ public class ProgressPanel extends javax.swing.JPanel {
                 int result = JOptionPane.showOptionDialog(
                         dispDialog,
                         "Vuoi eliminare la statistica di Evento id: " + e.getId() + "?",
-                        "Esci",
+                        "Elimina",
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.PLAIN_MESSAGE, // no icona
                         null,
